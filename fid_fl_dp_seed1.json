@@ -1,0 +1,11 @@
+{
+  "n_alerts": 200,
+  "k": 5,
+  "fallback_top_scored_used": false,
+  "mean_logit_drop_topk_shap": 8.957940101623535,
+  "mean_logit_drop_random": 0.8566612005233765,
+  "fidelity_ratio": 10.456806182861328,
+  "alerts_flipped_topk_shap": 0.58,
+  "alerts_flipped_random": 0.10600000000000001,
+  "spearman_importance_vs_reference": 0.9563742615765739
+}

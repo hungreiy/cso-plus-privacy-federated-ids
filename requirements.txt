@@ -1,0 +1,9 @@
+# Use Python 3.11 (flwr[simulation] 1.11 pins ray 2.6.3, which has no Python 3.12 wheels)
+torch>=2.4,<2.6
+opacus==1.5.2
+flwr[simulation]==1.11.1
+shap>=0.45
+numpy<2
+pandas
+scikit-learn
+scipy

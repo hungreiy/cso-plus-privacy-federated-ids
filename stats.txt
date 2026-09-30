@@ -1,0 +1,5 @@
+central: only 5 paired seeds -> not enough for a meaningful test
+fl_nodp: only 5 paired seeds -> not enough for a meaningful test
+fl_dp_nokg: only 5 paired seeds -> not enough for a meaningful test
+rf: only 5 paired seeds -> not enough for a meaningful test
+vs               n   fl_dp(mean±sd)    other(mean±sd)     p      p_Holm

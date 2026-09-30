@@ -1,0 +1,273 @@
+{
+  "precision": 0.9968854282536151,
+  "recall": 0.4064767779390421,
+  "f1": 0.577485662736001,
+  "accuracy": 0.7943418122510428,
+  "fpr": 0.0006711731147226617,
+  "threshold": 7.868117332458498,
+  "recall_seen": 0.7510942760942761,
+  "recall_unseen": 0.003835562549173879,
+  "by_purity": {
+    "seen_1-3": {
+      "n": 1591,
+      "recall": 0.0
+    },
+    "seen_4-7": {
+      "n": 404,
+      "recall": 0.1311881188118812
+    },
+    "seen_8-15": {
+      "n": 9885,
+      "recall": 0.8973191704602934
+    },
+    "unseen_1-3": {
+      "n": 9033,
+      "recall": 0.0
+    },
+    "unseen_4-7": {
+      "n": 322,
+      "recall": 0.0
+    },
+    "unseen_8-15": {
+      "n": 813,
+      "recall": 0.04797047970479705
+    }
+  },
+  "clean": {
+    "precision": 0.9968669575920331,
+    "recall": 0.8327724808375397,
+    "f1": 0.9074611662846956,
+    "accuracy": 0.9653350122100122,
+    "fpr": 0.0006711731147226617,
+    "auc": 0.9565947271189601,
+    "n": 52416,
+    "recall_seen": 0.8973191704602934,
+    "recall_unseen": 0.04797047970479705
+  },
+  "auc": 0.7944535097636344,
+  "auc_seen": 0.976160629700169,
+  "auc_unseen": 0.5821521147158345,
+  "auc_recon": 0.7341203360609221,
+  "auc_recon_seen": 0.8441835940949034,
+  "auc_recon_unseen": 0.6055255774610308,
+  "hybrid": {
+    "precision": 0.9865609165014321,
+    "recall": 0.40620464441219156,
+    "f1": 0.575467454860888,
+    "accuracy": 0.7927735783960104,
+    "fpr": 0.0029243971427201686,
+    "auc": 0.7930332198293386,
+    "auc_unseen": 0.5919260802713088,
+    "recall_seen": 0.7314814814814815,
+    "recall_unseen": 0.026160503540519277
+  },
+  "operating_points": {
+    "90": {
+      "precision": 0.7895579756566303,
+      "recall": 0.5590076197387518,
+      "f1": 0.6545753890275638,
+      "accuracy": 0.7960041401373773,
+      "fpr": 0.07874298863799799,
+      "threshold": -6.948622703552246,
+      "recall_seen": 0.9251683501683502,
+      "recall_unseen": 0.13119590873328088
+    },
+    "95": {
+      "precision": 0.8967056150600454,
+      "recall": 0.5012246008708273,
+      "f1": 0.643023391132317,
+      "accuracy": 0.8075777059875169,
+      "fpr": 0.030514406251498153,
+      "threshold": -5.680652046203622,
+      "recall_seen": 0.8883838383838384,
+      "recall_unseen": 0.048878835562549176
+    },
+    "99": {
+      "precision": 0.9939490445859872,
+      "recall": 0.4246643686502177,
+      "f1": 0.5950807169187746,
+      "accuracy": 0.8001756421917636,
+      "fpr": 0.0013663166978282756,
+      "threshold": 7.050781993865968,
+      "recall_seen": 0.7847643097643098,
+      "recall_unseen": 0.003933910306845004
+    },
+    "99.5": {
+      "precision": 0.9968854282536151,
+      "recall": 0.4064767779390421,
+      "f1": 0.577485662736001,
+      "accuracy": 0.7943418122510428,
+      "fpr": 0.0006711731147226617,
+      "threshold": 7.868117332458498,
+      "recall_seen": 0.7510942760942761,
+      "recall_unseen": 0.003835562549173879
+    },
+    "99.9": {
+      "precision": 0.9994094720680288,
+      "recall": 0.3837989840348331,
+      "f1": 0.5546124856627888,
+      "accuracy": 0.786861336762538,
+      "fpr": 0.00011985234191476102,
+      "threshold": 8.855485595703163,
+      "recall_seen": 0.7091750841750841,
+      "recall_unseen": 0.0036388670338316285
+    }
+  },
+  "per_type": {
+    "DDoS": {
+      "n": 2547,
+      "recall": 0.9956811935610522,
+      "unseen": false
+    },
+    "PortScan": {
+      "n": 3250,
+      "recall": 0.7178461538461538,
+      "unseen": false
+    },
+    "Bot": {
+      "n": 984,
+      "recall": 0.0,
+      "unseen": true
+    },
+    "Infiltration": {
+      "n": 35,
+      "recall": 0.0,
+      "unseen": true
+    },
+    "Web Attack - Brute Force": {
+      "n": 954,
+      "recall": 0.0,
+      "unseen": true
+    },
+    "Web Attack - Sql Injection": {
+      "n": 20,
+      "recall": 0.0,
+      "unseen": true
+    },
+    "Web Attack - XSS": {
+      "n": 369,
+      "recall": 0.0,
+      "unseen": true
+    },
+    "FTP-Patator": {
+      "n": 656,
+      "recall": 0.18140243902439024,
+      "unseen": false
+    },
+    "SSH-Patator": {
+      "n": 1313,
+      "recall": 0.0007616146230007616,
+      "unseen": false
+    },
+    "DoS GoldenEye": {
+      "n": 6608,
+      "recall": 0.0004539951573849879,
+      "unseen": true
+    },
+    "DoS Hulk": {
+      "n": 4114,
+      "recall": 0.9562469615945551,
+      "unseen": false
+    },
+    "DoS Slowhttptest": {
+      "n": 372,
+      "recall": 0.0967741935483871,
+      "unseen": true
+    },
+    "DoS slowloris": {
+      "n": 821,
+      "recall": 0.0,
+      "unseen": true
+    },
+    "Heartbleed": {
+      "n": 5,
+      "recall": 0.0,
+      "unseen": true
+    }
+  },
+  "threshold_percentile": 99.5,
+  "n_test": 63766,
+  "n_test_benign": 41718,
+  "n_test_seen": 11880,
+  "n_test_unseen": 10168,
+  "latency_ms": 3.8292157649993896,
+  "model_mb": 3.510724,
+  "method": "fl_dp",
+  "seed": 2,
+  "args": {
+    "prep": "/root/prepared",
+    "out": "results",
+    "dp": "on",
+    "sigma": 1.455,
+    "clip": 1.0,
+    "delta": 1e-06,
+    "clients": 10,
+    "rounds": 50,
+    "fraction": 0.3,
+    "local_epochs": 5,
+    "batch": 256,
+    "lr": 0.001,
+    "wd": 1e-05,
+    "rec_weight": 10.0,
+    "seed": 2,
+    "eval_every": 5,
+    "gpus_per_client": 0.1,
+    "cpus_per_client": 1,
+    "no_kg": false
+  },
+  "val_curve": [
+    {
+      "round": 0,
+      "val_objective": 2.6996633020367993
+    },
+    {
+      "round": 5,
+      "val_objective": 0.4699486030199509
+    },
+    {
+      "round": 10,
+      "val_objective": 0.40609835233718256
+    },
+    {
+      "round": 15,
+      "val_objective": 0.3813492377182698
+    },
+    {
+      "round": 20,
+      "val_objective": 0.3751812991550826
+    },
+    {
+      "round": 25,
+      "val_objective": 0.38452013705599297
+    },
+    {
+      "round": 30,
+      "val_objective": 0.3916235969894516
+    },
+    {
+      "round": 35,
+      "val_objective": 0.36866587672237916
+    },
+    {
+      "round": 40,
+      "val_objective": 0.37556670374424755
+    },
+    {
+      "round": 45,
+      "val_objective": 0.3847217703505348
+    },
+    {
+      "round": 50,
+      "val_objective": 0.36658470861355824
+    }
+  ],
+  "train_seconds": 1472.2351970672607,
+  "privacy": {
+    "delta": 1e-06,
+    "n_clients": 10,
+    "worst_client": 8,
+    "rounds_worst_client": 19,
+    "eps_numpy_accountant": 6.424847097322022,
+    "eps_opacus": 6.424763494320243
+  }
+}

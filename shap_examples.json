@@ -1,0 +1,152 @@
+[
+  {
+    "window": 658,
+    "attack_type": "DDoS",
+    "logit": 12.389491081237793,
+    "threshold": 8.490837516784667,
+    "top5": [
+      [
+        "Packet Length Std",
+        6.1900237414797825
+      ],
+      [
+        "ACK Flag Count",
+        5.782134600589053
+      ],
+      [
+        "Bwd Packet Length Std",
+        3.9649839968766765
+      ],
+      [
+        "Packet Length Mean",
+        3.1973448764347276
+      ],
+      [
+        "Avg Bwd Segment Size",
+        2.5689470998470636
+      ]
+    ],
+    "ontology_path": "Port_80 -> HTTPService -> DenialOfService, WebAttack",
+    "explanation": "Alert (DDoS): attack score 12.39 (threshold 8.49). Main contributing features: Packet Length Std (6.19), ACK Flag Count (5.78), Bwd Packet Length Std (3.96), Packet Length Mean (3.20), Avg Bwd Segment Size (2.57). Ontology context: Port_80 -> HTTPService -> DenialOfService, WebAttack"
+  },
+  {
+    "window": 659,
+    "attack_type": "DDoS",
+    "logit": 11.205522537231445,
+    "threshold": 8.490837516784667,
+    "top5": [
+      [
+        "Packet Length Std",
+        6.1718694793370785
+      ],
+      [
+        "ACK Flag Count",
+        5.379786160290242
+      ],
+      [
+        "kg_0",
+        3.247826832386189
+      ],
+      [
+        "Packet Length Mean",
+        3.1365019768601607
+      ],
+      [
+        "kg_23",
+        3.0795572357499843
+      ]
+    ],
+    "ontology_path": "Port_80 -> HTTPService -> DenialOfService, WebAttack",
+    "explanation": "Alert (DDoS): attack score 11.21 (threshold 8.49). Main contributing features: Packet Length Std (6.17), ACK Flag Count (5.38), kg_0 (3.25), Packet Length Mean (3.14), kg_23 (3.08). Ontology context: Port_80 -> HTTPService -> DenialOfService, WebAttack"
+  },
+  {
+    "window": 660,
+    "attack_type": "DDoS",
+    "logit": 12.225543975830078,
+    "threshold": 8.490837516784667,
+    "top5": [
+      [
+        "Packet Length Std",
+        6.942608934567514
+      ],
+      [
+        "ACK Flag Count",
+        5.847419159871062
+      ],
+      [
+        "Bwd Packet Length Std",
+        3.6803328564712863
+      ],
+      [
+        "kg_0",
+        3.678641817818873
+      ],
+      [
+        "kg_23",
+        3.5073573503439177
+      ]
+    ],
+    "ontology_path": "Port_80 -> HTTPService -> DenialOfService, WebAttack",
+    "explanation": "Alert (DDoS): attack score 12.23 (threshold 8.49). Main contributing features: Packet Length Std (6.94), ACK Flag Count (5.85), Bwd Packet Length Std (3.68), kg_0 (3.68), kg_23 (3.51). Ontology context: Port_80 -> HTTPService -> DenialOfService, WebAttack"
+  },
+  {
+    "window": 661,
+    "attack_type": "DDoS",
+    "logit": 11.802177429199219,
+    "threshold": 8.490837516784667,
+    "top5": [
+      [
+        "Packet Length Std",
+        7.123714290293241
+      ],
+      [
+        "ACK Flag Count",
+        6.069796758014709
+      ],
+      [
+        "kg_0",
+        3.5403867833579836
+      ],
+      [
+        "kg_23",
+        3.1888061292973315
+      ],
+      [
+        "Packet Length Mean",
+        3.1840962967452704
+      ]
+    ],
+    "ontology_path": "Port_80 -> HTTPService -> DenialOfService, WebAttack",
+    "explanation": "Alert (DDoS): attack score 11.80 (threshold 8.49). Main contributing features: Packet Length Std (7.12), ACK Flag Count (6.07), kg_0 (3.54), kg_23 (3.19), Packet Length Mean (3.18). Ontology context: Port_80 -> HTTPService -> DenialOfService, WebAttack"
+  },
+  {
+    "window": 662,
+    "attack_type": "DDoS",
+    "logit": 10.706485748291016,
+    "threshold": 8.490837516784667,
+    "top5": [
+      [
+        "Packet Length Std",
+        6.791289640741369
+      ],
+      [
+        "ACK Flag Count",
+        5.6116130179399635
+      ],
+      [
+        "kg_23",
+        3.9343017445818087
+      ],
+      [
+        "kg_0",
+        3.881517175830833
+      ],
+      [
+        "Bwd Packet Length Std",
+        3.3393207848156243
+      ]
+    ],
+    "ontology_path": "Port_80 -> HTTPService -> DenialOfService, WebAttack",
+    "explanation": "Alert (DDoS): attack score 10.71 (threshold 8.49). Main contributing features: Packet Length Std (6.79), ACK Flag Count (5.61), kg_23 (3.93), kg_0 (3.88), Bwd Packet Length Std (3.34). Ontology context: Port_80 -> HTTPService -> DenialOfService, WebAttack"
+  }
+]

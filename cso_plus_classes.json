@@ -1,0 +1,67 @@
+{
+ "core": [
+  "CloudAsset",
+  "Threat",
+  "AttackTechnique",
+  "NetworkEntity",
+  "Control",
+  "Tenant"
+ ],
+ "network": [
+  "Port",
+  "PortRange",
+  "Protocol",
+  "Service"
+ ],
+ "containerisation": [
+  "Container",
+  "Pod",
+  "Deployment",
+  "DaemonSet",
+  "Sidecar",
+  "ContainerRegistry",
+  "KubernetesAPIServer",
+  "Kubelet"
+ ],
+ "serverless": [
+  "Function",
+  "FunctionInvocation",
+  "EventTrigger",
+  "WorkflowOrchestrator",
+  "APIGateway",
+  "ObjectStorageBucket"
+ ],
+ "mesh": [
+  "ServiceMesh",
+  "VirtualService",
+  "IngressController",
+  "NetworkPolicy",
+  "LoadBalancer",
+  "VirtualNetwork"
+ ],
+ "identity": [
+  "IAMRole",
+  "ServiceAccount",
+  "TenantBoundary",
+  "CrossTenantFlow",
+  "AccessKey"
+ ],
+ "cloud_attacks": [
+  "ContainerEscape",
+  "SupplyChainCompromise",
+  "PrivilegeEscalation",
+  "Cryptojacking",
+  "LateralMovement",
+  "DataExfiltration",
+  "ExposedAPIExploit"
+ ],
+ "network_attacks": [
+  "Reconnaissance",
+  "BruteForce",
+  "DenialOfService",
+  "WebAttack",
+  "CommandAndControl",
+  "ProtocolExploit",
+  "DataExposure"
+ ]
+}

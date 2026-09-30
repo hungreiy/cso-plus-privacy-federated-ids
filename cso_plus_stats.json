@@ -1,0 +1,30 @@
+{
+ "classes": 49,
+ "object_properties": 20,
+ "individuals": 1133,
+ "triples": 2518,
+ "graph_nodes": 1181,
+ "graph_edges": 2511,
+ "services": 34,
+ "walks": 23620,
+ "training_pairs": 2078560,
+ "dim": 32,
+ "walk_length": 10,
+ "walks_per_node": 20,
+ "window": 8,
+ "p": 0.5,
+ "q": 0.5,
+ "negatives": 5,
+ "epochs": 10,
+ "seed": 0,
+ "classes_by_theme": {
+  "core": 6,
+  "network": 4,
+  "containerisation": 8,
+  "serverless": 6,
+  "mesh": 6,
+  "identity": 5,
+  "cloud_attacks": 7,
+  "network_attacks": 7
+ }
+}

@@ -1,0 +1,2549 @@
+@prefix cso: <http://example.org/csoplus#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<http://example.org/csoplus> a owl:Ontology ; rdfs:label "CSO+ (thesis ontology)" .
+
+cso:CloudAsset a owl:Class ; rdfs:comment "theme: core" .
+cso:Threat a owl:Class ; rdfs:comment "theme: core" .
+cso:AttackTechnique a owl:Class ; rdfs:subClassOf cso:Threat ; rdfs:comment "theme: core" .
+cso:NetworkEntity a owl:Class ; rdfs:comment "theme: core" .
+cso:Control a owl:Class ; rdfs:comment "theme: core" .
+cso:Tenant a owl:Class ; rdfs:comment "theme: core" .
+cso:Port a owl:Class ; rdfs:subClassOf cso:NetworkEntity ; rdfs:comment "theme: network" .
+cso:PortRange a owl:Class ; rdfs:subClassOf cso:NetworkEntity ; rdfs:comment "theme: network" .
+cso:Protocol a owl:Class ; rdfs:subClassOf cso:NetworkEntity ; rdfs:comment "theme: network" .
+cso:Service a owl:Class ; rdfs:subClassOf cso:NetworkEntity ; rdfs:comment "theme: network" .
+cso:Container a owl:Class ; rdfs:subClassOf cso:CloudAsset ; rdfs:comment "theme: containerisation" .
+cso:Pod a owl:Class ; rdfs:subClassOf cso:CloudAsset ; rdfs:comment "theme: containerisation" .
+cso:Deployment a owl:Class ; rdfs:subClassOf cso:CloudAsset ; rdfs:comment "theme: containerisation" .
+cso:DaemonSet a owl:Class ; rdfs:subClassOf cso:CloudAsset ; rdfs:comment "theme: containerisation" .
+cso:Sidecar a owl:Class ; rdfs:subClassOf cso:Container ; rdfs:comment "theme: containerisation" .
+cso:ContainerRegistry a owl:Class ; rdfs:subClassOf cso:CloudAsset ; rdfs:comment "theme: containerisation" .
+cso:KubernetesAPIServer a owl:Class ; rdfs:subClassOf cso:Service ; rdfs:comment "theme: containerisation" .
+cso:Kubelet a owl:Class ; rdfs:subClassOf cso:Service ; rdfs:comment "theme: containerisation" .
+cso:Function a owl:Class ; rdfs:subClassOf cso:CloudAsset ; rdfs:comment "theme: serverless" .
+cso:FunctionInvocation a owl:Class ; rdfs:subClassOf cso:CloudAsset ; rdfs:comment "theme: serverless" .
+cso:EventTrigger a owl:Class ; rdfs:subClassOf cso:CloudAsset ; rdfs:comment "theme: serverless" .
+cso:WorkflowOrchestrator a owl:Class ; rdfs:subClassOf cso:CloudAsset ; rdfs:comment "theme: serverless" .
+cso:APIGateway a owl:Class ; rdfs:subClassOf cso:Service ; rdfs:comment "theme: serverless" .
+cso:ObjectStorageBucket a owl:Class ; rdfs:subClassOf cso:CloudAsset ; rdfs:comment "theme: serverless" .
+cso:ServiceMesh a owl:Class ; rdfs:subClassOf cso:CloudAsset ; rdfs:comment "theme: mesh" .
+cso:VirtualService a owl:Class ; rdfs:subClassOf cso:CloudAsset ; rdfs:comment "theme: mesh" .
+cso:IngressController a owl:Class ; rdfs:subClassOf cso:CloudAsset ; rdfs:comment "theme: mesh" .
+cso:NetworkPolicy a owl:Class ; rdfs:subClassOf cso:Control ; rdfs:comment "theme: mesh" .
+cso:LoadBalancer a owl:Class ; rdfs:subClassOf cso:CloudAsset ; rdfs:comment "theme: mesh" .
+cso:VirtualNetwork a owl:Class ; rdfs:subClassOf cso:CloudAsset ; rdfs:comment "theme: mesh" .
+cso:IAMRole a owl:Class ; rdfs:subClassOf cso:CloudAsset ; rdfs:comment "theme: identity" .
+cso:ServiceAccount a owl:Class ; rdfs:subClassOf cso:CloudAsset ; rdfs:comment "theme: identity" .
+cso:TenantBoundary a owl:Class ; rdfs:subClassOf cso:Control ; rdfs:comment "theme: identity" .
+cso:CrossTenantFlow a owl:Class ; rdfs:subClassOf cso:CloudAsset ; rdfs:comment "theme: identity" .
+cso:AccessKey a owl:Class ; rdfs:subClassOf cso:CloudAsset ; rdfs:comment "theme: identity" .
+cso:ContainerEscape a owl:Class ; rdfs:subClassOf cso:AttackTechnique ; rdfs:comment "theme: cloud_attacks" .
+cso:SupplyChainCompromise a owl:Class ; rdfs:subClassOf cso:AttackTechnique ; rdfs:comment "theme: cloud_attacks" .
+cso:PrivilegeEscalation a owl:Class ; rdfs:subClassOf cso:AttackTechnique ; rdfs:comment "theme: cloud_attacks" .
+cso:Cryptojacking a owl:Class ; rdfs:subClassOf cso:AttackTechnique ; rdfs:comment "theme: cloud_attacks" .
+cso:LateralMovement a owl:Class ; rdfs:subClassOf cso:AttackTechnique ; rdfs:comment "theme: cloud_attacks" .
+cso:DataExfiltration a owl:Class ; rdfs:subClassOf cso:AttackTechnique ; rdfs:comment "theme: cloud_attacks" .
+cso:ExposedAPIExploit a owl:Class ; rdfs:subClassOf cso:AttackTechnique ; rdfs:comment "theme: cloud_attacks" .
+cso:Reconnaissance a owl:Class ; rdfs:subClassOf cso:AttackTechnique ; rdfs:comment "theme: network_attacks" .
+cso:BruteForce a owl:Class ; rdfs:subClassOf cso:AttackTechnique ; rdfs:comment "theme: network_attacks" .
+cso:DenialOfService a owl:Class ; rdfs:subClassOf cso:AttackTechnique ; rdfs:comment "theme: network_attacks" .
+cso:WebAttack a owl:Class ; rdfs:subClassOf cso:AttackTechnique ; rdfs:comment "theme: network_attacks" .
+cso:CommandAndControl a owl:Class ; rdfs:subClassOf cso:AttackTechnique ; rdfs:comment "theme: network_attacks" .
+cso:ProtocolExploit a owl:Class ; rdfs:subClassOf cso:AttackTechnique ; rdfs:comment "theme: network_attacks" .
+cso:DataExposure a owl:Class ; rdfs:subClassOf cso:AttackTechnique ; rdfs:comment "theme: network_attacks" .
+cso:usesProtocol a owl:ObjectProperty ; rdfs:domain cso:Service ; rdfs:range cso:Protocol .
+cso:listensOn a owl:ObjectProperty ; rdfs:domain cso:Service ; rdfs:range cso:Port .
+cso:inRange a owl:ObjectProperty ; rdfs:domain cso:Port ; rdfs:range cso:PortRange .
+cso:commonlyAbusedFor a owl:ObjectProperty ; rdfs:domain cso:Port ; rdfs:range cso:AttackTechnique .
+cso:targetsService a owl:ObjectProperty ; rdfs:domain cso:AttackTechnique ; rdfs:range cso:Service .
+cso:enablesLateralMovement a owl:ObjectProperty ; rdfs:domain cso:Service ; rdfs:range cso:LateralMovement .
+cso:mitigatedBy a owl:ObjectProperty ; rdfs:domain cso:AttackTechnique ; rdfs:range cso:Control .
+cso:isPartOf a owl:ObjectProperty ; rdfs:domain cso:CloudAsset ; rdfs:range cso:CloudAsset .
+cso:runsOn a owl:ObjectProperty ; rdfs:domain cso:Container ; rdfs:range cso:CloudAsset .
+cso:assumesRole a owl:ObjectProperty ; rdfs:domain cso:ServiceAccount ; rdfs:range cso:IAMRole .
+cso:invokes a owl:ObjectProperty ; rdfs:domain cso:EventTrigger ; rdfs:range cso:Function .
+cso:routesTo a owl:ObjectProperty ; rdfs:domain cso:IngressController ; rdfs:range cso:Service .
+cso:governs a owl:ObjectProperty ; rdfs:domain cso:NetworkPolicy ; rdfs:range cso:Pod .
+cso:crossesBoundary a owl:ObjectProperty ; rdfs:domain cso:CrossTenantFlow ; rdfs:range cso:TenantBoundary .
+cso:exposes a owl:ObjectProperty ; rdfs:domain cso:CloudAsset ; rdfs:range cso:Service .
+cso:authenticatesWith a owl:ObjectProperty ; rdfs:domain cso:Service ; rdfs:range cso:AccessKey .
+cso:storesDataIn a owl:ObjectProperty ; rdfs:domain cso:Function ; rdfs:range cso:ObjectStorageBucket .
+cso:escalatesTo a owl:ObjectProperty ; rdfs:domain cso:AttackTechnique ; rdfs:range cso:AttackTechnique .
+cso:precedes a owl:ObjectProperty ; rdfs:domain cso:AttackTechnique ; rdfs:range cso:AttackTechnique .
+cso:protectedBy a owl:ObjectProperty ; rdfs:domain cso:Service ; rdfs:range cso:Control .
+cso:WellKnownRange a owl:NamedIndividual, cso:PortRange .
+cso:RegisteredRange a owl:NamedIndividual, cso:PortRange .
+cso:DynamicRange a owl:NamedIndividual, cso:PortRange .
+cso:Port_0 a owl:NamedIndividual, cso:Port .
+cso:Port_1 a owl:NamedIndividual, cso:Port .
+cso:Port_2 a owl:NamedIndividual, cso:Port .
+cso:Port_3 a owl:NamedIndividual, cso:Port .
+cso:Port_4 a owl:NamedIndividual, cso:Port .
+cso:Port_5 a owl:NamedIndividual, cso:Port .
+cso:Port_6 a owl:NamedIndividual, cso:Port .
+cso:Port_7 a owl:NamedIndividual, cso:Port .
+cso:Port_8 a owl:NamedIndividual, cso:Port .
+cso:Port_9 a owl:NamedIndividual, cso:Port .
+cso:Port_10 a owl:NamedIndividual, cso:Port .
+cso:Port_11 a owl:NamedIndividual, cso:Port .
+cso:Port_12 a owl:NamedIndividual, cso:Port .
+cso:Port_13 a owl:NamedIndividual, cso:Port .
+cso:Port_14 a owl:NamedIndividual, cso:Port .
+cso:Port_15 a owl:NamedIndividual, cso:Port .
+cso:Port_16 a owl:NamedIndividual, cso:Port .
+cso:Port_17 a owl:NamedIndividual, cso:Port .
+cso:Port_18 a owl:NamedIndividual, cso:Port .
+cso:Port_19 a owl:NamedIndividual, cso:Port .
+cso:Port_20 a owl:NamedIndividual, cso:Port .
+cso:Port_21 a owl:NamedIndividual, cso:Port .
+cso:Port_22 a owl:NamedIndividual, cso:Port .
+cso:Port_23 a owl:NamedIndividual, cso:Port .
+cso:Port_24 a owl:NamedIndividual, cso:Port .
+cso:Port_25 a owl:NamedIndividual, cso:Port .
+cso:Port_26 a owl:NamedIndividual, cso:Port .
+cso:Port_27 a owl:NamedIndividual, cso:Port .
+cso:Port_28 a owl:NamedIndividual, cso:Port .
+cso:Port_29 a owl:NamedIndividual, cso:Port .
+cso:Port_30 a owl:NamedIndividual, cso:Port .
+cso:Port_31 a owl:NamedIndividual, cso:Port .
+cso:Port_32 a owl:NamedIndividual, cso:Port .
+cso:Port_33 a owl:NamedIndividual, cso:Port .
+cso:Port_34 a owl:NamedIndividual, cso:Port .
+cso:Port_35 a owl:NamedIndividual, cso:Port .
+cso:Port_36 a owl:NamedIndividual, cso:Port .
+cso:Port_37 a owl:NamedIndividual, cso:Port .
+cso:Port_38 a owl:NamedIndividual, cso:Port .
+cso:Port_39 a owl:NamedIndividual, cso:Port .
+cso:Port_40 a owl:NamedIndividual, cso:Port .
+cso:Port_41 a owl:NamedIndividual, cso:Port .
+cso:Port_42 a owl:NamedIndividual, cso:Port .
+cso:Port_43 a owl:NamedIndividual, cso:Port .
+cso:Port_44 a owl:NamedIndividual, cso:Port .
+cso:Port_45 a owl:NamedIndividual, cso:Port .
+cso:Port_46 a owl:NamedIndividual, cso:Port .
+cso:Port_47 a owl:NamedIndividual, cso:Port .
+cso:Port_48 a owl:NamedIndividual, cso:Port .
+cso:Port_49 a owl:NamedIndividual, cso:Port .
+cso:Port_50 a owl:NamedIndividual, cso:Port .
+cso:Port_51 a owl:NamedIndividual, cso:Port .
+cso:Port_52 a owl:NamedIndividual, cso:Port .
+cso:Port_53 a owl:NamedIndividual, cso:Port .
+cso:Port_54 a owl:NamedIndividual, cso:Port .
+cso:Port_55 a owl:NamedIndividual, cso:Port .
+cso:Port_56 a owl:NamedIndividual, cso:Port .
+cso:Port_57 a owl:NamedIndividual, cso:Port .
+cso:Port_58 a owl:NamedIndividual, cso:Port .
+cso:Port_59 a owl:NamedIndividual, cso:Port .
+cso:Port_60 a owl:NamedIndividual, cso:Port .
+cso:Port_61 a owl:NamedIndividual, cso:Port .
+cso:Port_62 a owl:NamedIndividual, cso:Port .
+cso:Port_63 a owl:NamedIndividual, cso:Port .
+cso:Port_64 a owl:NamedIndividual, cso:Port .
+cso:Port_65 a owl:NamedIndividual, cso:Port .
+cso:Port_66 a owl:NamedIndividual, cso:Port .
+cso:Port_67 a owl:NamedIndividual, cso:Port .
+cso:Port_68 a owl:NamedIndividual, cso:Port .
+cso:Port_69 a owl:NamedIndividual, cso:Port .
+cso:Port_70 a owl:NamedIndividual, cso:Port .
+cso:Port_71 a owl:NamedIndividual, cso:Port .
+cso:Port_72 a owl:NamedIndividual, cso:Port .
+cso:Port_73 a owl:NamedIndividual, cso:Port .
+cso:Port_74 a owl:NamedIndividual, cso:Port .
+cso:Port_75 a owl:NamedIndividual, cso:Port .
+cso:Port_76 a owl:NamedIndividual, cso:Port .
+cso:Port_77 a owl:NamedIndividual, cso:Port .
+cso:Port_78 a owl:NamedIndividual, cso:Port .
+cso:Port_79 a owl:NamedIndividual, cso:Port .
+cso:Port_80 a owl:NamedIndividual, cso:Port .
+cso:Port_81 a owl:NamedIndividual, cso:Port .
+cso:Port_82 a owl:NamedIndividual, cso:Port .
+cso:Port_83 a owl:NamedIndividual, cso:Port .
+cso:Port_84 a owl:NamedIndividual, cso:Port .
+cso:Port_85 a owl:NamedIndividual, cso:Port .
+cso:Port_86 a owl:NamedIndividual, cso:Port .
+cso:Port_87 a owl:NamedIndividual, cso:Port .
+cso:Port_88 a owl:NamedIndividual, cso:Port .
+cso:Port_89 a owl:NamedIndividual, cso:Port .
+cso:Port_90 a owl:NamedIndividual, cso:Port .
+cso:Port_91 a owl:NamedIndividual, cso:Port .
+cso:Port_92 a owl:NamedIndividual, cso:Port .
+cso:Port_93 a owl:NamedIndividual, cso:Port .
+cso:Port_94 a owl:NamedIndividual, cso:Port .
+cso:Port_95 a owl:NamedIndividual, cso:Port .
+cso:Port_96 a owl:NamedIndividual, cso:Port .
+cso:Port_97 a owl:NamedIndividual, cso:Port .
+cso:Port_98 a owl:NamedIndividual, cso:Port .
+cso:Port_99 a owl:NamedIndividual, cso:Port .
+cso:Port_100 a owl:NamedIndividual, cso:Port .
+cso:Port_101 a owl:NamedIndividual, cso:Port .
+cso:Port_102 a owl:NamedIndividual, cso:Port .
+cso:Port_103 a owl:NamedIndividual, cso:Port .
+cso:Port_104 a owl:NamedIndividual, cso:Port .
+cso:Port_105 a owl:NamedIndividual, cso:Port .
+cso:Port_106 a owl:NamedIndividual, cso:Port .
+cso:Port_107 a owl:NamedIndividual, cso:Port .
+cso:Port_108 a owl:NamedIndividual, cso:Port .
+cso:Port_109 a owl:NamedIndividual, cso:Port .
+cso:Port_110 a owl:NamedIndividual, cso:Port .
+cso:Port_111 a owl:NamedIndividual, cso:Port .
+cso:Port_112 a owl:NamedIndividual, cso:Port .
+cso:Port_113 a owl:NamedIndividual, cso:Port .
+cso:Port_114 a owl:NamedIndividual, cso:Port .
+cso:Port_115 a owl:NamedIndividual, cso:Port .
+cso:Port_116 a owl:NamedIndividual, cso:Port .
+cso:Port_117 a owl:NamedIndividual, cso:Port .
+cso:Port_118 a owl:NamedIndividual, cso:Port .
+cso:Port_119 a owl:NamedIndividual, cso:Port .
+cso:Port_120 a owl:NamedIndividual, cso:Port .
+cso:Port_121 a owl:NamedIndividual, cso:Port .
+cso:Port_122 a owl:NamedIndividual, cso:Port .
+cso:Port_123 a owl:NamedIndividual, cso:Port .
+cso:Port_124 a owl:NamedIndividual, cso:Port .
+cso:Port_125 a owl:NamedIndividual, cso:Port .
+cso:Port_126 a owl:NamedIndividual, cso:Port .
+cso:Port_127 a owl:NamedIndividual, cso:Port .
+cso:Port_128 a owl:NamedIndividual, cso:Port .
+cso:Port_129 a owl:NamedIndividual, cso:Port .
+cso:Port_130 a owl:NamedIndividual, cso:Port .
+cso:Port_131 a owl:NamedIndividual, cso:Port .
+cso:Port_132 a owl:NamedIndividual, cso:Port .
+cso:Port_133 a owl:NamedIndividual, cso:Port .
+cso:Port_134 a owl:NamedIndividual, cso:Port .
+cso:Port_135 a owl:NamedIndividual, cso:Port .
+cso:Port_136 a owl:NamedIndividual, cso:Port .
+cso:Port_137 a owl:NamedIndividual, cso:Port .
+cso:Port_138 a owl:NamedIndividual, cso:Port .
+cso:Port_139 a owl:NamedIndividual, cso:Port .
+cso:Port_140 a owl:NamedIndividual, cso:Port .
+cso:Port_141 a owl:NamedIndividual, cso:Port .
+cso:Port_142 a owl:NamedIndividual, cso:Port .
+cso:Port_143 a owl:NamedIndividual, cso:Port .
+cso:Port_144 a owl:NamedIndividual, cso:Port .
+cso:Port_145 a owl:NamedIndividual, cso:Port .
+cso:Port_146 a owl:NamedIndividual, cso:Port .
+cso:Port_147 a owl:NamedIndividual, cso:Port .
+cso:Port_148 a owl:NamedIndividual, cso:Port .
+cso:Port_149 a owl:NamedIndividual, cso:Port .
+cso:Port_150 a owl:NamedIndividual, cso:Port .
+cso:Port_151 a owl:NamedIndividual, cso:Port .
+cso:Port_152 a owl:NamedIndividual, cso:Port .
+cso:Port_153 a owl:NamedIndividual, cso:Port .
+cso:Port_154 a owl:NamedIndividual, cso:Port .
+cso:Port_155 a owl:NamedIndividual, cso:Port .
+cso:Port_156 a owl:NamedIndividual, cso:Port .
+cso:Port_157 a owl:NamedIndividual, cso:Port .
+cso:Port_158 a owl:NamedIndividual, cso:Port .
+cso:Port_159 a owl:NamedIndividual, cso:Port .
+cso:Port_160 a owl:NamedIndividual, cso:Port .
+cso:Port_161 a owl:NamedIndividual, cso:Port .
+cso:Port_162 a owl:NamedIndividual, cso:Port .
+cso:Port_163 a owl:NamedIndividual, cso:Port .
+cso:Port_164 a owl:NamedIndividual, cso:Port .
+cso:Port_165 a owl:NamedIndividual, cso:Port .
+cso:Port_166 a owl:NamedIndividual, cso:Port .
+cso:Port_167 a owl:NamedIndividual, cso:Port .
+cso:Port_168 a owl:NamedIndividual, cso:Port .
+cso:Port_169 a owl:NamedIndividual, cso:Port .
+cso:Port_170 a owl:NamedIndividual, cso:Port .
+cso:Port_171 a owl:NamedIndividual, cso:Port .
+cso:Port_172 a owl:NamedIndividual, cso:Port .
+cso:Port_173 a owl:NamedIndividual, cso:Port .
+cso:Port_174 a owl:NamedIndividual, cso:Port .
+cso:Port_175 a owl:NamedIndividual, cso:Port .
+cso:Port_176 a owl:NamedIndividual, cso:Port .
+cso:Port_177 a owl:NamedIndividual, cso:Port .
+cso:Port_178 a owl:NamedIndividual, cso:Port .
+cso:Port_179 a owl:NamedIndividual, cso:Port .
+cso:Port_180 a owl:NamedIndividual, cso:Port .
+cso:Port_181 a owl:NamedIndividual, cso:Port .
+cso:Port_182 a owl:NamedIndividual, cso:Port .
+cso:Port_183 a owl:NamedIndividual, cso:Port .
+cso:Port_184 a owl:NamedIndividual, cso:Port .
+cso:Port_185 a owl:NamedIndividual, cso:Port .
+cso:Port_186 a owl:NamedIndividual, cso:Port .
+cso:Port_187 a owl:NamedIndividual, cso:Port .
+cso:Port_188 a owl:NamedIndividual, cso:Port .
+cso:Port_189 a owl:NamedIndividual, cso:Port .
+cso:Port_190 a owl:NamedIndividual, cso:Port .
+cso:Port_191 a owl:NamedIndividual, cso:Port .
+cso:Port_192 a owl:NamedIndividual, cso:Port .
+cso:Port_193 a owl:NamedIndividual, cso:Port .
+cso:Port_194 a owl:NamedIndividual, cso:Port .
+cso:Port_195 a owl:NamedIndividual, cso:Port .
+cso:Port_196 a owl:NamedIndividual, cso:Port .
+cso:Port_197 a owl:NamedIndividual, cso:Port .
+cso:Port_198 a owl:NamedIndividual, cso:Port .
+cso:Port_199 a owl:NamedIndividual, cso:Port .
+cso:Port_200 a owl:NamedIndividual, cso:Port .
+cso:Port_201 a owl:NamedIndividual, cso:Port .
+cso:Port_202 a owl:NamedIndividual, cso:Port .
+cso:Port_203 a owl:NamedIndividual, cso:Port .
+cso:Port_204 a owl:NamedIndividual, cso:Port .
+cso:Port_205 a owl:NamedIndividual, cso:Port .
+cso:Port_206 a owl:NamedIndividual, cso:Port .
+cso:Port_207 a owl:NamedIndividual, cso:Port .
+cso:Port_208 a owl:NamedIndividual, cso:Port .
+cso:Port_209 a owl:NamedIndividual, cso:Port .
+cso:Port_210 a owl:NamedIndividual, cso:Port .
+cso:Port_211 a owl:NamedIndividual, cso:Port .
+cso:Port_212 a owl:NamedIndividual, cso:Port .
+cso:Port_213 a owl:NamedIndividual, cso:Port .
+cso:Port_214 a owl:NamedIndividual, cso:Port .
+cso:Port_215 a owl:NamedIndividual, cso:Port .
+cso:Port_216 a owl:NamedIndividual, cso:Port .
+cso:Port_217 a owl:NamedIndividual, cso:Port .
+cso:Port_218 a owl:NamedIndividual, cso:Port .
+cso:Port_219 a owl:NamedIndividual, cso:Port .
+cso:Port_220 a owl:NamedIndividual, cso:Port .
+cso:Port_221 a owl:NamedIndividual, cso:Port .
+cso:Port_222 a owl:NamedIndividual, cso:Port .
+cso:Port_223 a owl:NamedIndividual, cso:Port .
+cso:Port_224 a owl:NamedIndividual, cso:Port .
+cso:Port_225 a owl:NamedIndividual, cso:Port .
+cso:Port_226 a owl:NamedIndividual, cso:Port .
+cso:Port_227 a owl:NamedIndividual, cso:Port .
+cso:Port_228 a owl:NamedIndividual, cso:Port .
+cso:Port_229 a owl:NamedIndividual, cso:Port .
+cso:Port_230 a owl:NamedIndividual, cso:Port .
+cso:Port_231 a owl:NamedIndividual, cso:Port .
+cso:Port_232 a owl:NamedIndividual, cso:Port .
+cso:Port_233 a owl:NamedIndividual, cso:Port .
+cso:Port_234 a owl:NamedIndividual, cso:Port .
+cso:Port_235 a owl:NamedIndividual, cso:Port .
+cso:Port_236 a owl:NamedIndividual, cso:Port .
+cso:Port_237 a owl:NamedIndividual, cso:Port .
+cso:Port_238 a owl:NamedIndividual, cso:Port .
+cso:Port_239 a owl:NamedIndividual, cso:Port .
+cso:Port_240 a owl:NamedIndividual, cso:Port .
+cso:Port_241 a owl:NamedIndividual, cso:Port .
+cso:Port_242 a owl:NamedIndividual, cso:Port .
+cso:Port_243 a owl:NamedIndividual, cso:Port .
+cso:Port_244 a owl:NamedIndividual, cso:Port .
+cso:Port_245 a owl:NamedIndividual, cso:Port .
+cso:Port_246 a owl:NamedIndividual, cso:Port .
+cso:Port_247 a owl:NamedIndividual, cso:Port .
+cso:Port_248 a owl:NamedIndividual, cso:Port .
+cso:Port_249 a owl:NamedIndividual, cso:Port .
+cso:Port_250 a owl:NamedIndividual, cso:Port .
+cso:Port_251 a owl:NamedIndividual, cso:Port .
+cso:Port_252 a owl:NamedIndividual, cso:Port .
+cso:Port_253 a owl:NamedIndividual, cso:Port .
+cso:Port_254 a owl:NamedIndividual, cso:Port .
+cso:Port_255 a owl:NamedIndividual, cso:Port .
+cso:Port_256 a owl:NamedIndividual, cso:Port .
+cso:Port_257 a owl:NamedIndividual, cso:Port .
+cso:Port_258 a owl:NamedIndividual, cso:Port .
+cso:Port_259 a owl:NamedIndividual, cso:Port .
+cso:Port_260 a owl:NamedIndividual, cso:Port .
+cso:Port_261 a owl:NamedIndividual, cso:Port .
+cso:Port_262 a owl:NamedIndividual, cso:Port .
+cso:Port_263 a owl:NamedIndividual, cso:Port .
+cso:Port_264 a owl:NamedIndividual, cso:Port .
+cso:Port_265 a owl:NamedIndividual, cso:Port .
+cso:Port_266 a owl:NamedIndividual, cso:Port .
+cso:Port_267 a owl:NamedIndividual, cso:Port .
+cso:Port_268 a owl:NamedIndividual, cso:Port .
+cso:Port_269 a owl:NamedIndividual, cso:Port .
+cso:Port_270 a owl:NamedIndividual, cso:Port .
+cso:Port_271 a owl:NamedIndividual, cso:Port .
+cso:Port_272 a owl:NamedIndividual, cso:Port .
+cso:Port_273 a owl:NamedIndividual, cso:Port .
+cso:Port_274 a owl:NamedIndividual, cso:Port .
+cso:Port_275 a owl:NamedIndividual, cso:Port .
+cso:Port_276 a owl:NamedIndividual, cso:Port .
+cso:Port_277 a owl:NamedIndividual, cso:Port .
+cso:Port_278 a owl:NamedIndividual, cso:Port .
+cso:Port_279 a owl:NamedIndividual, cso:Port .
+cso:Port_280 a owl:NamedIndividual, cso:Port .
+cso:Port_281 a owl:NamedIndividual, cso:Port .
+cso:Port_282 a owl:NamedIndividual, cso:Port .
+cso:Port_283 a owl:NamedIndividual, cso:Port .
+cso:Port_284 a owl:NamedIndividual, cso:Port .
+cso:Port_285 a owl:NamedIndividual, cso:Port .
+cso:Port_286 a owl:NamedIndividual, cso:Port .
+cso:Port_287 a owl:NamedIndividual, cso:Port .
+cso:Port_288 a owl:NamedIndividual, cso:Port .
+cso:Port_289 a owl:NamedIndividual, cso:Port .
+cso:Port_290 a owl:NamedIndividual, cso:Port .
+cso:Port_291 a owl:NamedIndividual, cso:Port .
+cso:Port_292 a owl:NamedIndividual, cso:Port .
+cso:Port_293 a owl:NamedIndividual, cso:Port .
+cso:Port_294 a owl:NamedIndividual, cso:Port .
+cso:Port_295 a owl:NamedIndividual, cso:Port .
+cso:Port_296 a owl:NamedIndividual, cso:Port .
+cso:Port_297 a owl:NamedIndividual, cso:Port .
+cso:Port_298 a owl:NamedIndividual, cso:Port .
+cso:Port_299 a owl:NamedIndividual, cso:Port .
+cso:Port_300 a owl:NamedIndividual, cso:Port .
+cso:Port_301 a owl:NamedIndividual, cso:Port .
+cso:Port_302 a owl:NamedIndividual, cso:Port .
+cso:Port_303 a owl:NamedIndividual, cso:Port .
+cso:Port_304 a owl:NamedIndividual, cso:Port .
+cso:Port_305 a owl:NamedIndividual, cso:Port .
+cso:Port_306 a owl:NamedIndividual, cso:Port .
+cso:Port_307 a owl:NamedIndividual, cso:Port .
+cso:Port_308 a owl:NamedIndividual, cso:Port .
+cso:Port_309 a owl:NamedIndividual, cso:Port .
+cso:Port_310 a owl:NamedIndividual, cso:Port .
+cso:Port_311 a owl:NamedIndividual, cso:Port .
+cso:Port_312 a owl:NamedIndividual, cso:Port .
+cso:Port_313 a owl:NamedIndividual, cso:Port .
+cso:Port_314 a owl:NamedIndividual, cso:Port .
+cso:Port_315 a owl:NamedIndividual, cso:Port .
+cso:Port_316 a owl:NamedIndividual, cso:Port .
+cso:Port_317 a owl:NamedIndividual, cso:Port .
+cso:Port_318 a owl:NamedIndividual, cso:Port .
+cso:Port_319 a owl:NamedIndividual, cso:Port .
+cso:Port_320 a owl:NamedIndividual, cso:Port .
+cso:Port_321 a owl:NamedIndividual, cso:Port .
+cso:Port_322 a owl:NamedIndividual, cso:Port .
+cso:Port_323 a owl:NamedIndividual, cso:Port .
+cso:Port_324 a owl:NamedIndividual, cso:Port .
+cso:Port_325 a owl:NamedIndividual, cso:Port .
+cso:Port_326 a owl:NamedIndividual, cso:Port .
+cso:Port_327 a owl:NamedIndividual, cso:Port .
+cso:Port_328 a owl:NamedIndividual, cso:Port .
+cso:Port_329 a owl:NamedIndividual, cso:Port .
+cso:Port_330 a owl:NamedIndividual, cso:Port .
+cso:Port_331 a owl:NamedIndividual, cso:Port .
+cso:Port_332 a owl:NamedIndividual, cso:Port .
+cso:Port_333 a owl:NamedIndividual, cso:Port .
+cso:Port_334 a owl:NamedIndividual, cso:Port .
+cso:Port_335 a owl:NamedIndividual, cso:Port .
+cso:Port_336 a owl:NamedIndividual, cso:Port .
+cso:Port_337 a owl:NamedIndividual, cso:Port .
+cso:Port_338 a owl:NamedIndividual, cso:Port .
+cso:Port_339 a owl:NamedIndividual, cso:Port .
+cso:Port_340 a owl:NamedIndividual, cso:Port .
+cso:Port_341 a owl:NamedIndividual, cso:Port .
+cso:Port_342 a owl:NamedIndividual, cso:Port .
+cso:Port_343 a owl:NamedIndividual, cso:Port .
+cso:Port_344 a owl:NamedIndividual, cso:Port .
+cso:Port_345 a owl:NamedIndividual, cso:Port .
+cso:Port_346 a owl:NamedIndividual, cso:Port .
+cso:Port_347 a owl:NamedIndividual, cso:Port .
+cso:Port_348 a owl:NamedIndividual, cso:Port .
+cso:Port_349 a owl:NamedIndividual, cso:Port .
+cso:Port_350 a owl:NamedIndividual, cso:Port .
+cso:Port_351 a owl:NamedIndividual, cso:Port .
+cso:Port_352 a owl:NamedIndividual, cso:Port .
+cso:Port_353 a owl:NamedIndividual, cso:Port .
+cso:Port_354 a owl:NamedIndividual, cso:Port .
+cso:Port_355 a owl:NamedIndividual, cso:Port .
+cso:Port_356 a owl:NamedIndividual, cso:Port .
+cso:Port_357 a owl:NamedIndividual, cso:Port .
+cso:Port_358 a owl:NamedIndividual, cso:Port .
+cso:Port_359 a owl:NamedIndividual, cso:Port .
+cso:Port_360 a owl:NamedIndividual, cso:Port .
+cso:Port_361 a owl:NamedIndividual, cso:Port .
+cso:Port_362 a owl:NamedIndividual, cso:Port .
+cso:Port_363 a owl:NamedIndividual, cso:Port .
+cso:Port_364 a owl:NamedIndividual, cso:Port .
+cso:Port_365 a owl:NamedIndividual, cso:Port .
+cso:Port_366 a owl:NamedIndividual, cso:Port .
+cso:Port_367 a owl:NamedIndividual, cso:Port .
+cso:Port_368 a owl:NamedIndividual, cso:Port .
+cso:Port_369 a owl:NamedIndividual, cso:Port .
+cso:Port_370 a owl:NamedIndividual, cso:Port .
+cso:Port_371 a owl:NamedIndividual, cso:Port .
+cso:Port_372 a owl:NamedIndividual, cso:Port .
+cso:Port_373 a owl:NamedIndividual, cso:Port .
+cso:Port_374 a owl:NamedIndividual, cso:Port .
+cso:Port_375 a owl:NamedIndividual, cso:Port .
+cso:Port_376 a owl:NamedIndividual, cso:Port .
+cso:Port_377 a owl:NamedIndividual, cso:Port .
+cso:Port_378 a owl:NamedIndividual, cso:Port .
+cso:Port_379 a owl:NamedIndividual, cso:Port .
+cso:Port_380 a owl:NamedIndividual, cso:Port .
+cso:Port_381 a owl:NamedIndividual, cso:Port .
+cso:Port_382 a owl:NamedIndividual, cso:Port .
+cso:Port_383 a owl:NamedIndividual, cso:Port .
+cso:Port_384 a owl:NamedIndividual, cso:Port .
+cso:Port_385 a owl:NamedIndividual, cso:Port .
+cso:Port_386 a owl:NamedIndividual, cso:Port .
+cso:Port_387 a owl:NamedIndividual, cso:Port .
+cso:Port_388 a owl:NamedIndividual, cso:Port .
+cso:Port_389 a owl:NamedIndividual, cso:Port .
+cso:Port_390 a owl:NamedIndividual, cso:Port .
+cso:Port_391 a owl:NamedIndividual, cso:Port .
+cso:Port_392 a owl:NamedIndividual, cso:Port .
+cso:Port_393 a owl:NamedIndividual, cso:Port .
+cso:Port_394 a owl:NamedIndividual, cso:Port .
+cso:Port_395 a owl:NamedIndividual, cso:Port .
+cso:Port_396 a owl:NamedIndividual, cso:Port .
+cso:Port_397 a owl:NamedIndividual, cso:Port .
+cso:Port_398 a owl:NamedIndividual, cso:Port .
+cso:Port_399 a owl:NamedIndividual, cso:Port .
+cso:Port_400 a owl:NamedIndividual, cso:Port .
+cso:Port_401 a owl:NamedIndividual, cso:Port .
+cso:Port_402 a owl:NamedIndividual, cso:Port .
+cso:Port_403 a owl:NamedIndividual, cso:Port .
+cso:Port_404 a owl:NamedIndividual, cso:Port .
+cso:Port_405 a owl:NamedIndividual, cso:Port .
+cso:Port_406 a owl:NamedIndividual, cso:Port .
+cso:Port_407 a owl:NamedIndividual, cso:Port .
+cso:Port_408 a owl:NamedIndividual, cso:Port .
+cso:Port_409 a owl:NamedIndividual, cso:Port .
+cso:Port_410 a owl:NamedIndividual, cso:Port .
+cso:Port_411 a owl:NamedIndividual, cso:Port .
+cso:Port_412 a owl:NamedIndividual, cso:Port .
+cso:Port_413 a owl:NamedIndividual, cso:Port .
+cso:Port_414 a owl:NamedIndividual, cso:Port .
+cso:Port_415 a owl:NamedIndividual, cso:Port .
+cso:Port_416 a owl:NamedIndividual, cso:Port .
+cso:Port_417 a owl:NamedIndividual, cso:Port .
+cso:Port_418 a owl:NamedIndividual, cso:Port .
+cso:Port_419 a owl:NamedIndividual, cso:Port .
+cso:Port_420 a owl:NamedIndividual, cso:Port .
+cso:Port_421 a owl:NamedIndividual, cso:Port .
+cso:Port_422 a owl:NamedIndividual, cso:Port .
+cso:Port_423 a owl:NamedIndividual, cso:Port .
+cso:Port_424 a owl:NamedIndividual, cso:Port .
+cso:Port_425 a owl:NamedIndividual, cso:Port .
+cso:Port_426 a owl:NamedIndividual, cso:Port .
+cso:Port_427 a owl:NamedIndividual, cso:Port .
+cso:Port_428 a owl:NamedIndividual, cso:Port .
+cso:Port_429 a owl:NamedIndividual, cso:Port .
+cso:Port_430 a owl:NamedIndividual, cso:Port .
+cso:Port_431 a owl:NamedIndividual, cso:Port .
+cso:Port_432 a owl:NamedIndividual, cso:Port .
+cso:Port_433 a owl:NamedIndividual, cso:Port .
+cso:Port_434 a owl:NamedIndividual, cso:Port .
+cso:Port_435 a owl:NamedIndividual, cso:Port .
+cso:Port_436 a owl:NamedIndividual, cso:Port .
+cso:Port_437 a owl:NamedIndividual, cso:Port .
+cso:Port_438 a owl:NamedIndividual, cso:Port .
+cso:Port_439 a owl:NamedIndividual, cso:Port .
+cso:Port_440 a owl:NamedIndividual, cso:Port .
+cso:Port_441 a owl:NamedIndividual, cso:Port .
+cso:Port_442 a owl:NamedIndividual, cso:Port .
+cso:Port_443 a owl:NamedIndividual, cso:Port .
+cso:Port_444 a owl:NamedIndividual, cso:Port .
+cso:Port_445 a owl:NamedIndividual, cso:Port .
+cso:Port_446 a owl:NamedIndividual, cso:Port .
+cso:Port_447 a owl:NamedIndividual, cso:Port .
+cso:Port_448 a owl:NamedIndividual, cso:Port .
+cso:Port_449 a owl:NamedIndividual, cso:Port .
+cso:Port_450 a owl:NamedIndividual, cso:Port .
+cso:Port_451 a owl:NamedIndividual, cso:Port .
+cso:Port_452 a owl:NamedIndividual, cso:Port .
+cso:Port_453 a owl:NamedIndividual, cso:Port .
+cso:Port_454 a owl:NamedIndividual, cso:Port .
+cso:Port_455 a owl:NamedIndividual, cso:Port .
+cso:Port_456 a owl:NamedIndividual, cso:Port .
+cso:Port_457 a owl:NamedIndividual, cso:Port .
+cso:Port_458 a owl:NamedIndividual, cso:Port .
+cso:Port_459 a owl:NamedIndividual, cso:Port .
+cso:Port_460 a owl:NamedIndividual, cso:Port .
+cso:Port_461 a owl:NamedIndividual, cso:Port .
+cso:Port_462 a owl:NamedIndividual, cso:Port .
+cso:Port_463 a owl:NamedIndividual, cso:Port .
+cso:Port_464 a owl:NamedIndividual, cso:Port .
+cso:Port_465 a owl:NamedIndividual, cso:Port .
+cso:Port_466 a owl:NamedIndividual, cso:Port .
+cso:Port_467 a owl:NamedIndividual, cso:Port .
+cso:Port_468 a owl:NamedIndividual, cso:Port .
+cso:Port_469 a owl:NamedIndividual, cso:Port .
+cso:Port_470 a owl:NamedIndividual, cso:Port .
+cso:Port_471 a owl:NamedIndividual, cso:Port .
+cso:Port_472 a owl:NamedIndividual, cso:Port .
+cso:Port_473 a owl:NamedIndividual, cso:Port .
+cso:Port_474 a owl:NamedIndividual, cso:Port .
+cso:Port_475 a owl:NamedIndividual, cso:Port .
+cso:Port_476 a owl:NamedIndividual, cso:Port .
+cso:Port_477 a owl:NamedIndividual, cso:Port .
+cso:Port_478 a owl:NamedIndividual, cso:Port .
+cso:Port_479 a owl:NamedIndividual, cso:Port .
+cso:Port_480 a owl:NamedIndividual, cso:Port .
+cso:Port_481 a owl:NamedIndividual, cso:Port .
+cso:Port_482 a owl:NamedIndividual, cso:Port .
+cso:Port_483 a owl:NamedIndividual, cso:Port .
+cso:Port_484 a owl:NamedIndividual, cso:Port .
+cso:Port_485 a owl:NamedIndividual, cso:Port .
+cso:Port_486 a owl:NamedIndividual, cso:Port .
+cso:Port_487 a owl:NamedIndividual, cso:Port .
+cso:Port_488 a owl:NamedIndividual, cso:Port .
+cso:Port_489 a owl:NamedIndividual, cso:Port .
+cso:Port_490 a owl:NamedIndividual, cso:Port .
+cso:Port_491 a owl:NamedIndividual, cso:Port .
+cso:Port_492 a owl:NamedIndividual, cso:Port .
+cso:Port_493 a owl:NamedIndividual, cso:Port .
+cso:Port_494 a owl:NamedIndividual, cso:Port .
+cso:Port_495 a owl:NamedIndividual, cso:Port .
+cso:Port_496 a owl:NamedIndividual, cso:Port .
+cso:Port_497 a owl:NamedIndividual, cso:Port .
+cso:Port_498 a owl:NamedIndividual, cso:Port .
+cso:Port_499 a owl:NamedIndividual, cso:Port .
+cso:Port_500 a owl:NamedIndividual, cso:Port .
+cso:Port_501 a owl:NamedIndividual, cso:Port .
+cso:Port_502 a owl:NamedIndividual, cso:Port .
+cso:Port_503 a owl:NamedIndividual, cso:Port .
+cso:Port_504 a owl:NamedIndividual, cso:Port .
+cso:Port_505 a owl:NamedIndividual, cso:Port .
+cso:Port_506 a owl:NamedIndividual, cso:Port .
+cso:Port_507 a owl:NamedIndividual, cso:Port .
+cso:Port_508 a owl:NamedIndividual, cso:Port .
+cso:Port_509 a owl:NamedIndividual, cso:Port .
+cso:Port_510 a owl:NamedIndividual, cso:Port .
+cso:Port_511 a owl:NamedIndividual, cso:Port .
+cso:Port_512 a owl:NamedIndividual, cso:Port .
+cso:Port_513 a owl:NamedIndividual, cso:Port .
+cso:Port_514 a owl:NamedIndividual, cso:Port .
+cso:Port_515 a owl:NamedIndividual, cso:Port .
+cso:Port_516 a owl:NamedIndividual, cso:Port .
+cso:Port_517 a owl:NamedIndividual, cso:Port .
+cso:Port_518 a owl:NamedIndividual, cso:Port .
+cso:Port_519 a owl:NamedIndividual, cso:Port .
+cso:Port_520 a owl:NamedIndividual, cso:Port .
+cso:Port_521 a owl:NamedIndividual, cso:Port .
+cso:Port_522 a owl:NamedIndividual, cso:Port .
+cso:Port_523 a owl:NamedIndividual, cso:Port .
+cso:Port_524 a owl:NamedIndividual, cso:Port .
+cso:Port_525 a owl:NamedIndividual, cso:Port .
+cso:Port_526 a owl:NamedIndividual, cso:Port .
+cso:Port_527 a owl:NamedIndividual, cso:Port .
+cso:Port_528 a owl:NamedIndividual, cso:Port .
+cso:Port_529 a owl:NamedIndividual, cso:Port .
+cso:Port_530 a owl:NamedIndividual, cso:Port .
+cso:Port_531 a owl:NamedIndividual, cso:Port .
+cso:Port_532 a owl:NamedIndividual, cso:Port .
+cso:Port_533 a owl:NamedIndividual, cso:Port .
+cso:Port_534 a owl:NamedIndividual, cso:Port .
+cso:Port_535 a owl:NamedIndividual, cso:Port .
+cso:Port_536 a owl:NamedIndividual, cso:Port .
+cso:Port_537 a owl:NamedIndividual, cso:Port .
+cso:Port_538 a owl:NamedIndividual, cso:Port .
+cso:Port_539 a owl:NamedIndividual, cso:Port .
+cso:Port_540 a owl:NamedIndividual, cso:Port .
+cso:Port_541 a owl:NamedIndividual, cso:Port .
+cso:Port_542 a owl:NamedIndividual, cso:Port .
+cso:Port_543 a owl:NamedIndividual, cso:Port .
+cso:Port_544 a owl:NamedIndividual, cso:Port .
+cso:Port_545 a owl:NamedIndividual, cso:Port .
+cso:Port_546 a owl:NamedIndividual, cso:Port .
+cso:Port_547 a owl:NamedIndividual, cso:Port .
+cso:Port_548 a owl:NamedIndividual, cso:Port .
+cso:Port_549 a owl:NamedIndividual, cso:Port .
+cso:Port_550 a owl:NamedIndividual, cso:Port .
+cso:Port_551 a owl:NamedIndividual, cso:Port .
+cso:Port_552 a owl:NamedIndividual, cso:Port .
+cso:Port_553 a owl:NamedIndividual, cso:Port .
+cso:Port_554 a owl:NamedIndividual, cso:Port .
+cso:Port_555 a owl:NamedIndividual, cso:Port .
+cso:Port_556 a owl:NamedIndividual, cso:Port .
+cso:Port_557 a owl:NamedIndividual, cso:Port .
+cso:Port_558 a owl:NamedIndividual, cso:Port .
+cso:Port_559 a owl:NamedIndividual, cso:Port .
+cso:Port_560 a owl:NamedIndividual, cso:Port .
+cso:Port_561 a owl:NamedIndividual, cso:Port .
+cso:Port_562 a owl:NamedIndividual, cso:Port .
+cso:Port_563 a owl:NamedIndividual, cso:Port .
+cso:Port_564 a owl:NamedIndividual, cso:Port .
+cso:Port_565 a owl:NamedIndividual, cso:Port .
+cso:Port_566 a owl:NamedIndividual, cso:Port .
+cso:Port_567 a owl:NamedIndividual, cso:Port .
+cso:Port_568 a owl:NamedIndividual, cso:Port .
+cso:Port_569 a owl:NamedIndividual, cso:Port .
+cso:Port_570 a owl:NamedIndividual, cso:Port .
+cso:Port_571 a owl:NamedIndividual, cso:Port .
+cso:Port_572 a owl:NamedIndividual, cso:Port .
+cso:Port_573 a owl:NamedIndividual, cso:Port .
+cso:Port_574 a owl:NamedIndividual, cso:Port .
+cso:Port_575 a owl:NamedIndividual, cso:Port .
+cso:Port_576 a owl:NamedIndividual, cso:Port .
+cso:Port_577 a owl:NamedIndividual, cso:Port .
+cso:Port_578 a owl:NamedIndividual, cso:Port .
+cso:Port_579 a owl:NamedIndividual, cso:Port .
+cso:Port_580 a owl:NamedIndividual, cso:Port .
+cso:Port_581 a owl:NamedIndividual, cso:Port .
+cso:Port_582 a owl:NamedIndividual, cso:Port .
+cso:Port_583 a owl:NamedIndividual, cso:Port .
+cso:Port_584 a owl:NamedIndividual, cso:Port .
+cso:Port_585 a owl:NamedIndividual, cso:Port .
+cso:Port_586 a owl:NamedIndividual, cso:Port .
+cso:Port_587 a owl:NamedIndividual, cso:Port .
+cso:Port_588 a owl:NamedIndividual, cso:Port .
+cso:Port_589 a owl:NamedIndividual, cso:Port .
+cso:Port_590 a owl:NamedIndividual, cso:Port .
+cso:Port_591 a owl:NamedIndividual, cso:Port .
+cso:Port_592 a owl:NamedIndividual, cso:Port .
+cso:Port_593 a owl:NamedIndividual, cso:Port .
+cso:Port_594 a owl:NamedIndividual, cso:Port .
+cso:Port_595 a owl:NamedIndividual, cso:Port .
+cso:Port_596 a owl:NamedIndividual, cso:Port .
+cso:Port_597 a owl:NamedIndividual, cso:Port .
+cso:Port_598 a owl:NamedIndividual, cso:Port .
+cso:Port_599 a owl:NamedIndividual, cso:Port .
+cso:Port_600 a owl:NamedIndividual, cso:Port .
+cso:Port_601 a owl:NamedIndividual, cso:Port .
+cso:Port_602 a owl:NamedIndividual, cso:Port .
+cso:Port_603 a owl:NamedIndividual, cso:Port .
+cso:Port_604 a owl:NamedIndividual, cso:Port .
+cso:Port_605 a owl:NamedIndividual, cso:Port .
+cso:Port_606 a owl:NamedIndividual, cso:Port .
+cso:Port_607 a owl:NamedIndividual, cso:Port .
+cso:Port_608 a owl:NamedIndividual, cso:Port .
+cso:Port_609 a owl:NamedIndividual, cso:Port .
+cso:Port_610 a owl:NamedIndividual, cso:Port .
+cso:Port_611 a owl:NamedIndividual, cso:Port .
+cso:Port_612 a owl:NamedIndividual, cso:Port .
+cso:Port_613 a owl:NamedIndividual, cso:Port .
+cso:Port_614 a owl:NamedIndividual, cso:Port .
+cso:Port_615 a owl:NamedIndividual, cso:Port .
+cso:Port_616 a owl:NamedIndividual, cso:Port .
+cso:Port_617 a owl:NamedIndividual, cso:Port .
+cso:Port_618 a owl:NamedIndividual, cso:Port .
+cso:Port_619 a owl:NamedIndividual, cso:Port .
+cso:Port_620 a owl:NamedIndividual, cso:Port .
+cso:Port_621 a owl:NamedIndividual, cso:Port .
+cso:Port_622 a owl:NamedIndividual, cso:Port .
+cso:Port_623 a owl:NamedIndividual, cso:Port .
+cso:Port_624 a owl:NamedIndividual, cso:Port .
+cso:Port_625 a owl:NamedIndividual, cso:Port .
+cso:Port_626 a owl:NamedIndividual, cso:Port .
+cso:Port_627 a owl:NamedIndividual, cso:Port .
+cso:Port_628 a owl:NamedIndividual, cso:Port .
+cso:Port_629 a owl:NamedIndividual, cso:Port .
+cso:Port_630 a owl:NamedIndividual, cso:Port .
+cso:Port_631 a owl:NamedIndividual, cso:Port .
+cso:Port_632 a owl:NamedIndividual, cso:Port .
+cso:Port_633 a owl:NamedIndividual, cso:Port .
+cso:Port_634 a owl:NamedIndividual, cso:Port .
+cso:Port_635 a owl:NamedIndividual, cso:Port .
+cso:Port_636 a owl:NamedIndividual, cso:Port .
+cso:Port_637 a owl:NamedIndividual, cso:Port .
+cso:Port_638 a owl:NamedIndividual, cso:Port .
+cso:Port_639 a owl:NamedIndividual, cso:Port .
+cso:Port_640 a owl:NamedIndividual, cso:Port .
+cso:Port_641 a owl:NamedIndividual, cso:Port .
+cso:Port_642 a owl:NamedIndividual, cso:Port .
+cso:Port_643 a owl:NamedIndividual, cso:Port .
+cso:Port_644 a owl:NamedIndividual, cso:Port .
+cso:Port_645 a owl:NamedIndividual, cso:Port .
+cso:Port_646 a owl:NamedIndividual, cso:Port .
+cso:Port_647 a owl:NamedIndividual, cso:Port .
+cso:Port_648 a owl:NamedIndividual, cso:Port .
+cso:Port_649 a owl:NamedIndividual, cso:Port .
+cso:Port_650 a owl:NamedIndividual, cso:Port .
+cso:Port_651 a owl:NamedIndividual, cso:Port .
+cso:Port_652 a owl:NamedIndividual, cso:Port .
+cso:Port_653 a owl:NamedIndividual, cso:Port .
+cso:Port_654 a owl:NamedIndividual, cso:Port .
+cso:Port_655 a owl:NamedIndividual, cso:Port .
+cso:Port_656 a owl:NamedIndividual, cso:Port .
+cso:Port_657 a owl:NamedIndividual, cso:Port .
+cso:Port_658 a owl:NamedIndividual, cso:Port .
+cso:Port_659 a owl:NamedIndividual, cso:Port .
+cso:Port_660 a owl:NamedIndividual, cso:Port .
+cso:Port_661 a owl:NamedIndividual, cso:Port .
+cso:Port_662 a owl:NamedIndividual, cso:Port .
+cso:Port_663 a owl:NamedIndividual, cso:Port .
+cso:Port_664 a owl:NamedIndividual, cso:Port .
+cso:Port_665 a owl:NamedIndividual, cso:Port .
+cso:Port_666 a owl:NamedIndividual, cso:Port .
+cso:Port_667 a owl:NamedIndividual, cso:Port .
+cso:Port_668 a owl:NamedIndividual, cso:Port .
+cso:Port_669 a owl:NamedIndividual, cso:Port .
+cso:Port_670 a owl:NamedIndividual, cso:Port .
+cso:Port_671 a owl:NamedIndividual, cso:Port .
+cso:Port_672 a owl:NamedIndividual, cso:Port .
+cso:Port_673 a owl:NamedIndividual, cso:Port .
+cso:Port_674 a owl:NamedIndividual, cso:Port .
+cso:Port_675 a owl:NamedIndividual, cso:Port .
+cso:Port_676 a owl:NamedIndividual, cso:Port .
+cso:Port_677 a owl:NamedIndividual, cso:Port .
+cso:Port_678 a owl:NamedIndividual, cso:Port .
+cso:Port_679 a owl:NamedIndividual, cso:Port .
+cso:Port_680 a owl:NamedIndividual, cso:Port .
+cso:Port_681 a owl:NamedIndividual, cso:Port .
+cso:Port_682 a owl:NamedIndividual, cso:Port .
+cso:Port_683 a owl:NamedIndividual, cso:Port .
+cso:Port_684 a owl:NamedIndividual, cso:Port .
+cso:Port_685 a owl:NamedIndividual, cso:Port .
+cso:Port_686 a owl:NamedIndividual, cso:Port .
+cso:Port_687 a owl:NamedIndividual, cso:Port .
+cso:Port_688 a owl:NamedIndividual, cso:Port .
+cso:Port_689 a owl:NamedIndividual, cso:Port .
+cso:Port_690 a owl:NamedIndividual, cso:Port .
+cso:Port_691 a owl:NamedIndividual, cso:Port .
+cso:Port_692 a owl:NamedIndividual, cso:Port .
+cso:Port_693 a owl:NamedIndividual, cso:Port .
+cso:Port_694 a owl:NamedIndividual, cso:Port .
+cso:Port_695 a owl:NamedIndividual, cso:Port .
+cso:Port_696 a owl:NamedIndividual, cso:Port .
+cso:Port_697 a owl:NamedIndividual, cso:Port .
+cso:Port_698 a owl:NamedIndividual, cso:Port .
+cso:Port_699 a owl:NamedIndividual, cso:Port .
+cso:Port_700 a owl:NamedIndividual, cso:Port .
+cso:Port_701 a owl:NamedIndividual, cso:Port .
+cso:Port_702 a owl:NamedIndividual, cso:Port .
+cso:Port_703 a owl:NamedIndividual, cso:Port .
+cso:Port_704 a owl:NamedIndividual, cso:Port .
+cso:Port_705 a owl:NamedIndividual, cso:Port .
+cso:Port_706 a owl:NamedIndividual, cso:Port .
+cso:Port_707 a owl:NamedIndividual, cso:Port .
+cso:Port_708 a owl:NamedIndividual, cso:Port .
+cso:Port_709 a owl:NamedIndividual, cso:Port .
+cso:Port_710 a owl:NamedIndividual, cso:Port .
+cso:Port_711 a owl:NamedIndividual, cso:Port .
+cso:Port_712 a owl:NamedIndividual, cso:Port .
+cso:Port_713 a owl:NamedIndividual, cso:Port .
+cso:Port_714 a owl:NamedIndividual, cso:Port .
+cso:Port_715 a owl:NamedIndividual, cso:Port .
+cso:Port_716 a owl:NamedIndividual, cso:Port .
+cso:Port_717 a owl:NamedIndividual, cso:Port .
+cso:Port_718 a owl:NamedIndividual, cso:Port .
+cso:Port_719 a owl:NamedIndividual, cso:Port .
+cso:Port_720 a owl:NamedIndividual, cso:Port .
+cso:Port_721 a owl:NamedIndividual, cso:Port .
+cso:Port_722 a owl:NamedIndividual, cso:Port .
+cso:Port_723 a owl:NamedIndividual, cso:Port .
+cso:Port_724 a owl:NamedIndividual, cso:Port .
+cso:Port_725 a owl:NamedIndividual, cso:Port .
+cso:Port_726 a owl:NamedIndividual, cso:Port .
+cso:Port_727 a owl:NamedIndividual, cso:Port .
+cso:Port_728 a owl:NamedIndividual, cso:Port .
+cso:Port_729 a owl:NamedIndividual, cso:Port .
+cso:Port_730 a owl:NamedIndividual, cso:Port .
+cso:Port_731 a owl:NamedIndividual, cso:Port .
+cso:Port_732 a owl:NamedIndividual, cso:Port .
+cso:Port_733 a owl:NamedIndividual, cso:Port .
+cso:Port_734 a owl:NamedIndividual, cso:Port .
+cso:Port_735 a owl:NamedIndividual, cso:Port .
+cso:Port_736 a owl:NamedIndividual, cso:Port .
+cso:Port_737 a owl:NamedIndividual, cso:Port .
+cso:Port_738 a owl:NamedIndividual, cso:Port .
+cso:Port_739 a owl:NamedIndividual, cso:Port .
+cso:Port_740 a owl:NamedIndividual, cso:Port .
+cso:Port_741 a owl:NamedIndividual, cso:Port .
+cso:Port_742 a owl:NamedIndividual, cso:Port .
+cso:Port_743 a owl:NamedIndividual, cso:Port .
+cso:Port_744 a owl:NamedIndividual, cso:Port .
+cso:Port_745 a owl:NamedIndividual, cso:Port .
+cso:Port_746 a owl:NamedIndividual, cso:Port .
+cso:Port_747 a owl:NamedIndividual, cso:Port .
+cso:Port_748 a owl:NamedIndividual, cso:Port .
+cso:Port_749 a owl:NamedIndividual, cso:Port .
+cso:Port_750 a owl:NamedIndividual, cso:Port .
+cso:Port_751 a owl:NamedIndividual, cso:Port .
+cso:Port_752 a owl:NamedIndividual, cso:Port .
+cso:Port_753 a owl:NamedIndividual, cso:Port .
+cso:Port_754 a owl:NamedIndividual, cso:Port .
+cso:Port_755 a owl:NamedIndividual, cso:Port .
+cso:Port_756 a owl:NamedIndividual, cso:Port .
+cso:Port_757 a owl:NamedIndividual, cso:Port .
+cso:Port_758 a owl:NamedIndividual, cso:Port .
+cso:Port_759 a owl:NamedIndividual, cso:Port .
+cso:Port_760 a owl:NamedIndividual, cso:Port .
+cso:Port_761 a owl:NamedIndividual, cso:Port .
+cso:Port_762 a owl:NamedIndividual, cso:Port .
+cso:Port_763 a owl:NamedIndividual, cso:Port .
+cso:Port_764 a owl:NamedIndividual, cso:Port .
+cso:Port_765 a owl:NamedIndividual, cso:Port .
+cso:Port_766 a owl:NamedIndividual, cso:Port .
+cso:Port_767 a owl:NamedIndividual, cso:Port .
+cso:Port_768 a owl:NamedIndividual, cso:Port .
+cso:Port_769 a owl:NamedIndividual, cso:Port .
+cso:Port_770 a owl:NamedIndividual, cso:Port .
+cso:Port_771 a owl:NamedIndividual, cso:Port .
+cso:Port_772 a owl:NamedIndividual, cso:Port .
+cso:Port_773 a owl:NamedIndividual, cso:Port .
+cso:Port_774 a owl:NamedIndividual, cso:Port .
+cso:Port_775 a owl:NamedIndividual, cso:Port .
+cso:Port_776 a owl:NamedIndividual, cso:Port .
+cso:Port_777 a owl:NamedIndividual, cso:Port .
+cso:Port_778 a owl:NamedIndividual, cso:Port .
+cso:Port_779 a owl:NamedIndividual, cso:Port .
+cso:Port_780 a owl:NamedIndividual, cso:Port .
+cso:Port_781 a owl:NamedIndividual, cso:Port .
+cso:Port_782 a owl:NamedIndividual, cso:Port .
+cso:Port_783 a owl:NamedIndividual, cso:Port .
+cso:Port_784 a owl:NamedIndividual, cso:Port .
+cso:Port_785 a owl:NamedIndividual, cso:Port .
+cso:Port_786 a owl:NamedIndividual, cso:Port .
+cso:Port_787 a owl:NamedIndividual, cso:Port .
+cso:Port_788 a owl:NamedIndividual, cso:Port .
+cso:Port_789 a owl:NamedIndividual, cso:Port .
+cso:Port_790 a owl:NamedIndividual, cso:Port .
+cso:Port_791 a owl:NamedIndividual, cso:Port .
+cso:Port_792 a owl:NamedIndividual, cso:Port .
+cso:Port_793 a owl:NamedIndividual, cso:Port .
+cso:Port_794 a owl:NamedIndividual, cso:Port .
+cso:Port_795 a owl:NamedIndividual, cso:Port .
+cso:Port_796 a owl:NamedIndividual, cso:Port .
+cso:Port_797 a owl:NamedIndividual, cso:Port .
+cso:Port_798 a owl:NamedIndividual, cso:Port .
+cso:Port_799 a owl:NamedIndividual, cso:Port .
+cso:Port_800 a owl:NamedIndividual, cso:Port .
+cso:Port_801 a owl:NamedIndividual, cso:Port .
+cso:Port_802 a owl:NamedIndividual, cso:Port .
+cso:Port_803 a owl:NamedIndividual, cso:Port .
+cso:Port_804 a owl:NamedIndividual, cso:Port .
+cso:Port_805 a owl:NamedIndividual, cso:Port .
+cso:Port_806 a owl:NamedIndividual, cso:Port .
+cso:Port_807 a owl:NamedIndividual, cso:Port .
+cso:Port_808 a owl:NamedIndividual, cso:Port .
+cso:Port_809 a owl:NamedIndividual, cso:Port .
+cso:Port_810 a owl:NamedIndividual, cso:Port .
+cso:Port_811 a owl:NamedIndividual, cso:Port .
+cso:Port_812 a owl:NamedIndividual, cso:Port .
+cso:Port_813 a owl:NamedIndividual, cso:Port .
+cso:Port_814 a owl:NamedIndividual, cso:Port .
+cso:Port_815 a owl:NamedIndividual, cso:Port .
+cso:Port_816 a owl:NamedIndividual, cso:Port .
+cso:Port_817 a owl:NamedIndividual, cso:Port .
+cso:Port_818 a owl:NamedIndividual, cso:Port .
+cso:Port_819 a owl:NamedIndividual, cso:Port .
+cso:Port_820 a owl:NamedIndividual, cso:Port .
+cso:Port_821 a owl:NamedIndividual, cso:Port .
+cso:Port_822 a owl:NamedIndividual, cso:Port .
+cso:Port_823 a owl:NamedIndividual, cso:Port .
+cso:Port_824 a owl:NamedIndividual, cso:Port .
+cso:Port_825 a owl:NamedIndividual, cso:Port .
+cso:Port_826 a owl:NamedIndividual, cso:Port .
+cso:Port_827 a owl:NamedIndividual, cso:Port .
+cso:Port_828 a owl:NamedIndividual, cso:Port .
+cso:Port_829 a owl:NamedIndividual, cso:Port .
+cso:Port_830 a owl:NamedIndividual, cso:Port .
+cso:Port_831 a owl:NamedIndividual, cso:Port .
+cso:Port_832 a owl:NamedIndividual, cso:Port .
+cso:Port_833 a owl:NamedIndividual, cso:Port .
+cso:Port_834 a owl:NamedIndividual, cso:Port .
+cso:Port_835 a owl:NamedIndividual, cso:Port .
+cso:Port_836 a owl:NamedIndividual, cso:Port .
+cso:Port_837 a owl:NamedIndividual, cso:Port .
+cso:Port_838 a owl:NamedIndividual, cso:Port .
+cso:Port_839 a owl:NamedIndividual, cso:Port .
+cso:Port_840 a owl:NamedIndividual, cso:Port .
+cso:Port_841 a owl:NamedIndividual, cso:Port .
+cso:Port_842 a owl:NamedIndividual, cso:Port .
+cso:Port_843 a owl:NamedIndividual, cso:Port .
+cso:Port_844 a owl:NamedIndividual, cso:Port .
+cso:Port_845 a owl:NamedIndividual, cso:Port .
+cso:Port_846 a owl:NamedIndividual, cso:Port .
+cso:Port_847 a owl:NamedIndividual, cso:Port .
+cso:Port_848 a owl:NamedIndividual, cso:Port .
+cso:Port_849 a owl:NamedIndividual, cso:Port .
+cso:Port_850 a owl:NamedIndividual, cso:Port .
+cso:Port_851 a owl:NamedIndividual, cso:Port .
+cso:Port_852 a owl:NamedIndividual, cso:Port .
+cso:Port_853 a owl:NamedIndividual, cso:Port .
+cso:Port_854 a owl:NamedIndividual, cso:Port .
+cso:Port_855 a owl:NamedIndividual, cso:Port .
+cso:Port_856 a owl:NamedIndividual, cso:Port .
+cso:Port_857 a owl:NamedIndividual, cso:Port .
+cso:Port_858 a owl:NamedIndividual, cso:Port .
+cso:Port_859 a owl:NamedIndividual, cso:Port .
+cso:Port_860 a owl:NamedIndividual, cso:Port .
+cso:Port_861 a owl:NamedIndividual, cso:Port .
+cso:Port_862 a owl:NamedIndividual, cso:Port .
+cso:Port_863 a owl:NamedIndividual, cso:Port .
+cso:Port_864 a owl:NamedIndividual, cso:Port .
+cso:Port_865 a owl:NamedIndividual, cso:Port .
+cso:Port_866 a owl:NamedIndividual, cso:Port .
+cso:Port_867 a owl:NamedIndividual, cso:Port .
+cso:Port_868 a owl:NamedIndividual, cso:Port .
+cso:Port_869 a owl:NamedIndividual, cso:Port .
+cso:Port_870 a owl:NamedIndividual, cso:Port .
+cso:Port_871 a owl:NamedIndividual, cso:Port .
+cso:Port_872 a owl:NamedIndividual, cso:Port .
+cso:Port_873 a owl:NamedIndividual, cso:Port .
+cso:Port_874 a owl:NamedIndividual, cso:Port .
+cso:Port_875 a owl:NamedIndividual, cso:Port .
+cso:Port_876 a owl:NamedIndividual, cso:Port .
+cso:Port_877 a owl:NamedIndividual, cso:Port .
+cso:Port_878 a owl:NamedIndividual, cso:Port .
+cso:Port_879 a owl:NamedIndividual, cso:Port .
+cso:Port_880 a owl:NamedIndividual, cso:Port .
+cso:Port_881 a owl:NamedIndividual, cso:Port .
+cso:Port_882 a owl:NamedIndividual, cso:Port .
+cso:Port_883 a owl:NamedIndividual, cso:Port .
+cso:Port_884 a owl:NamedIndividual, cso:Port .
+cso:Port_885 a owl:NamedIndividual, cso:Port .
+cso:Port_886 a owl:NamedIndividual, cso:Port .
+cso:Port_887 a owl:NamedIndividual, cso:Port .
+cso:Port_888 a owl:NamedIndividual, cso:Port .
+cso:Port_889 a owl:NamedIndividual, cso:Port .
+cso:Port_890 a owl:NamedIndividual, cso:Port .
+cso:Port_891 a owl:NamedIndividual, cso:Port .
+cso:Port_892 a owl:NamedIndividual, cso:Port .
+cso:Port_893 a owl:NamedIndividual, cso:Port .
+cso:Port_894 a owl:NamedIndividual, cso:Port .
+cso:Port_895 a owl:NamedIndividual, cso:Port .
+cso:Port_896 a owl:NamedIndividual, cso:Port .
+cso:Port_897 a owl:NamedIndividual, cso:Port .
+cso:Port_898 a owl:NamedIndividual, cso:Port .
+cso:Port_899 a owl:NamedIndividual, cso:Port .
+cso:Port_900 a owl:NamedIndividual, cso:Port .
+cso:Port_901 a owl:NamedIndividual, cso:Port .
+cso:Port_902 a owl:NamedIndividual, cso:Port .
+cso:Port_903 a owl:NamedIndividual, cso:Port .
+cso:Port_904 a owl:NamedIndividual, cso:Port .
+cso:Port_905 a owl:NamedIndividual, cso:Port .
+cso:Port_906 a owl:NamedIndividual, cso:Port .
+cso:Port_907 a owl:NamedIndividual, cso:Port .
+cso:Port_908 a owl:NamedIndividual, cso:Port .
+cso:Port_909 a owl:NamedIndividual, cso:Port .
+cso:Port_910 a owl:NamedIndividual, cso:Port .
+cso:Port_911 a owl:NamedIndividual, cso:Port .
+cso:Port_912 a owl:NamedIndividual, cso:Port .
+cso:Port_913 a owl:NamedIndividual, cso:Port .
+cso:Port_914 a owl:NamedIndividual, cso:Port .
+cso:Port_915 a owl:NamedIndividual, cso:Port .
+cso:Port_916 a owl:NamedIndividual, cso:Port .
+cso:Port_917 a owl:NamedIndividual, cso:Port .
+cso:Port_918 a owl:NamedIndividual, cso:Port .
+cso:Port_919 a owl:NamedIndividual, cso:Port .
+cso:Port_920 a owl:NamedIndividual, cso:Port .
+cso:Port_921 a owl:NamedIndividual, cso:Port .
+cso:Port_922 a owl:NamedIndividual, cso:Port .
+cso:Port_923 a owl:NamedIndividual, cso:Port .
+cso:Port_924 a owl:NamedIndividual, cso:Port .
+cso:Port_925 a owl:NamedIndividual, cso:Port .
+cso:Port_926 a owl:NamedIndividual, cso:Port .
+cso:Port_927 a owl:NamedIndividual, cso:Port .
+cso:Port_928 a owl:NamedIndividual, cso:Port .
+cso:Port_929 a owl:NamedIndividual, cso:Port .
+cso:Port_930 a owl:NamedIndividual, cso:Port .
+cso:Port_931 a owl:NamedIndividual, cso:Port .
+cso:Port_932 a owl:NamedIndividual, cso:Port .
+cso:Port_933 a owl:NamedIndividual, cso:Port .
+cso:Port_934 a owl:NamedIndividual, cso:Port .
+cso:Port_935 a owl:NamedIndividual, cso:Port .
+cso:Port_936 a owl:NamedIndividual, cso:Port .
+cso:Port_937 a owl:NamedIndividual, cso:Port .
+cso:Port_938 a owl:NamedIndividual, cso:Port .
+cso:Port_939 a owl:NamedIndividual, cso:Port .
+cso:Port_940 a owl:NamedIndividual, cso:Port .
+cso:Port_941 a owl:NamedIndividual, cso:Port .
+cso:Port_942 a owl:NamedIndividual, cso:Port .
+cso:Port_943 a owl:NamedIndividual, cso:Port .
+cso:Port_944 a owl:NamedIndividual, cso:Port .
+cso:Port_945 a owl:NamedIndividual, cso:Port .
+cso:Port_946 a owl:NamedIndividual, cso:Port .
+cso:Port_947 a owl:NamedIndividual, cso:Port .
+cso:Port_948 a owl:NamedIndividual, cso:Port .
+cso:Port_949 a owl:NamedIndividual, cso:Port .
+cso:Port_950 a owl:NamedIndividual, cso:Port .
+cso:Port_951 a owl:NamedIndividual, cso:Port .
+cso:Port_952 a owl:NamedIndividual, cso:Port .
+cso:Port_953 a owl:NamedIndividual, cso:Port .
+cso:Port_954 a owl:NamedIndividual, cso:Port .
+cso:Port_955 a owl:NamedIndividual, cso:Port .
+cso:Port_956 a owl:NamedIndividual, cso:Port .
+cso:Port_957 a owl:NamedIndividual, cso:Port .
+cso:Port_958 a owl:NamedIndividual, cso:Port .
+cso:Port_959 a owl:NamedIndividual, cso:Port .
+cso:Port_960 a owl:NamedIndividual, cso:Port .
+cso:Port_961 a owl:NamedIndividual, cso:Port .
+cso:Port_962 a owl:NamedIndividual, cso:Port .
+cso:Port_963 a owl:NamedIndividual, cso:Port .
+cso:Port_964 a owl:NamedIndividual, cso:Port .
+cso:Port_965 a owl:NamedIndividual, cso:Port .
+cso:Port_966 a owl:NamedIndividual, cso:Port .
+cso:Port_967 a owl:NamedIndividual, cso:Port .
+cso:Port_968 a owl:NamedIndividual, cso:Port .
+cso:Port_969 a owl:NamedIndividual, cso:Port .
+cso:Port_970 a owl:NamedIndividual, cso:Port .
+cso:Port_971 a owl:NamedIndividual, cso:Port .
+cso:Port_972 a owl:NamedIndividual, cso:Port .
+cso:Port_973 a owl:NamedIndividual, cso:Port .
+cso:Port_974 a owl:NamedIndividual, cso:Port .
+cso:Port_975 a owl:NamedIndividual, cso:Port .
+cso:Port_976 a owl:NamedIndividual, cso:Port .
+cso:Port_977 a owl:NamedIndividual, cso:Port .
+cso:Port_978 a owl:NamedIndividual, cso:Port .
+cso:Port_979 a owl:NamedIndividual, cso:Port .
+cso:Port_980 a owl:NamedIndividual, cso:Port .
+cso:Port_981 a owl:NamedIndividual, cso:Port .
+cso:Port_982 a owl:NamedIndividual, cso:Port .
+cso:Port_983 a owl:NamedIndividual, cso:Port .
+cso:Port_984 a owl:NamedIndividual, cso:Port .
+cso:Port_985 a owl:NamedIndividual, cso:Port .
+cso:Port_986 a owl:NamedIndividual, cso:Port .
+cso:Port_987 a owl:NamedIndividual, cso:Port .
+cso:Port_988 a owl:NamedIndividual, cso:Port .
+cso:Port_989 a owl:NamedIndividual, cso:Port .
+cso:Port_990 a owl:NamedIndividual, cso:Port .
+cso:Port_991 a owl:NamedIndividual, cso:Port .
+cso:Port_992 a owl:NamedIndividual, cso:Port .
+cso:Port_993 a owl:NamedIndividual, cso:Port .
+cso:Port_994 a owl:NamedIndividual, cso:Port .
+cso:Port_995 a owl:NamedIndividual, cso:Port .
+cso:Port_996 a owl:NamedIndividual, cso:Port .
+cso:Port_997 a owl:NamedIndividual, cso:Port .
+cso:Port_998 a owl:NamedIndividual, cso:Port .
+cso:Port_999 a owl:NamedIndividual, cso:Port .
+cso:Port_1000 a owl:NamedIndividual, cso:Port .
+cso:Port_1001 a owl:NamedIndividual, cso:Port .
+cso:Port_1002 a owl:NamedIndividual, cso:Port .
+cso:Port_1003 a owl:NamedIndividual, cso:Port .
+cso:Port_1004 a owl:NamedIndividual, cso:Port .
+cso:Port_1005 a owl:NamedIndividual, cso:Port .
+cso:Port_1006 a owl:NamedIndividual, cso:Port .
+cso:Port_1007 a owl:NamedIndividual, cso:Port .
+cso:Port_1008 a owl:NamedIndividual, cso:Port .
+cso:Port_1009 a owl:NamedIndividual, cso:Port .
+cso:Port_1010 a owl:NamedIndividual, cso:Port .
+cso:Port_1011 a owl:NamedIndividual, cso:Port .
+cso:Port_1012 a owl:NamedIndividual, cso:Port .
+cso:Port_1013 a owl:NamedIndividual, cso:Port .
+cso:Port_1014 a owl:NamedIndividual, cso:Port .
+cso:Port_1015 a owl:NamedIndividual, cso:Port .
+cso:Port_1016 a owl:NamedIndividual, cso:Port .
+cso:Port_1017 a owl:NamedIndividual, cso:Port .
+cso:Port_1018 a owl:NamedIndividual, cso:Port .
+cso:Port_1019 a owl:NamedIndividual, cso:Port .
+cso:Port_1020 a owl:NamedIndividual, cso:Port .
+cso:Port_1021 a owl:NamedIndividual, cso:Port .
+cso:Port_1022 a owl:NamedIndividual, cso:Port .
+cso:Port_1023 a owl:NamedIndividual, cso:Port .
+cso:TCP a owl:NamedIndividual, cso:Protocol .
+cso:UDP a owl:NamedIndividual, cso:Protocol .
+cso:ICMP a owl:NamedIndividual, cso:Protocol .
+cso:FTPService a owl:NamedIndividual, cso:Service .
+cso:FTPProtocol a owl:NamedIndividual, cso:Protocol .
+cso:SSHService a owl:NamedIndividual, cso:Service .
+cso:SSHProtocol a owl:NamedIndividual, cso:Protocol .
+cso:TelnetService a owl:NamedIndividual, cso:Service .
+cso:TelnetProtocol a owl:NamedIndividual, cso:Protocol .
+cso:SMTPService a owl:NamedIndividual, cso:Service .
+cso:SMTPProtocol a owl:NamedIndividual, cso:Protocol .
+cso:DNSService a owl:NamedIndividual, cso:Service .
+cso:DNSProtocol a owl:NamedIndividual, cso:Protocol .
+cso:DHCPService a owl:NamedIndividual, cso:Service .
+cso:DHCPProtocol a owl:NamedIndividual, cso:Protocol .
+cso:HTTPService a owl:NamedIndividual, cso:Service .
+cso:HTTPProtocol a owl:NamedIndividual, cso:Protocol .
+cso:Port_8000 a owl:NamedIndividual, cso:Port .
+cso:Port_8080 a owl:NamedIndividual, cso:Port .
+cso:Port_8888 a owl:NamedIndividual, cso:Port .
+cso:HTTPSService a owl:NamedIndividual, cso:Service .
+cso:HTTPSProtocol a owl:NamedIndividual, cso:Protocol .
+cso:Port_8443 a owl:NamedIndividual, cso:Port .
+cso:KerberosService a owl:NamedIndividual, cso:Service .
+cso:KerberosProtocol a owl:NamedIndividual, cso:Protocol .
+cso:POP3Service a owl:NamedIndividual, cso:Service .
+cso:POP3Protocol a owl:NamedIndividual, cso:Protocol .
+cso:IMAPService a owl:NamedIndividual, cso:Service .
+cso:IMAPProtocol a owl:NamedIndividual, cso:Protocol .
+cso:NTPService a owl:NamedIndividual, cso:Service .
+cso:NTPProtocol a owl:NamedIndividual, cso:Protocol .
+cso:MSRPCService a owl:NamedIndividual, cso:Service .
+cso:MSRPCProtocol a owl:NamedIndividual, cso:Protocol .
+cso:NetBIOSService a owl:NamedIndividual, cso:Service .
+cso:NetBIOSProtocol a owl:NamedIndividual, cso:Protocol .
+cso:SNMPService a owl:NamedIndividual, cso:Service .
+cso:SNMPProtocol a owl:NamedIndividual, cso:Protocol .
+cso:LDAPService a owl:NamedIndividual, cso:Service .
+cso:LDAPProtocol a owl:NamedIndividual, cso:Protocol .
+cso:SMBService a owl:NamedIndividual, cso:Service .
+cso:SMBProtocol a owl:NamedIndividual, cso:Protocol .
+cso:SyslogService a owl:NamedIndividual, cso:Service .
+cso:SyslogProtocol a owl:NamedIndividual, cso:Protocol .
+cso:NFSService a owl:NamedIndividual, cso:Service .
+cso:NFSProtocol a owl:NamedIndividual, cso:Protocol .
+cso:Port_2049 a owl:NamedIndividual, cso:Port .
+cso:MSSQLService a owl:NamedIndividual, cso:Service .
+cso:MSSQLProtocol a owl:NamedIndividual, cso:Protocol .
+cso:Port_1433 a owl:NamedIndividual, cso:Port .
+cso:OracleService a owl:NamedIndividual, cso:Service .
+cso:OracleProtocol a owl:NamedIndividual, cso:Protocol .
+cso:Port_1521 a owl:NamedIndividual, cso:Port .
+cso:MySQLService a owl:NamedIndividual, cso:Service .
+cso:MySQLProtocol a owl:NamedIndividual, cso:Protocol .
+cso:Port_3306 a owl:NamedIndividual, cso:Port .
+cso:PostgreSQLService a owl:NamedIndividual, cso:Service .
+cso:PostgreSQLProtocol a owl:NamedIndividual, cso:Protocol .
+cso:Port_5432 a owl:NamedIndividual, cso:Port .
+cso:RDPService a owl:NamedIndividual, cso:Service .
+cso:RDPProtocol a owl:NamedIndividual, cso:Protocol .
+cso:Port_3389 a owl:NamedIndividual, cso:Port .
+cso:VNCService a owl:NamedIndividual, cso:Service .
+cso:VNCProtocol a owl:NamedIndividual, cso:Protocol .
+cso:Port_5900 a owl:NamedIndividual, cso:Port .
+cso:RedisService a owl:NamedIndividual, cso:Service .
+cso:RedisProtocol a owl:NamedIndividual, cso:Protocol .
+cso:Port_6379 a owl:NamedIndividual, cso:Port .
+cso:MongoDBService a owl:NamedIndividual, cso:Service .
+cso:MongoDBProtocol a owl:NamedIndividual, cso:Protocol .
+cso:Port_27017 a owl:NamedIndividual, cso:Port .
+cso:ElasticsearchService a owl:NamedIndividual, cso:Service .
+cso:ElasticsearchProtocol a owl:NamedIndividual, cso:Protocol .
+cso:Port_9200 a owl:NamedIndividual, cso:Port .
+cso:IRCService a owl:NamedIndividual, cso:Service .
+cso:IRCProtocol a owl:NamedIndividual, cso:Protocol .
+cso:Port_6667 a owl:NamedIndividual, cso:Port .
+cso:DockerAPIService a owl:NamedIndividual, cso:Service .
+cso:DockerAPIProtocol a owl:NamedIndividual, cso:Protocol .
+cso:Port_2375 a owl:NamedIndividual, cso:Port .
+cso:Port_2376 a owl:NamedIndividual, cso:Port .
+cso:KubernetesAPIService a owl:NamedIndividual, cso:Service .
+cso:KubernetesAPIProtocol a owl:NamedIndividual, cso:Protocol .
+cso:Port_6443 a owl:NamedIndividual, cso:Port .
+cso:KubeletAPIService a owl:NamedIndividual, cso:Service .
+cso:KubeletAPIProtocol a owl:NamedIndividual, cso:Protocol .
+cso:Port_10250 a owl:NamedIndividual, cso:Port .
+cso:EtcdService a owl:NamedIndividual, cso:Service .
+cso:EtcdProtocol a owl:NamedIndividual, cso:Protocol .
+cso:Port_2379 a owl:NamedIndividual, cso:Port .
+cso:Port_2380 a owl:NamedIndividual, cso:Port .
+cso:ContainerRegistryServiceService a owl:NamedIndividual, cso:Service .
+cso:RegistryHTTPProtocol a owl:NamedIndividual, cso:Protocol .
+cso:Port_5000 a owl:NamedIndividual, cso:Port .
+cso:RateLimiting a owl:NamedIndividual, cso:Control .
+cso:TrafficFiltering a owl:NamedIndividual, cso:Control .
+cso:WebApplicationFirewall a owl:NamedIndividual, cso:Control .
+cso:NetworkSegmentation a owl:NamedIndividual, cso:Control .
+cso:RuntimeIsolation a owl:NamedIndividual, cso:Control .
+cso:ResourceQuota a owl:NamedIndividual, cso:Control .
+cso:LeastPrivilege a owl:NamedIndividual, cso:Control .
+cso:AccessControl a owl:NamedIndividual, cso:Control .
+cso:NetworkPolicyEnforcement a owl:NamedIndividual, cso:Control .
+cso:ImageSigning a owl:NamedIndividual, cso:Control .
+cso:EgressFiltering a owl:NamedIndividual, cso:Control .
+cso:PortScanDetection a owl:NamedIndividual, cso:Control .
+cso:Patching a owl:NamedIndividual, cso:Control .
+cso:Port_0 cso:inRange cso:WellKnownRange .
+cso:Port_1 cso:inRange cso:WellKnownRange .
+cso:Port_2 cso:inRange cso:WellKnownRange .
+cso:Port_3 cso:inRange cso:WellKnownRange .
+cso:Port_4 cso:inRange cso:WellKnownRange .
+cso:Port_5 cso:inRange cso:WellKnownRange .
+cso:Port_6 cso:inRange cso:WellKnownRange .
+cso:Port_7 cso:inRange cso:WellKnownRange .
+cso:Port_8 cso:inRange cso:WellKnownRange .
+cso:Port_9 cso:inRange cso:WellKnownRange .
+cso:Port_10 cso:inRange cso:WellKnownRange .
+cso:Port_11 cso:inRange cso:WellKnownRange .
+cso:Port_12 cso:inRange cso:WellKnownRange .
+cso:Port_13 cso:inRange cso:WellKnownRange .
+cso:Port_14 cso:inRange cso:WellKnownRange .
+cso:Port_15 cso:inRange cso:WellKnownRange .
+cso:Port_16 cso:inRange cso:WellKnownRange .
+cso:Port_17 cso:inRange cso:WellKnownRange .
+cso:Port_18 cso:inRange cso:WellKnownRange .
+cso:Port_19 cso:inRange cso:WellKnownRange .
+cso:Port_20 cso:inRange cso:WellKnownRange .
+cso:Port_21 cso:inRange cso:WellKnownRange .
+cso:Port_22 cso:inRange cso:WellKnownRange .
+cso:Port_23 cso:inRange cso:WellKnownRange .
+cso:Port_24 cso:inRange cso:WellKnownRange .
+cso:Port_25 cso:inRange cso:WellKnownRange .
+cso:Port_26 cso:inRange cso:WellKnownRange .
+cso:Port_27 cso:inRange cso:WellKnownRange .
+cso:Port_28 cso:inRange cso:WellKnownRange .
+cso:Port_29 cso:inRange cso:WellKnownRange .
+cso:Port_30 cso:inRange cso:WellKnownRange .
+cso:Port_31 cso:inRange cso:WellKnownRange .
+cso:Port_32 cso:inRange cso:WellKnownRange .
+cso:Port_33 cso:inRange cso:WellKnownRange .
+cso:Port_34 cso:inRange cso:WellKnownRange .
+cso:Port_35 cso:inRange cso:WellKnownRange .
+cso:Port_36 cso:inRange cso:WellKnownRange .
+cso:Port_37 cso:inRange cso:WellKnownRange .
+cso:Port_38 cso:inRange cso:WellKnownRange .
+cso:Port_39 cso:inRange cso:WellKnownRange .
+cso:Port_40 cso:inRange cso:WellKnownRange .
+cso:Port_41 cso:inRange cso:WellKnownRange .
+cso:Port_42 cso:inRange cso:WellKnownRange .
+cso:Port_43 cso:inRange cso:WellKnownRange .
+cso:Port_44 cso:inRange cso:WellKnownRange .
+cso:Port_45 cso:inRange cso:WellKnownRange .
+cso:Port_46 cso:inRange cso:WellKnownRange .
+cso:Port_47 cso:inRange cso:WellKnownRange .
+cso:Port_48 cso:inRange cso:WellKnownRange .
+cso:Port_49 cso:inRange cso:WellKnownRange .
+cso:Port_50 cso:inRange cso:WellKnownRange .
+cso:Port_51 cso:inRange cso:WellKnownRange .
+cso:Port_52 cso:inRange cso:WellKnownRange .
+cso:Port_53 cso:inRange cso:WellKnownRange .
+cso:Port_54 cso:inRange cso:WellKnownRange .
+cso:Port_55 cso:inRange cso:WellKnownRange .
+cso:Port_56 cso:inRange cso:WellKnownRange .
+cso:Port_57 cso:inRange cso:WellKnownRange .
+cso:Port_58 cso:inRange cso:WellKnownRange .
+cso:Port_59 cso:inRange cso:WellKnownRange .
+cso:Port_60 cso:inRange cso:WellKnownRange .
+cso:Port_61 cso:inRange cso:WellKnownRange .
+cso:Port_62 cso:inRange cso:WellKnownRange .
+cso:Port_63 cso:inRange cso:WellKnownRange .
+cso:Port_64 cso:inRange cso:WellKnownRange .
+cso:Port_65 cso:inRange cso:WellKnownRange .
+cso:Port_66 cso:inRange cso:WellKnownRange .
+cso:Port_67 cso:inRange cso:WellKnownRange .
+cso:Port_68 cso:inRange cso:WellKnownRange .
+cso:Port_69 cso:inRange cso:WellKnownRange .
+cso:Port_70 cso:inRange cso:WellKnownRange .
+cso:Port_71 cso:inRange cso:WellKnownRange .
+cso:Port_72 cso:inRange cso:WellKnownRange .
+cso:Port_73 cso:inRange cso:WellKnownRange .
+cso:Port_74 cso:inRange cso:WellKnownRange .
+cso:Port_75 cso:inRange cso:WellKnownRange .
+cso:Port_76 cso:inRange cso:WellKnownRange .
+cso:Port_77 cso:inRange cso:WellKnownRange .
+cso:Port_78 cso:inRange cso:WellKnownRange .
+cso:Port_79 cso:inRange cso:WellKnownRange .
+cso:Port_80 cso:inRange cso:WellKnownRange .
+cso:Port_81 cso:inRange cso:WellKnownRange .
+cso:Port_82 cso:inRange cso:WellKnownRange .
+cso:Port_83 cso:inRange cso:WellKnownRange .
+cso:Port_84 cso:inRange cso:WellKnownRange .
+cso:Port_85 cso:inRange cso:WellKnownRange .
+cso:Port_86 cso:inRange cso:WellKnownRange .
+cso:Port_87 cso:inRange cso:WellKnownRange .
+cso:Port_88 cso:inRange cso:WellKnownRange .
+cso:Port_89 cso:inRange cso:WellKnownRange .
+cso:Port_90 cso:inRange cso:WellKnownRange .
+cso:Port_91 cso:inRange cso:WellKnownRange .
+cso:Port_92 cso:inRange cso:WellKnownRange .
+cso:Port_93 cso:inRange cso:WellKnownRange .
+cso:Port_94 cso:inRange cso:WellKnownRange .
+cso:Port_95 cso:inRange cso:WellKnownRange .
+cso:Port_96 cso:inRange cso:WellKnownRange .
+cso:Port_97 cso:inRange cso:WellKnownRange .
+cso:Port_98 cso:inRange cso:WellKnownRange .
+cso:Port_99 cso:inRange cso:WellKnownRange .
+cso:Port_100 cso:inRange cso:WellKnownRange .
+cso:Port_101 cso:inRange cso:WellKnownRange .
+cso:Port_102 cso:inRange cso:WellKnownRange .
+cso:Port_103 cso:inRange cso:WellKnownRange .
+cso:Port_104 cso:inRange cso:WellKnownRange .
+cso:Port_105 cso:inRange cso:WellKnownRange .
+cso:Port_106 cso:inRange cso:WellKnownRange .
+cso:Port_107 cso:inRange cso:WellKnownRange .
+cso:Port_108 cso:inRange cso:WellKnownRange .
+cso:Port_109 cso:inRange cso:WellKnownRange .
+cso:Port_110 cso:inRange cso:WellKnownRange .
+cso:Port_111 cso:inRange cso:WellKnownRange .
+cso:Port_112 cso:inRange cso:WellKnownRange .
+cso:Port_113 cso:inRange cso:WellKnownRange .
+cso:Port_114 cso:inRange cso:WellKnownRange .
+cso:Port_115 cso:inRange cso:WellKnownRange .
+cso:Port_116 cso:inRange cso:WellKnownRange .
+cso:Port_117 cso:inRange cso:WellKnownRange .
+cso:Port_118 cso:inRange cso:WellKnownRange .
+cso:Port_119 cso:inRange cso:WellKnownRange .
+cso:Port_120 cso:inRange cso:WellKnownRange .
+cso:Port_121 cso:inRange cso:WellKnownRange .
+cso:Port_122 cso:inRange cso:WellKnownRange .
+cso:Port_123 cso:inRange cso:WellKnownRange .
+cso:Port_124 cso:inRange cso:WellKnownRange .
+cso:Port_125 cso:inRange cso:WellKnownRange .
+cso:Port_126 cso:inRange cso:WellKnownRange .
+cso:Port_127 cso:inRange cso:WellKnownRange .
+cso:Port_128 cso:inRange cso:WellKnownRange .
+cso:Port_129 cso:inRange cso:WellKnownRange .
+cso:Port_130 cso:inRange cso:WellKnownRange .
+cso:Port_131 cso:inRange cso:WellKnownRange .
+cso:Port_132 cso:inRange cso:WellKnownRange .
+cso:Port_133 cso:inRange cso:WellKnownRange .
+cso:Port_134 cso:inRange cso:WellKnownRange .
+cso:Port_135 cso:inRange cso:WellKnownRange .
+cso:Port_136 cso:inRange cso:WellKnownRange .
+cso:Port_137 cso:inRange cso:WellKnownRange .
+cso:Port_138 cso:inRange cso:WellKnownRange .
+cso:Port_139 cso:inRange cso:WellKnownRange .
+cso:Port_140 cso:inRange cso:WellKnownRange .
+cso:Port_141 cso:inRange cso:WellKnownRange .
+cso:Port_142 cso:inRange cso:WellKnownRange .
+cso:Port_143 cso:inRange cso:WellKnownRange .
+cso:Port_144 cso:inRange cso:WellKnownRange .
+cso:Port_145 cso:inRange cso:WellKnownRange .
+cso:Port_146 cso:inRange cso:WellKnownRange .
+cso:Port_147 cso:inRange cso:WellKnownRange .
+cso:Port_148 cso:inRange cso:WellKnownRange .
+cso:Port_149 cso:inRange cso:WellKnownRange .
+cso:Port_150 cso:inRange cso:WellKnownRange .
+cso:Port_151 cso:inRange cso:WellKnownRange .
+cso:Port_152 cso:inRange cso:WellKnownRange .
+cso:Port_153 cso:inRange cso:WellKnownRange .
+cso:Port_154 cso:inRange cso:WellKnownRange .
+cso:Port_155 cso:inRange cso:WellKnownRange .
+cso:Port_156 cso:inRange cso:WellKnownRange .
+cso:Port_157 cso:inRange cso:WellKnownRange .
+cso:Port_158 cso:inRange cso:WellKnownRange .
+cso:Port_159 cso:inRange cso:WellKnownRange .
+cso:Port_160 cso:inRange cso:WellKnownRange .
+cso:Port_161 cso:inRange cso:WellKnownRange .
+cso:Port_162 cso:inRange cso:WellKnownRange .
+cso:Port_163 cso:inRange cso:WellKnownRange .
+cso:Port_164 cso:inRange cso:WellKnownRange .
+cso:Port_165 cso:inRange cso:WellKnownRange .
+cso:Port_166 cso:inRange cso:WellKnownRange .
+cso:Port_167 cso:inRange cso:WellKnownRange .
+cso:Port_168 cso:inRange cso:WellKnownRange .
+cso:Port_169 cso:inRange cso:WellKnownRange .
+cso:Port_170 cso:inRange cso:WellKnownRange .
+cso:Port_171 cso:inRange cso:WellKnownRange .
+cso:Port_172 cso:inRange cso:WellKnownRange .
+cso:Port_173 cso:inRange cso:WellKnownRange .
+cso:Port_174 cso:inRange cso:WellKnownRange .
+cso:Port_175 cso:inRange cso:WellKnownRange .
+cso:Port_176 cso:inRange cso:WellKnownRange .
+cso:Port_177 cso:inRange cso:WellKnownRange .
+cso:Port_178 cso:inRange cso:WellKnownRange .
+cso:Port_179 cso:inRange cso:WellKnownRange .
+cso:Port_180 cso:inRange cso:WellKnownRange .
+cso:Port_181 cso:inRange cso:WellKnownRange .
+cso:Port_182 cso:inRange cso:WellKnownRange .
+cso:Port_183 cso:inRange cso:WellKnownRange .
+cso:Port_184 cso:inRange cso:WellKnownRange .
+cso:Port_185 cso:inRange cso:WellKnownRange .
+cso:Port_186 cso:inRange cso:WellKnownRange .
+cso:Port_187 cso:inRange cso:WellKnownRange .
+cso:Port_188 cso:inRange cso:WellKnownRange .
+cso:Port_189 cso:inRange cso:WellKnownRange .
+cso:Port_190 cso:inRange cso:WellKnownRange .
+cso:Port_191 cso:inRange cso:WellKnownRange .
+cso:Port_192 cso:inRange cso:WellKnownRange .
+cso:Port_193 cso:inRange cso:WellKnownRange .
+cso:Port_194 cso:inRange cso:WellKnownRange .
+cso:Port_195 cso:inRange cso:WellKnownRange .
+cso:Port_196 cso:inRange cso:WellKnownRange .
+cso:Port_197 cso:inRange cso:WellKnownRange .
+cso:Port_198 cso:inRange cso:WellKnownRange .
+cso:Port_199 cso:inRange cso:WellKnownRange .
+cso:Port_200 cso:inRange cso:WellKnownRange .
+cso:Port_201 cso:inRange cso:WellKnownRange .
+cso:Port_202 cso:inRange cso:WellKnownRange .
+cso:Port_203 cso:inRange cso:WellKnownRange .
+cso:Port_204 cso:inRange cso:WellKnownRange .
+cso:Port_205 cso:inRange cso:WellKnownRange .
+cso:Port_206 cso:inRange cso:WellKnownRange .
+cso:Port_207 cso:inRange cso:WellKnownRange .
+cso:Port_208 cso:inRange cso:WellKnownRange .
+cso:Port_209 cso:inRange cso:WellKnownRange .
+cso:Port_210 cso:inRange cso:WellKnownRange .
+cso:Port_211 cso:inRange cso:WellKnownRange .
+cso:Port_212 cso:inRange cso:WellKnownRange .
+cso:Port_213 cso:inRange cso:WellKnownRange .
+cso:Port_214 cso:inRange cso:WellKnownRange .
+cso:Port_215 cso:inRange cso:WellKnownRange .
+cso:Port_216 cso:inRange cso:WellKnownRange .
+cso:Port_217 cso:inRange cso:WellKnownRange .
+cso:Port_218 cso:inRange cso:WellKnownRange .
+cso:Port_219 cso:inRange cso:WellKnownRange .
+cso:Port_220 cso:inRange cso:WellKnownRange .
+cso:Port_221 cso:inRange cso:WellKnownRange .
+cso:Port_222 cso:inRange cso:WellKnownRange .
+cso:Port_223 cso:inRange cso:WellKnownRange .
+cso:Port_224 cso:inRange cso:WellKnownRange .
+cso:Port_225 cso:inRange cso:WellKnownRange .
+cso:Port_226 cso:inRange cso:WellKnownRange .
+cso:Port_227 cso:inRange cso:WellKnownRange .
+cso:Port_228 cso:inRange cso:WellKnownRange .
+cso:Port_229 cso:inRange cso:WellKnownRange .
+cso:Port_230 cso:inRange cso:WellKnownRange .
+cso:Port_231 cso:inRange cso:WellKnownRange .
+cso:Port_232 cso:inRange cso:WellKnownRange .
+cso:Port_233 cso:inRange cso:WellKnownRange .
+cso:Port_234 cso:inRange cso:WellKnownRange .
+cso:Port_235 cso:inRange cso:WellKnownRange .
+cso:Port_236 cso:inRange cso:WellKnownRange .
+cso:Port_237 cso:inRange cso:WellKnownRange .
+cso:Port_238 cso:inRange cso:WellKnownRange .
+cso:Port_239 cso:inRange cso:WellKnownRange .
+cso:Port_240 cso:inRange cso:WellKnownRange .
+cso:Port_241 cso:inRange cso:WellKnownRange .
+cso:Port_242 cso:inRange cso:WellKnownRange .
+cso:Port_243 cso:inRange cso:WellKnownRange .
+cso:Port_244 cso:inRange cso:WellKnownRange .
+cso:Port_245 cso:inRange cso:WellKnownRange .
+cso:Port_246 cso:inRange cso:WellKnownRange .
+cso:Port_247 cso:inRange cso:WellKnownRange .
+cso:Port_248 cso:inRange cso:WellKnownRange .
+cso:Port_249 cso:inRange cso:WellKnownRange .
+cso:Port_250 cso:inRange cso:WellKnownRange .
+cso:Port_251 cso:inRange cso:WellKnownRange .
+cso:Port_252 cso:inRange cso:WellKnownRange .
+cso:Port_253 cso:inRange cso:WellKnownRange .
+cso:Port_254 cso:inRange cso:WellKnownRange .
+cso:Port_255 cso:inRange cso:WellKnownRange .
+cso:Port_256 cso:inRange cso:WellKnownRange .
+cso:Port_257 cso:inRange cso:WellKnownRange .
+cso:Port_258 cso:inRange cso:WellKnownRange .
+cso:Port_259 cso:inRange cso:WellKnownRange .
+cso:Port_260 cso:inRange cso:WellKnownRange .
+cso:Port_261 cso:inRange cso:WellKnownRange .
+cso:Port_262 cso:inRange cso:WellKnownRange .
+cso:Port_263 cso:inRange cso:WellKnownRange .
+cso:Port_264 cso:inRange cso:WellKnownRange .
+cso:Port_265 cso:inRange cso:WellKnownRange .
+cso:Port_266 cso:inRange cso:WellKnownRange .
+cso:Port_267 cso:inRange cso:WellKnownRange .
+cso:Port_268 cso:inRange cso:WellKnownRange .
+cso:Port_269 cso:inRange cso:WellKnownRange .
+cso:Port_270 cso:inRange cso:WellKnownRange .
+cso:Port_271 cso:inRange cso:WellKnownRange .
+cso:Port_272 cso:inRange cso:WellKnownRange .
+cso:Port_273 cso:inRange cso:WellKnownRange .
+cso:Port_274 cso:inRange cso:WellKnownRange .
+cso:Port_275 cso:inRange cso:WellKnownRange .
+cso:Port_276 cso:inRange cso:WellKnownRange .
+cso:Port_277 cso:inRange cso:WellKnownRange .
+cso:Port_278 cso:inRange cso:WellKnownRange .
+cso:Port_279 cso:inRange cso:WellKnownRange .
+cso:Port_280 cso:inRange cso:WellKnownRange .
+cso:Port_281 cso:inRange cso:WellKnownRange .
+cso:Port_282 cso:inRange cso:WellKnownRange .
+cso:Port_283 cso:inRange cso:WellKnownRange .
+cso:Port_284 cso:inRange cso:WellKnownRange .
+cso:Port_285 cso:inRange cso:WellKnownRange .
+cso:Port_286 cso:inRange cso:WellKnownRange .
+cso:Port_287 cso:inRange cso:WellKnownRange .
+cso:Port_288 cso:inRange cso:WellKnownRange .
+cso:Port_289 cso:inRange cso:WellKnownRange .
+cso:Port_290 cso:inRange cso:WellKnownRange .
+cso:Port_291 cso:inRange cso:WellKnownRange .
+cso:Port_292 cso:inRange cso:WellKnownRange .
+cso:Port_293 cso:inRange cso:WellKnownRange .
+cso:Port_294 cso:inRange cso:WellKnownRange .
+cso:Port_295 cso:inRange cso:WellKnownRange .
+cso:Port_296 cso:inRange cso:WellKnownRange .
+cso:Port_297 cso:inRange cso:WellKnownRange .
+cso:Port_298 cso:inRange cso:WellKnownRange .
+cso:Port_299 cso:inRange cso:WellKnownRange .
+cso:Port_300 cso:inRange cso:WellKnownRange .
+cso:Port_301 cso:inRange cso:WellKnownRange .
+cso:Port_302 cso:inRange cso:WellKnownRange .
+cso:Port_303 cso:inRange cso:WellKnownRange .
+cso:Port_304 cso:inRange cso:WellKnownRange .
+cso:Port_305 cso:inRange cso:WellKnownRange .
+cso:Port_306 cso:inRange cso:WellKnownRange .
+cso:Port_307 cso:inRange cso:WellKnownRange .
+cso:Port_308 cso:inRange cso:WellKnownRange .
+cso:Port_309 cso:inRange cso:WellKnownRange .
+cso:Port_310 cso:inRange cso:WellKnownRange .
+cso:Port_311 cso:inRange cso:WellKnownRange .
+cso:Port_312 cso:inRange cso:WellKnownRange .
+cso:Port_313 cso:inRange cso:WellKnownRange .
+cso:Port_314 cso:inRange cso:WellKnownRange .
+cso:Port_315 cso:inRange cso:WellKnownRange .
+cso:Port_316 cso:inRange cso:WellKnownRange .
+cso:Port_317 cso:inRange cso:WellKnownRange .
+cso:Port_318 cso:inRange cso:WellKnownRange .
+cso:Port_319 cso:inRange cso:WellKnownRange .
+cso:Port_320 cso:inRange cso:WellKnownRange .
+cso:Port_321 cso:inRange cso:WellKnownRange .
+cso:Port_322 cso:inRange cso:WellKnownRange .
+cso:Port_323 cso:inRange cso:WellKnownRange .
+cso:Port_324 cso:inRange cso:WellKnownRange .
+cso:Port_325 cso:inRange cso:WellKnownRange .
+cso:Port_326 cso:inRange cso:WellKnownRange .
+cso:Port_327 cso:inRange cso:WellKnownRange .
+cso:Port_328 cso:inRange cso:WellKnownRange .
+cso:Port_329 cso:inRange cso:WellKnownRange .
+cso:Port_330 cso:inRange cso:WellKnownRange .
+cso:Port_331 cso:inRange cso:WellKnownRange .
+cso:Port_332 cso:inRange cso:WellKnownRange .
+cso:Port_333 cso:inRange cso:WellKnownRange .
+cso:Port_334 cso:inRange cso:WellKnownRange .
+cso:Port_335 cso:inRange cso:WellKnownRange .
+cso:Port_336 cso:inRange cso:WellKnownRange .
+cso:Port_337 cso:inRange cso:WellKnownRange .
+cso:Port_338 cso:inRange cso:WellKnownRange .
+cso:Port_339 cso:inRange cso:WellKnownRange .
+cso:Port_340 cso:inRange cso:WellKnownRange .
+cso:Port_341 cso:inRange cso:WellKnownRange .
+cso:Port_342 cso:inRange cso:WellKnownRange .
+cso:Port_343 cso:inRange cso:WellKnownRange .
+cso:Port_344 cso:inRange cso:WellKnownRange .
+cso:Port_345 cso:inRange cso:WellKnownRange .
+cso:Port_346 cso:inRange cso:WellKnownRange .
+cso:Port_347 cso:inRange cso:WellKnownRange .
+cso:Port_348 cso:inRange cso:WellKnownRange .
+cso:Port_349 cso:inRange cso:WellKnownRange .
+cso:Port_350 cso:inRange cso:WellKnownRange .
+cso:Port_351 cso:inRange cso:WellKnownRange .
+cso:Port_352 cso:inRange cso:WellKnownRange .
+cso:Port_353 cso:inRange cso:WellKnownRange .
+cso:Port_354 cso:inRange cso:WellKnownRange .
+cso:Port_355 cso:inRange cso:WellKnownRange .
+cso:Port_356 cso:inRange cso:WellKnownRange .
+cso:Port_357 cso:inRange cso:WellKnownRange .
+cso:Port_358 cso:inRange cso:WellKnownRange .
+cso:Port_359 cso:inRange cso:WellKnownRange .
+cso:Port_360 cso:inRange cso:WellKnownRange .
+cso:Port_361 cso:inRange cso:WellKnownRange .
+cso:Port_362 cso:inRange cso:WellKnownRange .
+cso:Port_363 cso:inRange cso:WellKnownRange .
+cso:Port_364 cso:inRange cso:WellKnownRange .
+cso:Port_365 cso:inRange cso:WellKnownRange .
+cso:Port_366 cso:inRange cso:WellKnownRange .
+cso:Port_367 cso:inRange cso:WellKnownRange .
+cso:Port_368 cso:inRange cso:WellKnownRange .
+cso:Port_369 cso:inRange cso:WellKnownRange .
+cso:Port_370 cso:inRange cso:WellKnownRange .
+cso:Port_371 cso:inRange cso:WellKnownRange .
+cso:Port_372 cso:inRange cso:WellKnownRange .
+cso:Port_373 cso:inRange cso:WellKnownRange .
+cso:Port_374 cso:inRange cso:WellKnownRange .
+cso:Port_375 cso:inRange cso:WellKnownRange .
+cso:Port_376 cso:inRange cso:WellKnownRange .
+cso:Port_377 cso:inRange cso:WellKnownRange .
+cso:Port_378 cso:inRange cso:WellKnownRange .
+cso:Port_379 cso:inRange cso:WellKnownRange .
+cso:Port_380 cso:inRange cso:WellKnownRange .
+cso:Port_381 cso:inRange cso:WellKnownRange .
+cso:Port_382 cso:inRange cso:WellKnownRange .
+cso:Port_383 cso:inRange cso:WellKnownRange .
+cso:Port_384 cso:inRange cso:WellKnownRange .
+cso:Port_385 cso:inRange cso:WellKnownRange .
+cso:Port_386 cso:inRange cso:WellKnownRange .
+cso:Port_387 cso:inRange cso:WellKnownRange .
+cso:Port_388 cso:inRange cso:WellKnownRange .
+cso:Port_389 cso:inRange cso:WellKnownRange .
+cso:Port_390 cso:inRange cso:WellKnownRange .
+cso:Port_391 cso:inRange cso:WellKnownRange .
+cso:Port_392 cso:inRange cso:WellKnownRange .
+cso:Port_393 cso:inRange cso:WellKnownRange .
+cso:Port_394 cso:inRange cso:WellKnownRange .
+cso:Port_395 cso:inRange cso:WellKnownRange .
+cso:Port_396 cso:inRange cso:WellKnownRange .
+cso:Port_397 cso:inRange cso:WellKnownRange .
+cso:Port_398 cso:inRange cso:WellKnownRange .
+cso:Port_399 cso:inRange cso:WellKnownRange .
+cso:Port_400 cso:inRange cso:WellKnownRange .
+cso:Port_401 cso:inRange cso:WellKnownRange .
+cso:Port_402 cso:inRange cso:WellKnownRange .
+cso:Port_403 cso:inRange cso:WellKnownRange .
+cso:Port_404 cso:inRange cso:WellKnownRange .
+cso:Port_405 cso:inRange cso:WellKnownRange .
+cso:Port_406 cso:inRange cso:WellKnownRange .
+cso:Port_407 cso:inRange cso:WellKnownRange .
+cso:Port_408 cso:inRange cso:WellKnownRange .
+cso:Port_409 cso:inRange cso:WellKnownRange .
+cso:Port_410 cso:inRange cso:WellKnownRange .
+cso:Port_411 cso:inRange cso:WellKnownRange .
+cso:Port_412 cso:inRange cso:WellKnownRange .
+cso:Port_413 cso:inRange cso:WellKnownRange .
+cso:Port_414 cso:inRange cso:WellKnownRange .
+cso:Port_415 cso:inRange cso:WellKnownRange .
+cso:Port_416 cso:inRange cso:WellKnownRange .
+cso:Port_417 cso:inRange cso:WellKnownRange .
+cso:Port_418 cso:inRange cso:WellKnownRange .
+cso:Port_419 cso:inRange cso:WellKnownRange .
+cso:Port_420 cso:inRange cso:WellKnownRange .
+cso:Port_421 cso:inRange cso:WellKnownRange .
+cso:Port_422 cso:inRange cso:WellKnownRange .
+cso:Port_423 cso:inRange cso:WellKnownRange .
+cso:Port_424 cso:inRange cso:WellKnownRange .
+cso:Port_425 cso:inRange cso:WellKnownRange .
+cso:Port_426 cso:inRange cso:WellKnownRange .
+cso:Port_427 cso:inRange cso:WellKnownRange .
+cso:Port_428 cso:inRange cso:WellKnownRange .
+cso:Port_429 cso:inRange cso:WellKnownRange .
+cso:Port_430 cso:inRange cso:WellKnownRange .
+cso:Port_431 cso:inRange cso:WellKnownRange .
+cso:Port_432 cso:inRange cso:WellKnownRange .
+cso:Port_433 cso:inRange cso:WellKnownRange .
+cso:Port_434 cso:inRange cso:WellKnownRange .
+cso:Port_435 cso:inRange cso:WellKnownRange .
+cso:Port_436 cso:inRange cso:WellKnownRange .
+cso:Port_437 cso:inRange cso:WellKnownRange .
+cso:Port_438 cso:inRange cso:WellKnownRange .
+cso:Port_439 cso:inRange cso:WellKnownRange .
+cso:Port_440 cso:inRange cso:WellKnownRange .
+cso:Port_441 cso:inRange cso:WellKnownRange .
+cso:Port_442 cso:inRange cso:WellKnownRange .
+cso:Port_443 cso:inRange cso:WellKnownRange .
+cso:Port_444 cso:inRange cso:WellKnownRange .
+cso:Port_445 cso:inRange cso:WellKnownRange .
+cso:Port_446 cso:inRange cso:WellKnownRange .
+cso:Port_447 cso:inRange cso:WellKnownRange .
+cso:Port_448 cso:inRange cso:WellKnownRange .
+cso:Port_449 cso:inRange cso:WellKnownRange .
+cso:Port_450 cso:inRange cso:WellKnownRange .
+cso:Port_451 cso:inRange cso:WellKnownRange .
+cso:Port_452 cso:inRange cso:WellKnownRange .
+cso:Port_453 cso:inRange cso:WellKnownRange .
+cso:Port_454 cso:inRange cso:WellKnownRange .
+cso:Port_455 cso:inRange cso:WellKnownRange .
+cso:Port_456 cso:inRange cso:WellKnownRange .
+cso:Port_457 cso:inRange cso:WellKnownRange .
+cso:Port_458 cso:inRange cso:WellKnownRange .
+cso:Port_459 cso:inRange cso:WellKnownRange .
+cso:Port_460 cso:inRange cso:WellKnownRange .
+cso:Port_461 cso:inRange cso:WellKnownRange .
+cso:Port_462 cso:inRange cso:WellKnownRange .
+cso:Port_463 cso:inRange cso:WellKnownRange .
+cso:Port_464 cso:inRange cso:WellKnownRange .
+cso:Port_465 cso:inRange cso:WellKnownRange .
+cso:Port_466 cso:inRange cso:WellKnownRange .
+cso:Port_467 cso:inRange cso:WellKnownRange .
+cso:Port_468 cso:inRange cso:WellKnownRange .
+cso:Port_469 cso:inRange cso:WellKnownRange .
+cso:Port_470 cso:inRange cso:WellKnownRange .
+cso:Port_471 cso:inRange cso:WellKnownRange .
+cso:Port_472 cso:inRange cso:WellKnownRange .
+cso:Port_473 cso:inRange cso:WellKnownRange .
+cso:Port_474 cso:inRange cso:WellKnownRange .
+cso:Port_475 cso:inRange cso:WellKnownRange .
+cso:Port_476 cso:inRange cso:WellKnownRange .
+cso:Port_477 cso:inRange cso:WellKnownRange .
+cso:Port_478 cso:inRange cso:WellKnownRange .
+cso:Port_479 cso:inRange cso:WellKnownRange .
+cso:Port_480 cso:inRange cso:WellKnownRange .
+cso:Port_481 cso:inRange cso:WellKnownRange .
+cso:Port_482 cso:inRange cso:WellKnownRange .
+cso:Port_483 cso:inRange cso:WellKnownRange .
+cso:Port_484 cso:inRange cso:WellKnownRange .
+cso:Port_485 cso:inRange cso:WellKnownRange .
+cso:Port_486 cso:inRange cso:WellKnownRange .
+cso:Port_487 cso:inRange cso:WellKnownRange .
+cso:Port_488 cso:inRange cso:WellKnownRange .
+cso:Port_489 cso:inRange cso:WellKnownRange .
+cso:Port_490 cso:inRange cso:WellKnownRange .
+cso:Port_491 cso:inRange cso:WellKnownRange .
+cso:Port_492 cso:inRange cso:WellKnownRange .
+cso:Port_493 cso:inRange cso:WellKnownRange .
+cso:Port_494 cso:inRange cso:WellKnownRange .
+cso:Port_495 cso:inRange cso:WellKnownRange .
+cso:Port_496 cso:inRange cso:WellKnownRange .
+cso:Port_497 cso:inRange cso:WellKnownRange .
+cso:Port_498 cso:inRange cso:WellKnownRange .
+cso:Port_499 cso:inRange cso:WellKnownRange .
+cso:Port_500 cso:inRange cso:WellKnownRange .
+cso:Port_501 cso:inRange cso:WellKnownRange .
+cso:Port_502 cso:inRange cso:WellKnownRange .
+cso:Port_503 cso:inRange cso:WellKnownRange .
+cso:Port_504 cso:inRange cso:WellKnownRange .
+cso:Port_505 cso:inRange cso:WellKnownRange .
+cso:Port_506 cso:inRange cso:WellKnownRange .
+cso:Port_507 cso:inRange cso:WellKnownRange .
+cso:Port_508 cso:inRange cso:WellKnownRange .
+cso:Port_509 cso:inRange cso:WellKnownRange .
+cso:Port_510 cso:inRange cso:WellKnownRange .
+cso:Port_511 cso:inRange cso:WellKnownRange .
+cso:Port_512 cso:inRange cso:WellKnownRange .
+cso:Port_513 cso:inRange cso:WellKnownRange .
+cso:Port_514 cso:inRange cso:WellKnownRange .
+cso:Port_515 cso:inRange cso:WellKnownRange .
+cso:Port_516 cso:inRange cso:WellKnownRange .
+cso:Port_517 cso:inRange cso:WellKnownRange .
+cso:Port_518 cso:inRange cso:WellKnownRange .
+cso:Port_519 cso:inRange cso:WellKnownRange .
+cso:Port_520 cso:inRange cso:WellKnownRange .
+cso:Port_521 cso:inRange cso:WellKnownRange .
+cso:Port_522 cso:inRange cso:WellKnownRange .
+cso:Port_523 cso:inRange cso:WellKnownRange .
+cso:Port_524 cso:inRange cso:WellKnownRange .
+cso:Port_525 cso:inRange cso:WellKnownRange .
+cso:Port_526 cso:inRange cso:WellKnownRange .
+cso:Port_527 cso:inRange cso:WellKnownRange .
+cso:Port_528 cso:inRange cso:WellKnownRange .
+cso:Port_529 cso:inRange cso:WellKnownRange .
+cso:Port_530 cso:inRange cso:WellKnownRange .
+cso:Port_531 cso:inRange cso:WellKnownRange .
+cso:Port_532 cso:inRange cso:WellKnownRange .
+cso:Port_533 cso:inRange cso:WellKnownRange .
+cso:Port_534 cso:inRange cso:WellKnownRange .
+cso:Port_535 cso:inRange cso:WellKnownRange .
+cso:Port_536 cso:inRange cso:WellKnownRange .
+cso:Port_537 cso:inRange cso:WellKnownRange .
+cso:Port_538 cso:inRange cso:WellKnownRange .
+cso:Port_539 cso:inRange cso:WellKnownRange .
+cso:Port_540 cso:inRange cso:WellKnownRange .
+cso:Port_541 cso:inRange cso:WellKnownRange .
+cso:Port_542 cso:inRange cso:WellKnownRange .
+cso:Port_543 cso:inRange cso:WellKnownRange .
+cso:Port_544 cso:inRange cso:WellKnownRange .
+cso:Port_545 cso:inRange cso:WellKnownRange .
+cso:Port_546 cso:inRange cso:WellKnownRange .
+cso:Port_547 cso:inRange cso:WellKnownRange .
+cso:Port_548 cso:inRange cso:WellKnownRange .
+cso:Port_549 cso:inRange cso:WellKnownRange .
+cso:Port_550 cso:inRange cso:WellKnownRange .
+cso:Port_551 cso:inRange cso:WellKnownRange .
+cso:Port_552 cso:inRange cso:WellKnownRange .
+cso:Port_553 cso:inRange cso:WellKnownRange .
+cso:Port_554 cso:inRange cso:WellKnownRange .
+cso:Port_555 cso:inRange cso:WellKnownRange .
+cso:Port_556 cso:inRange cso:WellKnownRange .
+cso:Port_557 cso:inRange cso:WellKnownRange .
+cso:Port_558 cso:inRange cso:WellKnownRange .
+cso:Port_559 cso:inRange cso:WellKnownRange .
+cso:Port_560 cso:inRange cso:WellKnownRange .
+cso:Port_561 cso:inRange cso:WellKnownRange .
+cso:Port_562 cso:inRange cso:WellKnownRange .
+cso:Port_563 cso:inRange cso:WellKnownRange .
+cso:Port_564 cso:inRange cso:WellKnownRange .
+cso:Port_565 cso:inRange cso:WellKnownRange .
+cso:Port_566 cso:inRange cso:WellKnownRange .
+cso:Port_567 cso:inRange cso:WellKnownRange .
+cso:Port_568 cso:inRange cso:WellKnownRange .
+cso:Port_569 cso:inRange cso:WellKnownRange .
+cso:Port_570 cso:inRange cso:WellKnownRange .
+cso:Port_571 cso:inRange cso:WellKnownRange .
+cso:Port_572 cso:inRange cso:WellKnownRange .
+cso:Port_573 cso:inRange cso:WellKnownRange .
+cso:Port_574 cso:inRange cso:WellKnownRange .
+cso:Port_575 cso:inRange cso:WellKnownRange .
+cso:Port_576 cso:inRange cso:WellKnownRange .
+cso:Port_577 cso:inRange cso:WellKnownRange .
+cso:Port_578 cso:inRange cso:WellKnownRange .
+cso:Port_579 cso:inRange cso:WellKnownRange .
+cso:Port_580 cso:inRange cso:WellKnownRange .
+cso:Port_581 cso:inRange cso:WellKnownRange .
+cso:Port_582 cso:inRange cso:WellKnownRange .
+cso:Port_583 cso:inRange cso:WellKnownRange .
+cso:Port_584 cso:inRange cso:WellKnownRange .
+cso:Port_585 cso:inRange cso:WellKnownRange .
+cso:Port_586 cso:inRange cso:WellKnownRange .
+cso:Port_587 cso:inRange cso:WellKnownRange .
+cso:Port_588 cso:inRange cso:WellKnownRange .
+cso:Port_589 cso:inRange cso:WellKnownRange .
+cso:Port_590 cso:inRange cso:WellKnownRange .
+cso:Port_591 cso:inRange cso:WellKnownRange .
+cso:Port_592 cso:inRange cso:WellKnownRange .
+cso:Port_593 cso:inRange cso:WellKnownRange .
+cso:Port_594 cso:inRange cso:WellKnownRange .
+cso:Port_595 cso:inRange cso:WellKnownRange .
+cso:Port_596 cso:inRange cso:WellKnownRange .
+cso:Port_597 cso:inRange cso:WellKnownRange .
+cso:Port_598 cso:inRange cso:WellKnownRange .
+cso:Port_599 cso:inRange cso:WellKnownRange .
+cso:Port_600 cso:inRange cso:WellKnownRange .
+cso:Port_601 cso:inRange cso:WellKnownRange .
+cso:Port_602 cso:inRange cso:WellKnownRange .
+cso:Port_603 cso:inRange cso:WellKnownRange .
+cso:Port_604 cso:inRange cso:WellKnownRange .
+cso:Port_605 cso:inRange cso:WellKnownRange .
+cso:Port_606 cso:inRange cso:WellKnownRange .
+cso:Port_607 cso:inRange cso:WellKnownRange .
+cso:Port_608 cso:inRange cso:WellKnownRange .
+cso:Port_609 cso:inRange cso:WellKnownRange .
+cso:Port_610 cso:inRange cso:WellKnownRange .
+cso:Port_611 cso:inRange cso:WellKnownRange .
+cso:Port_612 cso:inRange cso:WellKnownRange .
+cso:Port_613 cso:inRange cso:WellKnownRange .
+cso:Port_614 cso:inRange cso:WellKnownRange .
+cso:Port_615 cso:inRange cso:WellKnownRange .
+cso:Port_616 cso:inRange cso:WellKnownRange .
+cso:Port_617 cso:inRange cso:WellKnownRange .
+cso:Port_618 cso:inRange cso:WellKnownRange .
+cso:Port_619 cso:inRange cso:WellKnownRange .
+cso:Port_620 cso:inRange cso:WellKnownRange .
+cso:Port_621 cso:inRange cso:WellKnownRange .
+cso:Port_622 cso:inRange cso:WellKnownRange .
+cso:Port_623 cso:inRange cso:WellKnownRange .
+cso:Port_624 cso:inRange cso:WellKnownRange .
+cso:Port_625 cso:inRange cso:WellKnownRange .
+cso:Port_626 cso:inRange cso:WellKnownRange .
+cso:Port_627 cso:inRange cso:WellKnownRange .
+cso:Port_628 cso:inRange cso:WellKnownRange .
+cso:Port_629 cso:inRange cso:WellKnownRange .
+cso:Port_630 cso:inRange cso:WellKnownRange .
+cso:Port_631 cso:inRange cso:WellKnownRange .
+cso:Port_632 cso:inRange cso:WellKnownRange .
+cso:Port_633 cso:inRange cso:WellKnownRange .
+cso:Port_634 cso:inRange cso:WellKnownRange .
+cso:Port_635 cso:inRange cso:WellKnownRange .
+cso:Port_636 cso:inRange cso:WellKnownRange .
+cso:Port_637 cso:inRange cso:WellKnownRange .
+cso:Port_638 cso:inRange cso:WellKnownRange .
+cso:Port_639 cso:inRange cso:WellKnownRange .
+cso:Port_640 cso:inRange cso:WellKnownRange .
+cso:Port_641 cso:inRange cso:WellKnownRange .
+cso:Port_642 cso:inRange cso:WellKnownRange .
+cso:Port_643 cso:inRange cso:WellKnownRange .
+cso:Port_644 cso:inRange cso:WellKnownRange .
+cso:Port_645 cso:inRange cso:WellKnownRange .
+cso:Port_646 cso:inRange cso:WellKnownRange .
+cso:Port_647 cso:inRange cso:WellKnownRange .
+cso:Port_648 cso:inRange cso:WellKnownRange .
+cso:Port_649 cso:inRange cso:WellKnownRange .
+cso:Port_650 cso:inRange cso:WellKnownRange .
+cso:Port_651 cso:inRange cso:WellKnownRange .
+cso:Port_652 cso:inRange cso:WellKnownRange .
+cso:Port_653 cso:inRange cso:WellKnownRange .
+cso:Port_654 cso:inRange cso:WellKnownRange .
+cso:Port_655 cso:inRange cso:WellKnownRange .
+cso:Port_656 cso:inRange cso:WellKnownRange .
+cso:Port_657 cso:inRange cso:WellKnownRange .
+cso:Port_658 cso:inRange cso:WellKnownRange .
+cso:Port_659 cso:inRange cso:WellKnownRange .
+cso:Port_660 cso:inRange cso:WellKnownRange .
+cso:Port_661 cso:inRange cso:WellKnownRange .
+cso:Port_662 cso:inRange cso:WellKnownRange .
+cso:Port_663 cso:inRange cso:WellKnownRange .
+cso:Port_664 cso:inRange cso:WellKnownRange .
+cso:Port_665 cso:inRange cso:WellKnownRange .
+cso:Port_666 cso:inRange cso:WellKnownRange .
+cso:Port_667 cso:inRange cso:WellKnownRange .
+cso:Port_668 cso:inRange cso:WellKnownRange .
+cso:Port_669 cso:inRange cso:WellKnownRange .
+cso:Port_670 cso:inRange cso:WellKnownRange .
+cso:Port_671 cso:inRange cso:WellKnownRange .
+cso:Port_672 cso:inRange cso:WellKnownRange .
+cso:Port_673 cso:inRange cso:WellKnownRange .
+cso:Port_674 cso:inRange cso:WellKnownRange .
+cso:Port_675 cso:inRange cso:WellKnownRange .
+cso:Port_676 cso:inRange cso:WellKnownRange .
+cso:Port_677 cso:inRange cso:WellKnownRange .
+cso:Port_678 cso:inRange cso:WellKnownRange .
+cso:Port_679 cso:inRange cso:WellKnownRange .
+cso:Port_680 cso:inRange cso:WellKnownRange .
+cso:Port_681 cso:inRange cso:WellKnownRange .
+cso:Port_682 cso:inRange cso:WellKnownRange .
+cso:Port_683 cso:inRange cso:WellKnownRange .
+cso:Port_684 cso:inRange cso:WellKnownRange .
+cso:Port_685 cso:inRange cso:WellKnownRange .
+cso:Port_686 cso:inRange cso:WellKnownRange .
+cso:Port_687 cso:inRange cso:WellKnownRange .
+cso:Port_688 cso:inRange cso:WellKnownRange .
+cso:Port_689 cso:inRange cso:WellKnownRange .
+cso:Port_690 cso:inRange cso:WellKnownRange .
+cso:Port_691 cso:inRange cso:WellKnownRange .
+cso:Port_692 cso:inRange cso:WellKnownRange .
+cso:Port_693 cso:inRange cso:WellKnownRange .
+cso:Port_694 cso:inRange cso:WellKnownRange .
+cso:Port_695 cso:inRange cso:WellKnownRange .
+cso:Port_696 cso:inRange cso:WellKnownRange .
+cso:Port_697 cso:inRange cso:WellKnownRange .
+cso:Port_698 cso:inRange cso:WellKnownRange .
+cso:Port_699 cso:inRange cso:WellKnownRange .
+cso:Port_700 cso:inRange cso:WellKnownRange .
+cso:Port_701 cso:inRange cso:WellKnownRange .
+cso:Port_702 cso:inRange cso:WellKnownRange .
+cso:Port_703 cso:inRange cso:WellKnownRange .
+cso:Port_704 cso:inRange cso:WellKnownRange .
+cso:Port_705 cso:inRange cso:WellKnownRange .
+cso:Port_706 cso:inRange cso:WellKnownRange .
+cso:Port_707 cso:inRange cso:WellKnownRange .
+cso:Port_708 cso:inRange cso:WellKnownRange .
+cso:Port_709 cso:inRange cso:WellKnownRange .
+cso:Port_710 cso:inRange cso:WellKnownRange .
+cso:Port_711 cso:inRange cso:WellKnownRange .
+cso:Port_712 cso:inRange cso:WellKnownRange .
+cso:Port_713 cso:inRange cso:WellKnownRange .
+cso:Port_714 cso:inRange cso:WellKnownRange .
+cso:Port_715 cso:inRange cso:WellKnownRange .
+cso:Port_716 cso:inRange cso:WellKnownRange .
+cso:Port_717 cso:inRange cso:WellKnownRange .
+cso:Port_718 cso:inRange cso:WellKnownRange .
+cso:Port_719 cso:inRange cso:WellKnownRange .
+cso:Port_720 cso:inRange cso:WellKnownRange .
+cso:Port_721 cso:inRange cso:WellKnownRange .
+cso:Port_722 cso:inRange cso:WellKnownRange .
+cso:Port_723 cso:inRange cso:WellKnownRange .
+cso:Port_724 cso:inRange cso:WellKnownRange .
+cso:Port_725 cso:inRange cso:WellKnownRange .
+cso:Port_726 cso:inRange cso:WellKnownRange .
+cso:Port_727 cso:inRange cso:WellKnownRange .
+cso:Port_728 cso:inRange cso:WellKnownRange .
+cso:Port_729 cso:inRange cso:WellKnownRange .
+cso:Port_730 cso:inRange cso:WellKnownRange .
+cso:Port_731 cso:inRange cso:WellKnownRange .
+cso:Port_732 cso:inRange cso:WellKnownRange .
+cso:Port_733 cso:inRange cso:WellKnownRange .
+cso:Port_734 cso:inRange cso:WellKnownRange .
+cso:Port_735 cso:inRange cso:WellKnownRange .
+cso:Port_736 cso:inRange cso:WellKnownRange .
+cso:Port_737 cso:inRange cso:WellKnownRange .
+cso:Port_738 cso:inRange cso:WellKnownRange .
+cso:Port_739 cso:inRange cso:WellKnownRange .
+cso:Port_740 cso:inRange cso:WellKnownRange .
+cso:Port_741 cso:inRange cso:WellKnownRange .
+cso:Port_742 cso:inRange cso:WellKnownRange .
+cso:Port_743 cso:inRange cso:WellKnownRange .
+cso:Port_744 cso:inRange cso:WellKnownRange .
+cso:Port_745 cso:inRange cso:WellKnownRange .
+cso:Port_746 cso:inRange cso:WellKnownRange .
+cso:Port_747 cso:inRange cso:WellKnownRange .
+cso:Port_748 cso:inRange cso:WellKnownRange .
+cso:Port_749 cso:inRange cso:WellKnownRange .
+cso:Port_750 cso:inRange cso:WellKnownRange .
+cso:Port_751 cso:inRange cso:WellKnownRange .
+cso:Port_752 cso:inRange cso:WellKnownRange .
+cso:Port_753 cso:inRange cso:WellKnownRange .
+cso:Port_754 cso:inRange cso:WellKnownRange .
+cso:Port_755 cso:inRange cso:WellKnownRange .
+cso:Port_756 cso:inRange cso:WellKnownRange .
+cso:Port_757 cso:inRange cso:WellKnownRange .
+cso:Port_758 cso:inRange cso:WellKnownRange .
+cso:Port_759 cso:inRange cso:WellKnownRange .
+cso:Port_760 cso:inRange cso:WellKnownRange .
+cso:Port_761 cso:inRange cso:WellKnownRange .
+cso:Port_762 cso:inRange cso:WellKnownRange .
+cso:Port_763 cso:inRange cso:WellKnownRange .
+cso:Port_764 cso:inRange cso:WellKnownRange .
+cso:Port_765 cso:inRange cso:WellKnownRange .
+cso:Port_766 cso:inRange cso:WellKnownRange .
+cso:Port_767 cso:inRange cso:WellKnownRange .
+cso:Port_768 cso:inRange cso:WellKnownRange .
+cso:Port_769 cso:inRange cso:WellKnownRange .
+cso:Port_770 cso:inRange cso:WellKnownRange .
+cso:Port_771 cso:inRange cso:WellKnownRange .
+cso:Port_772 cso:inRange cso:WellKnownRange .
+cso:Port_773 cso:inRange cso:WellKnownRange .
+cso:Port_774 cso:inRange cso:WellKnownRange .
+cso:Port_775 cso:inRange cso:WellKnownRange .
+cso:Port_776 cso:inRange cso:WellKnownRange .
+cso:Port_777 cso:inRange cso:WellKnownRange .
+cso:Port_778 cso:inRange cso:WellKnownRange .
+cso:Port_779 cso:inRange cso:WellKnownRange .
+cso:Port_780 cso:inRange cso:WellKnownRange .
+cso:Port_781 cso:inRange cso:WellKnownRange .
+cso:Port_782 cso:inRange cso:WellKnownRange .
+cso:Port_783 cso:inRange cso:WellKnownRange .
+cso:Port_784 cso:inRange cso:WellKnownRange .
+cso:Port_785 cso:inRange cso:WellKnownRange .
+cso:Port_786 cso:inRange cso:WellKnownRange .
+cso:Port_787 cso:inRange cso:WellKnownRange .
+cso:Port_788 cso:inRange cso:WellKnownRange .
+cso:Port_789 cso:inRange cso:WellKnownRange .
+cso:Port_790 cso:inRange cso:WellKnownRange .
+cso:Port_791 cso:inRange cso:WellKnownRange .
+cso:Port_792 cso:inRange cso:WellKnownRange .
+cso:Port_793 cso:inRange cso:WellKnownRange .
+cso:Port_794 cso:inRange cso:WellKnownRange .
+cso:Port_795 cso:inRange cso:WellKnownRange .
+cso:Port_796 cso:inRange cso:WellKnownRange .
+cso:Port_797 cso:inRange cso:WellKnownRange .
+cso:Port_798 cso:inRange cso:WellKnownRange .
+cso:Port_799 cso:inRange cso:WellKnownRange .
+cso:Port_800 cso:inRange cso:WellKnownRange .
+cso:Port_801 cso:inRange cso:WellKnownRange .
+cso:Port_802 cso:inRange cso:WellKnownRange .
+cso:Port_803 cso:inRange cso:WellKnownRange .
+cso:Port_804 cso:inRange cso:WellKnownRange .
+cso:Port_805 cso:inRange cso:WellKnownRange .
+cso:Port_806 cso:inRange cso:WellKnownRange .
+cso:Port_807 cso:inRange cso:WellKnownRange .
+cso:Port_808 cso:inRange cso:WellKnownRange .
+cso:Port_809 cso:inRange cso:WellKnownRange .
+cso:Port_810 cso:inRange cso:WellKnownRange .
+cso:Port_811 cso:inRange cso:WellKnownRange .
+cso:Port_812 cso:inRange cso:WellKnownRange .
+cso:Port_813 cso:inRange cso:WellKnownRange .
+cso:Port_814 cso:inRange cso:WellKnownRange .
+cso:Port_815 cso:inRange cso:WellKnownRange .
+cso:Port_816 cso:inRange cso:WellKnownRange .
+cso:Port_817 cso:inRange cso:WellKnownRange .
+cso:Port_818 cso:inRange cso:WellKnownRange .
+cso:Port_819 cso:inRange cso:WellKnownRange .
+cso:Port_820 cso:inRange cso:WellKnownRange .
+cso:Port_821 cso:inRange cso:WellKnownRange .
+cso:Port_822 cso:inRange cso:WellKnownRange .
+cso:Port_823 cso:inRange cso:WellKnownRange .
+cso:Port_824 cso:inRange cso:WellKnownRange .
+cso:Port_825 cso:inRange cso:WellKnownRange .
+cso:Port_826 cso:inRange cso:WellKnownRange .
+cso:Port_827 cso:inRange cso:WellKnownRange .
+cso:Port_828 cso:inRange cso:WellKnownRange .
+cso:Port_829 cso:inRange cso:WellKnownRange .
+cso:Port_830 cso:inRange cso:WellKnownRange .
+cso:Port_831 cso:inRange cso:WellKnownRange .
+cso:Port_832 cso:inRange cso:WellKnownRange .
+cso:Port_833 cso:inRange cso:WellKnownRange .
+cso:Port_834 cso:inRange cso:WellKnownRange .
+cso:Port_835 cso:inRange cso:WellKnownRange .
+cso:Port_836 cso:inRange cso:WellKnownRange .
+cso:Port_837 cso:inRange cso:WellKnownRange .
+cso:Port_838 cso:inRange cso:WellKnownRange .
+cso:Port_839 cso:inRange cso:WellKnownRange .
+cso:Port_840 cso:inRange cso:WellKnownRange .
+cso:Port_841 cso:inRange cso:WellKnownRange .
+cso:Port_842 cso:inRange cso:WellKnownRange .
+cso:Port_843 cso:inRange cso:WellKnownRange .
+cso:Port_844 cso:inRange cso:WellKnownRange .
+cso:Port_845 cso:inRange cso:WellKnownRange .
+cso:Port_846 cso:inRange cso:WellKnownRange .
+cso:Port_847 cso:inRange cso:WellKnownRange .
+cso:Port_848 cso:inRange cso:WellKnownRange .
+cso:Port_849 cso:inRange cso:WellKnownRange .
+cso:Port_850 cso:inRange cso:WellKnownRange .
+cso:Port_851 cso:inRange cso:WellKnownRange .
+cso:Port_852 cso:inRange cso:WellKnownRange .
+cso:Port_853 cso:inRange cso:WellKnownRange .
+cso:Port_854 cso:inRange cso:WellKnownRange .
+cso:Port_855 cso:inRange cso:WellKnownRange .
+cso:Port_856 cso:inRange cso:WellKnownRange .
+cso:Port_857 cso:inRange cso:WellKnownRange .
+cso:Port_858 cso:inRange cso:WellKnownRange .
+cso:Port_859 cso:inRange cso:WellKnownRange .
+cso:Port_860 cso:inRange cso:WellKnownRange .
+cso:Port_861 cso:inRange cso:WellKnownRange .
+cso:Port_862 cso:inRange cso:WellKnownRange .
+cso:Port_863 cso:inRange cso:WellKnownRange .
+cso:Port_864 cso:inRange cso:WellKnownRange .
+cso:Port_865 cso:inRange cso:WellKnownRange .
+cso:Port_866 cso:inRange cso:WellKnownRange .
+cso:Port_867 cso:inRange cso:WellKnownRange .
+cso:Port_868 cso:inRange cso:WellKnownRange .
+cso:Port_869 cso:inRange cso:WellKnownRange .
+cso:Port_870 cso:inRange cso:WellKnownRange .
+cso:Port_871 cso:inRange cso:WellKnownRange .
+cso:Port_872 cso:inRange cso:WellKnownRange .
+cso:Port_873 cso:inRange cso:WellKnownRange .
+cso:Port_874 cso:inRange cso:WellKnownRange .
+cso:Port_875 cso:inRange cso:WellKnownRange .
+cso:Port_876 cso:inRange cso:WellKnownRange .
+cso:Port_877 cso:inRange cso:WellKnownRange .
+cso:Port_878 cso:inRange cso:WellKnownRange .
+cso:Port_879 cso:inRange cso:WellKnownRange .
+cso:Port_880 cso:inRange cso:WellKnownRange .
+cso:Port_881 cso:inRange cso:WellKnownRange .
+cso:Port_882 cso:inRange cso:WellKnownRange .
+cso:Port_883 cso:inRange cso:WellKnownRange .
+cso:Port_884 cso:inRange cso:WellKnownRange .
+cso:Port_885 cso:inRange cso:WellKnownRange .
+cso:Port_886 cso:inRange cso:WellKnownRange .
+cso:Port_887 cso:inRange cso:WellKnownRange .
+cso:Port_888 cso:inRange cso:WellKnownRange .
+cso:Port_889 cso:inRange cso:WellKnownRange .
+cso:Port_890 cso:inRange cso:WellKnownRange .
+cso:Port_891 cso:inRange cso:WellKnownRange .
+cso:Port_892 cso:inRange cso:WellKnownRange .
+cso:Port_893 cso:inRange cso:WellKnownRange .
+cso:Port_894 cso:inRange cso:WellKnownRange .
+cso:Port_895 cso:inRange cso:WellKnownRange .
+cso:Port_896 cso:inRange cso:WellKnownRange .
+cso:Port_897 cso:inRange cso:WellKnownRange .
+cso:Port_898 cso:inRange cso:WellKnownRange .
+cso:Port_899 cso:inRange cso:WellKnownRange .
+cso:Port_900 cso:inRange cso:WellKnownRange .
+cso:Port_901 cso:inRange cso:WellKnownRange .
+cso:Port_902 cso:inRange cso:WellKnownRange .
+cso:Port_903 cso:inRange cso:WellKnownRange .
+cso:Port_904 cso:inRange cso:WellKnownRange .
+cso:Port_905 cso:inRange cso:WellKnownRange .
+cso:Port_906 cso:inRange cso:WellKnownRange .
+cso:Port_907 cso:inRange cso:WellKnownRange .
+cso:Port_908 cso:inRange cso:WellKnownRange .
+cso:Port_909 cso:inRange cso:WellKnownRange .
+cso:Port_910 cso:inRange cso:WellKnownRange .
+cso:Port_911 cso:inRange cso:WellKnownRange .
+cso:Port_912 cso:inRange cso:WellKnownRange .
+cso:Port_913 cso:inRange cso:WellKnownRange .
+cso:Port_914 cso:inRange cso:WellKnownRange .
+cso:Port_915 cso:inRange cso:WellKnownRange .
+cso:Port_916 cso:inRange cso:WellKnownRange .
+cso:Port_917 cso:inRange cso:WellKnownRange .
+cso:Port_918 cso:inRange cso:WellKnownRange .
+cso:Port_919 cso:inRange cso:WellKnownRange .
+cso:Port_920 cso:inRange cso:WellKnownRange .
+cso:Port_921 cso:inRange cso:WellKnownRange .
+cso:Port_922 cso:inRange cso:WellKnownRange .
+cso:Port_923 cso:inRange cso:WellKnownRange .
+cso:Port_924 cso:inRange cso:WellKnownRange .
+cso:Port_925 cso:inRange cso:WellKnownRange .
+cso:Port_926 cso:inRange cso:WellKnownRange .
+cso:Port_927 cso:inRange cso:WellKnownRange .
+cso:Port_928 cso:inRange cso:WellKnownRange .
+cso:Port_929 cso:inRange cso:WellKnownRange .
+cso:Port_930 cso:inRange cso:WellKnownRange .
+cso:Port_931 cso:inRange cso:WellKnownRange .
+cso:Port_932 cso:inRange cso:WellKnownRange .
+cso:Port_933 cso:inRange cso:WellKnownRange .
+cso:Port_934 cso:inRange cso:WellKnownRange .
+cso:Port_935 cso:inRange cso:WellKnownRange .
+cso:Port_936 cso:inRange cso:WellKnownRange .
+cso:Port_937 cso:inRange cso:WellKnownRange .
+cso:Port_938 cso:inRange cso:WellKnownRange .
+cso:Port_939 cso:inRange cso:WellKnownRange .
+cso:Port_940 cso:inRange cso:WellKnownRange .
+cso:Port_941 cso:inRange cso:WellKnownRange .
+cso:Port_942 cso:inRange cso:WellKnownRange .
+cso:Port_943 cso:inRange cso:WellKnownRange .
+cso:Port_944 cso:inRange cso:WellKnownRange .
+cso:Port_945 cso:inRange cso:WellKnownRange .
+cso:Port_946 cso:inRange cso:WellKnownRange .
+cso:Port_947 cso:inRange cso:WellKnownRange .
+cso:Port_948 cso:inRange cso:WellKnownRange .
+cso:Port_949 cso:inRange cso:WellKnownRange .
+cso:Port_950 cso:inRange cso:WellKnownRange .
+cso:Port_951 cso:inRange cso:WellKnownRange .
+cso:Port_952 cso:inRange cso:WellKnownRange .
+cso:Port_953 cso:inRange cso:WellKnownRange .
+cso:Port_954 cso:inRange cso:WellKnownRange .
+cso:Port_955 cso:inRange cso:WellKnownRange .
+cso:Port_956 cso:inRange cso:WellKnownRange .
+cso:Port_957 cso:inRange cso:WellKnownRange .
+cso:Port_958 cso:inRange cso:WellKnownRange .
+cso:Port_959 cso:inRange cso:WellKnownRange .
+cso:Port_960 cso:inRange cso:WellKnownRange .
+cso:Port_961 cso:inRange cso:WellKnownRange .
+cso:Port_962 cso:inRange cso:WellKnownRange .
+cso:Port_963 cso:inRange cso:WellKnownRange .
+cso:Port_964 cso:inRange cso:WellKnownRange .
+cso:Port_965 cso:inRange cso:WellKnownRange .
+cso:Port_966 cso:inRange cso:WellKnownRange .
+cso:Port_967 cso:inRange cso:WellKnownRange .
+cso:Port_968 cso:inRange cso:WellKnownRange .
+cso:Port_969 cso:inRange cso:WellKnownRange .
+cso:Port_970 cso:inRange cso:WellKnownRange .
+cso:Port_971 cso:inRange cso:WellKnownRange .
+cso:Port_972 cso:inRange cso:WellKnownRange .
+cso:Port_973 cso:inRange cso:WellKnownRange .
+cso:Port_974 cso:inRange cso:WellKnownRange .
+cso:Port_975 cso:inRange cso:WellKnownRange .
+cso:Port_976 cso:inRange cso:WellKnownRange .
+cso:Port_977 cso:inRange cso:WellKnownRange .
+cso:Port_978 cso:inRange cso:WellKnownRange .
+cso:Port_979 cso:inRange cso:WellKnownRange .
+cso:Port_980 cso:inRange cso:WellKnownRange .
+cso:Port_981 cso:inRange cso:WellKnownRange .
+cso:Port_982 cso:inRange cso:WellKnownRange .
+cso:Port_983 cso:inRange cso:WellKnownRange .
+cso:Port_984 cso:inRange cso:WellKnownRange .
+cso:Port_985 cso:inRange cso:WellKnownRange .
+cso:Port_986 cso:inRange cso:WellKnownRange .
+cso:Port_987 cso:inRange cso:WellKnownRange .
+cso:Port_988 cso:inRange cso:WellKnownRange .
+cso:Port_989 cso:inRange cso:WellKnownRange .
+cso:Port_990 cso:inRange cso:WellKnownRange .
+cso:Port_991 cso:inRange cso:WellKnownRange .
+cso:Port_992 cso:inRange cso:WellKnownRange .
+cso:Port_993 cso:inRange cso:WellKnownRange .
+cso:Port_994 cso:inRange cso:WellKnownRange .
+cso:Port_995 cso:inRange cso:WellKnownRange .
+cso:Port_996 cso:inRange cso:WellKnownRange .
+cso:Port_997 cso:inRange cso:WellKnownRange .
+cso:Port_998 cso:inRange cso:WellKnownRange .
+cso:Port_999 cso:inRange cso:WellKnownRange .
+cso:Port_1000 cso:inRange cso:WellKnownRange .
+cso:Port_1001 cso:inRange cso:WellKnownRange .
+cso:Port_1002 cso:inRange cso:WellKnownRange .
+cso:Port_1003 cso:inRange cso:WellKnownRange .
+cso:Port_1004 cso:inRange cso:WellKnownRange .
+cso:Port_1005 cso:inRange cso:WellKnownRange .
+cso:Port_1006 cso:inRange cso:WellKnownRange .
+cso:Port_1007 cso:inRange cso:WellKnownRange .
+cso:Port_1008 cso:inRange cso:WellKnownRange .
+cso:Port_1009 cso:inRange cso:WellKnownRange .
+cso:Port_1010 cso:inRange cso:WellKnownRange .
+cso:Port_1011 cso:inRange cso:WellKnownRange .
+cso:Port_1012 cso:inRange cso:WellKnownRange .
+cso:Port_1013 cso:inRange cso:WellKnownRange .
+cso:Port_1014 cso:inRange cso:WellKnownRange .
+cso:Port_1015 cso:inRange cso:WellKnownRange .
+cso:Port_1016 cso:inRange cso:WellKnownRange .
+cso:Port_1017 cso:inRange cso:WellKnownRange .
+cso:Port_1018 cso:inRange cso:WellKnownRange .
+cso:Port_1019 cso:inRange cso:WellKnownRange .
+cso:Port_1020 cso:inRange cso:WellKnownRange .
+cso:Port_1021 cso:inRange cso:WellKnownRange .
+cso:Port_1022 cso:inRange cso:WellKnownRange .
+cso:Port_1023 cso:inRange cso:WellKnownRange .
+cso:FTPService cso:usesProtocol cso:FTPProtocol .
+cso:FTPService cso:usesProtocol cso:TCP .
+cso:FTPService cso:listensOn cso:Port_20 .
+cso:Port_20 cso:commonlyAbusedFor cso:BruteForce .
+cso:Port_20 cso:commonlyAbusedFor cso:DataExfiltration .
+cso:FTPService cso:listensOn cso:Port_21 .
+cso:Port_21 cso:commonlyAbusedFor cso:BruteForce .
+cso:Port_21 cso:commonlyAbusedFor cso:DataExfiltration .
+cso:BruteForce cso:targetsService cso:FTPService .
+cso:DataExfiltration cso:targetsService cso:FTPService .
+cso:SSHService cso:usesProtocol cso:SSHProtocol .
+cso:SSHService cso:usesProtocol cso:TCP .
+cso:SSHService cso:listensOn cso:Port_22 .
+cso:Port_22 cso:commonlyAbusedFor cso:BruteForce .
+cso:Port_22 cso:commonlyAbusedFor cso:LateralMovement .
+cso:BruteForce cso:targetsService cso:SSHService .
+cso:LateralMovement cso:targetsService cso:SSHService .
+cso:SSHService cso:enablesLateralMovement cso:LateralMovement .
+cso:TelnetService cso:usesProtocol cso:TelnetProtocol .
+cso:TelnetService cso:usesProtocol cso:TCP .
+cso:TelnetService cso:listensOn cso:Port_23 .
+cso:Port_23 cso:commonlyAbusedFor cso:BruteForce .
+cso:Port_23 cso:commonlyAbusedFor cso:CommandAndControl .
+cso:BruteForce cso:targetsService cso:TelnetService .
+cso:CommandAndControl cso:targetsService cso:TelnetService .
+cso:SMTPService cso:usesProtocol cso:SMTPProtocol .
+cso:SMTPService cso:usesProtocol cso:TCP .
+cso:SMTPService cso:listensOn cso:Port_25 .
+cso:Port_25 cso:commonlyAbusedFor cso:DataExfiltration .
+cso:SMTPService cso:listensOn cso:Port_465 .
+cso:Port_465 cso:commonlyAbusedFor cso:DataExfiltration .
+cso:SMTPService cso:listensOn cso:Port_587 .
+cso:Port_587 cso:commonlyAbusedFor cso:DataExfiltration .
+cso:DataExfiltration cso:targetsService cso:SMTPService .
+cso:DNSService cso:usesProtocol cso:DNSProtocol .
+cso:DNSService cso:usesProtocol cso:UDP .
+cso:DNSService cso:listensOn cso:Port_53 .
+cso:Port_53 cso:commonlyAbusedFor cso:DenialOfService .
+cso:Port_53 cso:commonlyAbusedFor cso:DataExfiltration .
+cso:DenialOfService cso:targetsService cso:DNSService .
+cso:DataExfiltration cso:targetsService cso:DNSService .
+cso:DHCPService cso:usesProtocol cso:DHCPProtocol .
+cso:DHCPService cso:usesProtocol cso:UDP .
+cso:DHCPService cso:listensOn cso:Port_67 .
+cso:Port_67 cso:commonlyAbusedFor cso:DenialOfService .
+cso:DHCPService cso:listensOn cso:Port_68 .
+cso:Port_68 cso:commonlyAbusedFor cso:DenialOfService .
+cso:DenialOfService cso:targetsService cso:DHCPService .
+cso:HTTPService cso:usesProtocol cso:HTTPProtocol .
+cso:HTTPService cso:usesProtocol cso:TCP .
+cso:HTTPService cso:listensOn cso:Port_80 .
+cso:Port_80 cso:commonlyAbusedFor cso:WebAttack .
+cso:Port_80 cso:commonlyAbusedFor cso:DenialOfService .
+cso:Port_8000 cso:inRange cso:RegisteredRange .
+cso:HTTPService cso:listensOn cso:Port_8000 .
+cso:Port_8000 cso:commonlyAbusedFor cso:WebAttack .
+cso:Port_8000 cso:commonlyAbusedFor cso:DenialOfService .
+cso:Port_8080 cso:inRange cso:RegisteredRange .
+cso:HTTPService cso:listensOn cso:Port_8080 .
+cso:Port_8080 cso:commonlyAbusedFor cso:WebAttack .
+cso:Port_8080 cso:commonlyAbusedFor cso:DenialOfService .
+cso:Port_8888 cso:inRange cso:RegisteredRange .
+cso:HTTPService cso:listensOn cso:Port_8888 .
+cso:Port_8888 cso:commonlyAbusedFor cso:WebAttack .
+cso:Port_8888 cso:commonlyAbusedFor cso:DenialOfService .
+cso:WebAttack cso:targetsService cso:HTTPService .
+cso:DenialOfService cso:targetsService cso:HTTPService .
+cso:HTTPSService cso:usesProtocol cso:HTTPSProtocol .
+cso:HTTPSService cso:usesProtocol cso:TCP .
+cso:HTTPSService cso:listensOn cso:Port_443 .
+cso:Port_443 cso:commonlyAbusedFor cso:WebAttack .
+cso:Port_443 cso:commonlyAbusedFor cso:DenialOfService .
+cso:Port_443 cso:commonlyAbusedFor cso:ProtocolExploit .
+cso:Port_8443 cso:inRange cso:RegisteredRange .
+cso:HTTPSService cso:listensOn cso:Port_8443 .
+cso:Port_8443 cso:commonlyAbusedFor cso:WebAttack .
+cso:Port_8443 cso:commonlyAbusedFor cso:DenialOfService .
+cso:Port_8443 cso:commonlyAbusedFor cso:ProtocolExploit .
+cso:WebAttack cso:targetsService cso:HTTPSService .
+cso:DenialOfService cso:targetsService cso:HTTPSService .
+cso:ProtocolExploit cso:targetsService cso:HTTPSService .
+cso:KerberosService cso:usesProtocol cso:KerberosProtocol .
+cso:KerberosService cso:usesProtocol cso:TCP .
+cso:KerberosService cso:listensOn cso:Port_88 .
+cso:Port_88 cso:commonlyAbusedFor cso:PrivilegeEscalation .
+cso:PrivilegeEscalation cso:targetsService cso:KerberosService .
+cso:POP3Service cso:usesProtocol cso:POP3Protocol .
+cso:POP3Service cso:usesProtocol cso:TCP .
+cso:POP3Service cso:listensOn cso:Port_110 .
+cso:Port_110 cso:commonlyAbusedFor cso:BruteForce .
+cso:POP3Service cso:listensOn cso:Port_995 .
+cso:Port_995 cso:commonlyAbusedFor cso:BruteForce .
+cso:BruteForce cso:targetsService cso:POP3Service .
+cso:IMAPService cso:usesProtocol cso:IMAPProtocol .
+cso:IMAPService cso:usesProtocol cso:TCP .
+cso:IMAPService cso:listensOn cso:Port_143 .
+cso:Port_143 cso:commonlyAbusedFor cso:BruteForce .
+cso:IMAPService cso:listensOn cso:Port_993 .
+cso:Port_993 cso:commonlyAbusedFor cso:BruteForce .
+cso:BruteForce cso:targetsService cso:IMAPService .
+cso:NTPService cso:usesProtocol cso:NTPProtocol .
+cso:NTPService cso:usesProtocol cso:UDP .
+cso:NTPService cso:listensOn cso:Port_123 .
+cso:Port_123 cso:commonlyAbusedFor cso:DenialOfService .
+cso:DenialOfService cso:targetsService cso:NTPService .
+cso:MSRPCService cso:usesProtocol cso:MSRPCProtocol .
+cso:MSRPCService cso:usesProtocol cso:TCP .
+cso:MSRPCService cso:listensOn cso:Port_135 .
+cso:Port_135 cso:commonlyAbusedFor cso:LateralMovement .
+cso:Port_135 cso:commonlyAbusedFor cso:ProtocolExploit .
+cso:LateralMovement cso:targetsService cso:MSRPCService .
+cso:MSRPCService cso:enablesLateralMovement cso:LateralMovement .
+cso:ProtocolExploit cso:targetsService cso:MSRPCService .
+cso:NetBIOSService cso:usesProtocol cso:NetBIOSProtocol .
+cso:NetBIOSService cso:usesProtocol cso:UDP .
+cso:NetBIOSService cso:listensOn cso:Port_137 .
+cso:Port_137 cso:commonlyAbusedFor cso:LateralMovement .
+cso:NetBIOSService cso:listensOn cso:Port_138 .
+cso:Port_138 cso:commonlyAbusedFor cso:LateralMovement .
+cso:NetBIOSService cso:listensOn cso:Port_139 .
+cso:Port_139 cso:commonlyAbusedFor cso:LateralMovement .
+cso:LateralMovement cso:targetsService cso:NetBIOSService .
+cso:NetBIOSService cso:enablesLateralMovement cso:LateralMovement .
+cso:SNMPService cso:usesProtocol cso:SNMPProtocol .
+cso:SNMPService cso:usesProtocol cso:UDP .
+cso:SNMPService cso:listensOn cso:Port_161 .
+cso:Port_161 cso:commonlyAbusedFor cso:Reconnaissance .
+cso:SNMPService cso:listensOn cso:Port_162 .
+cso:Port_162 cso:commonlyAbusedFor cso:Reconnaissance .
+cso:Reconnaissance cso:targetsService cso:SNMPService .
+cso:LDAPService cso:usesProtocol cso:LDAPProtocol .
+cso:LDAPService cso:usesProtocol cso:TCP .
+cso:LDAPService cso:listensOn cso:Port_389 .
+cso:Port_389 cso:commonlyAbusedFor cso:PrivilegeEscalation .
+cso:Port_389 cso:commonlyAbusedFor cso:Reconnaissance .
+cso:LDAPService cso:listensOn cso:Port_636 .
+cso:Port_636 cso:commonlyAbusedFor cso:PrivilegeEscalation .
+cso:Port_636 cso:commonlyAbusedFor cso:Reconnaissance .
+cso:PrivilegeEscalation cso:targetsService cso:LDAPService .
+cso:Reconnaissance cso:targetsService cso:LDAPService .
+cso:SMBService cso:usesProtocol cso:SMBProtocol .
+cso:SMBService cso:usesProtocol cso:TCP .
+cso:SMBService cso:listensOn cso:Port_445 .
+cso:Port_445 cso:commonlyAbusedFor cso:LateralMovement .
+cso:Port_445 cso:commonlyAbusedFor cso:ProtocolExploit .
+cso:LateralMovement cso:targetsService cso:SMBService .
+cso:SMBService cso:enablesLateralMovement cso:LateralMovement .
+cso:ProtocolExploit cso:targetsService cso:SMBService .
+cso:SyslogService cso:usesProtocol cso:SyslogProtocol .
+cso:SyslogService cso:usesProtocol cso:UDP .
+cso:SyslogService cso:listensOn cso:Port_514 .
+cso:NFSService cso:usesProtocol cso:NFSProtocol .
+cso:NFSService cso:usesProtocol cso:TCP .
+cso:Port_2049 cso:inRange cso:RegisteredRange .
+cso:NFSService cso:listensOn cso:Port_2049 .
+cso:Port_2049 cso:commonlyAbusedFor cso:DataExposure .
+cso:DataExposure cso:targetsService cso:NFSService .
+cso:MSSQLService cso:usesProtocol cso:MSSQLProtocol .
+cso:MSSQLService cso:usesProtocol cso:TCP .
+cso:Port_1433 cso:inRange cso:RegisteredRange .
+cso:MSSQLService cso:listensOn cso:Port_1433 .
+cso:Port_1433 cso:commonlyAbusedFor cso:BruteForce .
+cso:Port_1433 cso:commonlyAbusedFor cso:DataExfiltration .
+cso:BruteForce cso:targetsService cso:MSSQLService .
+cso:DataExfiltration cso:targetsService cso:MSSQLService .
+cso:OracleService cso:usesProtocol cso:OracleProtocol .
+cso:OracleService cso:usesProtocol cso:TCP .
+cso:Port_1521 cso:inRange cso:RegisteredRange .
+cso:OracleService cso:listensOn cso:Port_1521 .
+cso:Port_1521 cso:commonlyAbusedFor cso:BruteForce .
+cso:Port_1521 cso:commonlyAbusedFor cso:DataExfiltration .
+cso:BruteForce cso:targetsService cso:OracleService .
+cso:DataExfiltration cso:targetsService cso:OracleService .
+cso:MySQLService cso:usesProtocol cso:MySQLProtocol .
+cso:MySQLService cso:usesProtocol cso:TCP .
+cso:Port_3306 cso:inRange cso:RegisteredRange .
+cso:MySQLService cso:listensOn cso:Port_3306 .
+cso:Port_3306 cso:commonlyAbusedFor cso:BruteForce .
+cso:Port_3306 cso:commonlyAbusedFor cso:DataExfiltration .
+cso:BruteForce cso:targetsService cso:MySQLService .
+cso:DataExfiltration cso:targetsService cso:MySQLService .
+cso:PostgreSQLService cso:usesProtocol cso:PostgreSQLProtocol .
+cso:PostgreSQLService cso:usesProtocol cso:TCP .
+cso:Port_5432 cso:inRange cso:RegisteredRange .
+cso:PostgreSQLService cso:listensOn cso:Port_5432 .
+cso:Port_5432 cso:commonlyAbusedFor cso:BruteForce .
+cso:Port_5432 cso:commonlyAbusedFor cso:DataExfiltration .
+cso:BruteForce cso:targetsService cso:PostgreSQLService .
+cso:DataExfiltration cso:targetsService cso:PostgreSQLService .
+cso:RDPService cso:usesProtocol cso:RDPProtocol .
+cso:RDPService cso:usesProtocol cso:TCP .
+cso:Port_3389 cso:inRange cso:RegisteredRange .
+cso:RDPService cso:listensOn cso:Port_3389 .
+cso:Port_3389 cso:commonlyAbusedFor cso:BruteForce .
+cso:Port_3389 cso:commonlyAbusedFor cso:LateralMovement .
+cso:BruteForce cso:targetsService cso:RDPService .
+cso:LateralMovement cso:targetsService cso:RDPService .
+cso:RDPService cso:enablesLateralMovement cso:LateralMovement .
+cso:VNCService cso:usesProtocol cso:VNCProtocol .
+cso:VNCService cso:usesProtocol cso:TCP .
+cso:Port_5900 cso:inRange cso:RegisteredRange .
+cso:VNCService cso:listensOn cso:Port_5900 .
+cso:Port_5900 cso:commonlyAbusedFor cso:BruteForce .
+cso:BruteForce cso:targetsService cso:VNCService .
+cso:RedisService cso:usesProtocol cso:RedisProtocol .
+cso:RedisService cso:usesProtocol cso:TCP .
+cso:Port_6379 cso:inRange cso:RegisteredRange .
+cso:RedisService cso:listensOn cso:Port_6379 .
+cso:Port_6379 cso:commonlyAbusedFor cso:DataExposure .
+cso:Port_6379 cso:commonlyAbusedFor cso:Cryptojacking .
+cso:DataExposure cso:targetsService cso:RedisService .
+cso:Cryptojacking cso:targetsService cso:RedisService .
+cso:MongoDBService cso:usesProtocol cso:MongoDBProtocol .
+cso:MongoDBService cso:usesProtocol cso:TCP .
+cso:Port_27017 cso:inRange cso:RegisteredRange .
+cso:MongoDBService cso:listensOn cso:Port_27017 .
+cso:Port_27017 cso:commonlyAbusedFor cso:DataExposure .
+cso:DataExposure cso:targetsService cso:MongoDBService .
+cso:ElasticsearchService cso:usesProtocol cso:ElasticsearchProtocol .
+cso:ElasticsearchService cso:usesProtocol cso:TCP .
+cso:Port_9200 cso:inRange cso:RegisteredRange .
+cso:ElasticsearchService cso:listensOn cso:Port_9200 .
+cso:Port_9200 cso:commonlyAbusedFor cso:DataExposure .
+cso:DataExposure cso:targetsService cso:ElasticsearchService .
+cso:IRCService cso:usesProtocol cso:IRCProtocol .
+cso:IRCService cso:usesProtocol cso:TCP .
+cso:Port_6667 cso:inRange cso:RegisteredRange .
+cso:IRCService cso:listensOn cso:Port_6667 .
+cso:Port_6667 cso:commonlyAbusedFor cso:CommandAndControl .
+cso:CommandAndControl cso:targetsService cso:IRCService .
+cso:DockerAPIService cso:usesProtocol cso:DockerAPIProtocol .
+cso:DockerAPIService cso:usesProtocol cso:TCP .
+cso:Port_2375 cso:inRange cso:RegisteredRange .
+cso:DockerAPIService cso:listensOn cso:Port_2375 .
+cso:Port_2375 cso:commonlyAbusedFor cso:ContainerEscape .
+cso:Port_2375 cso:commonlyAbusedFor cso:Cryptojacking .
+cso:Port_2375 cso:commonlyAbusedFor cso:ExposedAPIExploit .
+cso:Port_2376 cso:inRange cso:RegisteredRange .
+cso:DockerAPIService cso:listensOn cso:Port_2376 .
+cso:Port_2376 cso:commonlyAbusedFor cso:ContainerEscape .
+cso:Port_2376 cso:commonlyAbusedFor cso:Cryptojacking .
+cso:Port_2376 cso:commonlyAbusedFor cso:ExposedAPIExploit .
+cso:ContainerEscape cso:targetsService cso:DockerAPIService .
+cso:Cryptojacking cso:targetsService cso:DockerAPIService .
+cso:ExposedAPIExploit cso:targetsService cso:DockerAPIService .
+cso:KubernetesAPIService cso:usesProtocol cso:KubernetesAPIProtocol .
+cso:KubernetesAPIService cso:usesProtocol cso:TCP .
+cso:Port_6443 cso:inRange cso:RegisteredRange .
+cso:KubernetesAPIService cso:listensOn cso:Port_6443 .
+cso:Port_6443 cso:commonlyAbusedFor cso:PrivilegeEscalation .
+cso:Port_6443 cso:commonlyAbusedFor cso:ExposedAPIExploit .
+cso:PrivilegeEscalation cso:targetsService cso:KubernetesAPIService .
+cso:ExposedAPIExploit cso:targetsService cso:KubernetesAPIService .
+cso:KubeletAPIService cso:usesProtocol cso:KubeletAPIProtocol .
+cso:KubeletAPIService cso:usesProtocol cso:TCP .
+cso:Port_10250 cso:inRange cso:RegisteredRange .
+cso:KubeletAPIService cso:listensOn cso:Port_10250 .
+cso:Port_10250 cso:commonlyAbusedFor cso:ContainerEscape .
+cso:Port_10250 cso:commonlyAbusedFor cso:ExposedAPIExploit .
+cso:ContainerEscape cso:targetsService cso:KubeletAPIService .
+cso:ExposedAPIExploit cso:targetsService cso:KubeletAPIService .
+cso:EtcdService cso:usesProtocol cso:EtcdProtocol .
+cso:EtcdService cso:usesProtocol cso:TCP .
+cso:Port_2379 cso:inRange cso:RegisteredRange .
+cso:EtcdService cso:listensOn cso:Port_2379 .
+cso:Port_2379 cso:commonlyAbusedFor cso:DataExposure .
+cso:Port_2379 cso:commonlyAbusedFor cso:ExposedAPIExploit .
+cso:Port_2380 cso:inRange cso:RegisteredRange .
+cso:EtcdService cso:listensOn cso:Port_2380 .
+cso:Port_2380 cso:commonlyAbusedFor cso:DataExposure .
+cso:Port_2380 cso:commonlyAbusedFor cso:ExposedAPIExploit .
+cso:DataExposure cso:targetsService cso:EtcdService .
+cso:ExposedAPIExploit cso:targetsService cso:EtcdService .
+cso:ContainerRegistryServiceService cso:usesProtocol cso:RegistryHTTPProtocol .
+cso:ContainerRegistryServiceService cso:usesProtocol cso:TCP .
+cso:Port_5000 cso:inRange cso:RegisteredRange .
+cso:ContainerRegistryServiceService cso:listensOn cso:Port_5000 .
+cso:Port_5000 cso:commonlyAbusedFor cso:SupplyChainCompromise .
+cso:SupplyChainCompromise cso:targetsService cso:ContainerRegistryServiceService .
+cso:BruteForce cso:mitigatedBy cso:RateLimiting .
+cso:DenialOfService cso:mitigatedBy cso:TrafficFiltering .
+cso:WebAttack cso:mitigatedBy cso:WebApplicationFirewall .
+cso:LateralMovement cso:mitigatedBy cso:NetworkSegmentation .
+cso:ContainerEscape cso:mitigatedBy cso:RuntimeIsolation .
+cso:Cryptojacking cso:mitigatedBy cso:ResourceQuota .
+cso:PrivilegeEscalation cso:mitigatedBy cso:LeastPrivilege .
+cso:DataExposure cso:mitigatedBy cso:AccessControl .
+cso:ExposedAPIExploit cso:mitigatedBy cso:NetworkPolicyEnforcement .
+cso:SupplyChainCompromise cso:mitigatedBy cso:ImageSigning .
+cso:CommandAndControl cso:mitigatedBy cso:EgressFiltering .
+cso:DataExfiltration cso:mitigatedBy cso:EgressFiltering .
+cso:Reconnaissance cso:mitigatedBy cso:PortScanDetection .
+cso:ProtocolExploit cso:mitigatedBy cso:Patching .
+cso:Reconnaissance cso:precedes cso:BruteForce .
+cso:BruteForce cso:precedes cso:LateralMovement .
+cso:LateralMovement cso:precedes cso:PrivilegeEscalation .
+cso:PrivilegeEscalation cso:precedes cso:DataExfiltration .
+cso:ContainerEscape cso:precedes cso:LateralMovement .
+cso:ExposedAPIExploit cso:precedes cso:ContainerEscape .
+cso:Cryptojacking cso:precedes cso:DenialOfService .
+cso:ContainerEscape cso:escalatesTo cso:PrivilegeEscalation .
+cso:KubernetesAPIServer cso:exposes cso:KubernetesAPIService .
+cso:Kubelet cso:exposes cso:KubeletAPIService .
+cso:IngressController cso:routesTo cso:HTTPSService .
+cso:APIGateway cso:routesTo cso:HTTPSService .
+cso:NetworkPolicy cso:governs cso:Pod .
+cso:EventTrigger cso:invokes cso:Function .
+cso:ServiceAccount cso:assumesRole cso:IAMRole .
+cso:CrossTenantFlow cso:crossesBoundary cso:TenantBoundary .
+cso:Function cso:storesDataIn cso:ObjectStorageBucket .
+cso:Container cso:runsOn cso:Pod .
+cso:Container cso:isPartOf cso:Pod .
+cso:Pod cso:isPartOf cso:Deployment .
+cso:Sidecar cso:isPartOf cso:Pod .
+cso:Pod cso:isPartOf cso:DaemonSet .
+cso:Function cso:isPartOf cso:WorkflowOrchestrator .

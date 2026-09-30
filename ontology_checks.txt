@@ -1,0 +1,24 @@
+classes 49, object properties 20, individuals 1133, triples 1340
+hierarchy/vocabulary issues: 0; domain/range violations: 3; triples that use a class name as subject or object (OWL punning): 195
+  violation: ('cso:KubernetesAPIServer', 'cso:exposes', 'cso:KubernetesAPIService', 'subject not a cso:CloudAsset')
+  violation: ('cso:Kubelet', 'cso:exposes', 'cso:KubeletAPIService', 'subject not a cso:CloudAsset')
+  violation: ('cso:APIGateway', 'cso:routesTo', 'cso:HTTPSService', 'subject not a cso:IngressController')
+disjointness axioms: 0 (none are declared), so a reasoner cannot find this ontology inconsistent; consistency is trivially true and says nothing about quality
+
+classes that occur in at least one individual or triple, by theme (used / total):
+  cloud_attacks    7 / 7
+  containerisation 7 / 8
+  core             2 / 6
+  identity         4 / 5
+  mesh             2 / 6
+  network          4 / 4
+  network_attacks  7 / 7
+  serverless       5 / 6
+classes never instantiated and never used in a triple (11): AccessKey, AttackTechnique, CloudAsset, ContainerRegistry, FunctionInvocation, LoadBalancer, ServiceMesh, Tenant, Threat, VirtualNetwork, VirtualService
+
+competency questions answered from the triples:
+Q1 Which attack techniques is Port_3389 commonly abused for? BruteForce, LateralMovement
+Q2 Which ports are commonly abused for BruteForce? Port_110, Port_143, Port_1433, Port_1521, Port_20, Port_21, Port_22, Port_23, Port_3306, Port_3389, Port_5432, Port_5900, Port_993, Port_995
+Q3 Which services listen on Port_22, Port_80, Port_443, Port_3389? Port_22: SSHService; Port_80: HTTPService; Port_443: HTTPSService; Port_3389: RDPService
+Q4 Which attack techniques exist (14)? BruteForce, CommandAndControl, ContainerEscape, Cryptojacking, DataExfiltration, DataExposure, DenialOfService, ExposedAPIExploit, LateralMovement, PrivilegeEscalation, ProtocolExploit, Reconnaissance, SupplyChainCompromise, WebAttack
+Q5 How many triples use each property? inRange=1046, commonlyAbusedFor=80, usesProtocol=68, targetsService=54, listensOn=50, mitigatedBy=14, precedes=7, enablesLateralMovement=5, isPartOf=5, exposes=2, routesTo=2, escalatesTo=1, governs=1, invokes=1, assumesRole=1, crossesBoundary=1, storesDataIn=1, runsOn=1
