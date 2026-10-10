@@ -60,7 +60,7 @@ stage_scaling() {
     for s in 0 1 2; do
       run $O/local_rf_seed$s.json local_rf.py --prep $PR --out $O --seed $s || return 1
       retry $O/fl_nodp_seed$s.json fl_flower.py --prep $PR --out $O --dp off --clients $n --rounds 50 --local_epochs 5 --fraction 0.3 --seed $s --gpus_per_client 0.25 || return 1
-      retry $O/fl_dp_seed$s.json fl_flower.py --prep $PR --out $O --dp on --sigma $SIG --clients $n --rounds 50 --local_epochs 5 --fraction 0.3 --seed $s --gpus_per_client 0.5 || return 1
+      retry $O/fl_dp_seed$s.json fl_flower.py --prep $PR --out $O --dp on --sigma $SIG --clients $n --rounds 50 --local_epochs 5 --fraction 0.3 --seed $s --gpus_per_client 1.0 || return 1
     done
   done
 }

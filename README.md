@@ -15,7 +15,7 @@ The detector is a hybrid CNN-LSTM autoencoder-classifier over windows of 15 netw
 | `ontology/` | `cso_plus.ttl` (the CSO+ ontology), the script that builds it, a structural check, the Node2Vec embeddings, the shuffled-ontology control, and the SPARQL competency questions |
 | `src/` | Data preparation, models, federated training, baselines, explanations, privacy accounting, membership-inference attacks, and table scripts |
 | `scripts/` | One-command runners for every group of experiments (see below) |
-| `results/` | Result files (JSON) and summary tables (Markdown) for every experiment; model weights are not included |
+| `results/` | Result files (JSON; the main study is in `results/main_study`) and summary tables (Markdown) for every experiment; model weights are not included |
 
 ## Data
 
