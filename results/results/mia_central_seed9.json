@@ -1,0 +1,7 @@
+{
+  "mia_auc": 0.53355316,
+  "mia_accuracy": 0.5118,
+  "n_members": 5000,
+  "n_nonmembers": 5000,
+  "weights": "results/central_seed9.pt"
+}

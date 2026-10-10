@@ -1,0 +1,15 @@
+# datasets and prepared data (not redistributed)
+data/
+prepared*/
+*.csv
+*.parquet
+# model weights and large binaries
+*.pt
+*.pth
+*.zip
+# caches and logs
+__pycache__/
+.cache/
+*.log
+dp_log_*.jsonl
+.ipynb_checkpoints/

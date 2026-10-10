@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this code or the CSO+ ontology, please cite the thesis."
+title: "CSO+: Ontology-driven, privacy-aware federated intrusion detection (thesis code and ontology)"
+authors:
+  - family-names: "Nor Haizily"
+    given-names: "Nor Haizi Azreen"
+    affiliation: "Universiti Teknologi MARA"
+repository-code: "https://github.com/hungreiy/cso-plus-privacy-federated-ids"
+license: MIT
+type: software
+version: "2.0"
+date-released: "2026-10-10"

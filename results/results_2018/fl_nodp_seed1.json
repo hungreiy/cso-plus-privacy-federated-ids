@@ -1,0 +1,268 @@
+{
+  "precision": 0.9936465676338002,
+  "recall": 0.5058683999753558,
+  "f1": 0.6704226502138257,
+  "accuracy": 0.698873491616465,
+  "fpr": 0.004963365634601749,
+  "threshold": -9.163447570800786,
+  "recall_seen": 0.9991017964071857,
+  "recall_unseen": 0.2856474467516264,
+  "by_purity": {
+    "seen_1-3": {
+      "n": 1141,
+      "recall": 0.9842243645924628
+    },
+    "seen_4-7": {
+      "n": 3388,
+      "recall": 1.0
+    },
+    "seen_8-15": {
+      "n": 15511,
+      "recall": 1.0
+    },
+    "unseen_1-3": {
+      "n": 7347,
+      "recall": 0.03729413365999728
+    },
+    "unseen_4-7": {
+      "n": 9105,
+      "recall": 0.03898956617243273
+    },
+    "unseen_8-15": {
+      "n": 28432,
+      "recall": 0.4288126055149128
+    }
+  },
+  "clean": {
+    "precision": 0.9924766237953642,
+    "recall": 0.630430330200487,
+    "f1": 0.7710699176130038,
+    "accuracy": 0.8092819959885453,
+    "fpr": 0.004963365634601749,
+    "auc": 0.8335884648982301,
+    "n": 86253,
+    "recall_seen": 1.0,
+    "recall_unseen": 0.4288126055149128
+  },
+  "auc": 0.7834555452659437,
+  "auc_seen": 0.999826684376461,
+  "auc_unseen": 0.6868492350490567,
+  "auc_recon": 0.8336133662876933,
+  "auc_recon_seen": 0.9983445617627899,
+  "auc_recon_unseen": 0.7600634786368394,
+  "hybrid": {
+    "precision": 0.9938551963665508,
+    "recall": 0.5156798718501633,
+    "f1": 0.6790317510216913,
+    "accuracy": 0.7048417479530746,
+    "fpr": 0.0048924604112502955,
+    "auc": 0.8244859855483118,
+    "auc_unseen": 0.7462357039236478,
+    "recall_seen": 0.9987524950099801,
+    "recall_unseen": 0.2999955440691561
+  },
+  "operating_points": {
+    "90": {
+      "precision": 0.8997536078845477,
+      "recall": 0.5905828353151377,
+      "f1": 0.7130994336938227,
+      "accuracy": 0.7122834175727848,
+      "fpr": 0.10096903805246986,
+      "threshold": -13.853285598754884,
+      "recall_seen": 0.9996007984031936,
+      "recall_unseen": 0.40796274841814456
+    },
+    "95": {
+      "precision": 0.9445815394308517,
+      "recall": 0.5542018359928532,
+      "f1": 0.6985516812922264,
+      "accuracy": 0.7104090120670683,
+      "fpr": 0.04989364216497282,
+      "threshold": -12.892535018920901,
+      "recall_seen": 0.9995009980039921,
+      "recall_unseen": 0.35538276445949557
+    },
+    "99": {
+      "precision": 0.9873598006053054,
+      "recall": 0.5125377364302878,
+      "f1": 0.674791637093667,
+      "accuracy": 0.7008971035305966,
+      "fpr": 0.010068541715906406,
+      "threshold": -10.52907497406006,
+      "recall_seen": 0.9993013972055889,
+      "recall_unseen": 0.29520541841190623
+    },
+    "99.5": {
+      "precision": 0.9936465676338002,
+      "recall": 0.5058683999753558,
+      "f1": 0.6704226502138257,
+      "accuracy": 0.698873491616465,
+      "fpr": 0.004963365634601749,
+      "threshold": -9.163447570800786,
+      "recall_seen": 0.9991017964071857,
+      "recall_unseen": 0.2856474467516264
+    },
+    "99.9": {
+      "precision": 0.9980333107983529,
+      "recall": 0.5002464419937157,
+      "f1": 0.6664477869205672,
+      "accuracy": 0.6968312289012814,
+      "fpr": 0.0015126447648310091,
+      "threshold": -4.845663208007732,
+      "recall_seen": 0.9983033932135729,
+      "recall_unseen": 0.2778718474289279
+    }
+  },
+  "per_type": {
+    "Bot": {
+      "n": 14723,
+      "recall": 0.008490117503226244,
+      "unseen": true
+    },
+    "DoS attacks-Hulk": {
+      "n": 3170,
+      "recall": 1.0,
+      "unseen": false
+    },
+    "DoS attacks-SlowHTTPTest": {
+      "n": 9330,
+      "recall": 1.0,
+      "unseen": true
+    },
+    "Brute Force -Web": {
+      "n": 416,
+      "recall": 0.009615384615384616,
+      "unseen": true
+    },
+    "Brute Force -XSS": {
+      "n": 172,
+      "recall": 0.0,
+      "unseen": true
+    },
+    "SQL Injection": {
+      "n": 79,
+      "recall": 0.012658227848101266,
+      "unseen": true
+    },
+    "DDoS attacks-LOIC-HTTP": {
+      "n": 2051,
+      "recall": 0.9936616284739151,
+      "unseen": false
+    },
+    "Infilteration": {
+      "n": 13802,
+      "recall": 0.011447616287494565,
+      "unseen": true
+    },
+    "DoS attacks-GoldenEye": {
+      "n": 3357,
+      "recall": 0.8716115579386357,
+      "unseen": true
+    },
+    "DoS attacks-Slowloris": {
+      "n": 3005,
+      "recall": 0.09217970049916806,
+      "unseen": true
+    },
+    "FTP-BruteForce": {
+      "n": 4650,
+      "recall": 0.9995698924731182,
+      "unseen": false
+    },
+    "SSH-Bruteforce": {
+      "n": 4569,
+      "recall": 0.9993434011818779,
+      "unseen": false
+    },
+    "DDOS attack-HOIC": {
+      "n": 5600,
+      "recall": 1.0,
+      "unseen": false
+    }
+  },
+  "threshold_percentile": 99.5,
+  "n_test": 107234,
+  "n_test_benign": 42310,
+  "n_test_seen": 20040,
+  "n_test_unseen": 44884,
+  "latency_ms": 1.4561617374420166,
+  "model_mb": 3.510724,
+  "val_selection": {
+    "val_ap": 0.9999048346453312,
+    "val_auc": 0.9999336563850376,
+    "val_recall_at_fpr005": 0.9995783555867884,
+    "val_threshold": -9.163447570800786
+  },
+  "method": "fl_nodp",
+  "seed": 1,
+  "args": {
+    "prep": "/root/prepared18",
+    "out": "results_2018",
+    "dp": "off",
+    "sigma": 1.1,
+    "clip": 1.0,
+    "delta": 1e-06,
+    "clients": 10,
+    "rounds": 50,
+    "fraction": 0.3,
+    "local_epochs": 5,
+    "batch": 256,
+    "lr": 0.001,
+    "wd": 1e-05,
+    "rec_weight": 10.0,
+    "seed": 1,
+    "eval_every": 5,
+    "gpus_per_client": 1.0,
+    "cpus_per_client": 1,
+    "no_kg": false,
+    "skip_test": false,
+    "max_rounds_per_tenant": 0
+  },
+  "val_curve": [
+    {
+      "round": 0,
+      "val_objective": 2.2639411550180792
+    },
+    {
+      "round": 5,
+      "val_objective": 0.08315159743135393
+    },
+    {
+      "round": 10,
+      "val_objective": 0.052721544464595066
+    },
+    {
+      "round": 15,
+      "val_objective": 0.0326266038950456
+    },
+    {
+      "round": 20,
+      "val_objective": 0.02322468900673284
+    },
+    {
+      "round": 25,
+      "val_objective": 0.018875582456445637
+    },
+    {
+      "round": 30,
+      "val_objective": 0.018207410994268352
+    },
+    {
+      "round": 35,
+      "val_objective": 0.016328614147420584
+    },
+    {
+      "round": 40,
+      "val_objective": 0.016116933361807934
+    },
+    {
+      "round": 45,
+      "val_objective": 0.01424870951521317
+    },
+    {
+      "round": 50,
+      "val_objective": 0.014300666750336158
+    }
+  ],
+  "train_seconds": 600.8855671882629
+}

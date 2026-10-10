@@ -1,0 +1,34 @@
+{
+  "n_candidates_per_class": 2000,
+  "shadows": 8,
+  "shadow_epochs": 10,
+  "seconds": 142.5360870361328,
+  "targets": {
+    "central": {
+      "weights": "results/central_seed0.pt",
+      "lira_offline": {
+        "auc": 0.542859,
+        "tpr_at_1pct_fpr": 0.0135,
+        "tpr_at_0_1pct_fpr": 0.0005
+      },
+      "global_threshold": {
+        "auc": 0.5210455,
+        "tpr_at_1pct_fpr": 0.0195,
+        "tpr_at_0_1pct_fpr": 0.003
+      }
+    },
+    "fl_dp": {
+      "weights": "results/fl_dp_seed0.pt",
+      "lira_offline": {
+        "auc": 0.49765775,
+        "tpr_at_1pct_fpr": 0.02,
+        "tpr_at_0_1pct_fpr": 0.0005
+      },
+      "global_threshold": {
+        "auc": 0.526732,
+        "tpr_at_1pct_fpr": 0.0105,
+        "tpr_at_0_1pct_fpr": 0.001
+      }
+    }
+  }
+}

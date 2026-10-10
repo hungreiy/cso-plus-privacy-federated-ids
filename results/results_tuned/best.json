@@ -1,0 +1,8 @@
+{
+  "rec_weight": 1,
+  "lr": 0.003,
+  "sigma": 1.292,
+  "cap": 20,
+  "target_eps": 8.0,
+  "selected_on": "validation average precision, seed 100 (tie-break: prefer rec_weight > 0 within 0.005)"
+}

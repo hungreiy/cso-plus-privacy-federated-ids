@@ -1,0 +1,99 @@
+{
+  "precision": 0.9854014598540146,
+  "recall": 1.0,
+  "f1": 0.9926470588235294,
+  "accuracy": 0.9951219512195122,
+  "fpr": 0.007272727272727273,
+  "threshold": 0.07524999999999978,
+  "recall_seen": 1.0,
+  "recall_unseen": 1.0,
+  "auc": 0.999973063973064,
+  "auc_seen": 1.0,
+  "auc_unseen": 0.9999567099567099,
+  "operating_points": {
+    "90": {
+      "precision": 0.9,
+      "recall": 1.0,
+      "f1": 0.9473684210526315,
+      "accuracy": 0.9634146341463414,
+      "fpr": 0.05454545454545454,
+      "threshold": 0.0,
+      "recall_seen": 1.0,
+      "recall_unseen": 1.0
+    },
+    "95": {
+      "precision": 0.9854014598540146,
+      "recall": 1.0,
+      "f1": 0.9926470588235294,
+      "accuracy": 0.9951219512195122,
+      "fpr": 0.007272727272727273,
+      "threshold": 0.05,
+      "recall_seen": 1.0,
+      "recall_unseen": 1.0
+    },
+    "99": {
+      "precision": 0.9854014598540146,
+      "recall": 1.0,
+      "f1": 0.9926470588235294,
+      "accuracy": 0.9951219512195122,
+      "fpr": 0.007272727272727273,
+      "threshold": 0.05050000000000026,
+      "recall_seen": 1.0,
+      "recall_unseen": 1.0
+    },
+    "99.5": {
+      "precision": 0.9854014598540146,
+      "recall": 1.0,
+      "f1": 0.9926470588235294,
+      "accuracy": 0.9951219512195122,
+      "fpr": 0.007272727272727273,
+      "threshold": 0.07524999999999978,
+      "recall_seen": 1.0,
+      "recall_unseen": 1.0
+    },
+    "99.9": {
+      "precision": 0.9854014598540146,
+      "recall": 1.0,
+      "f1": 0.9926470588235294,
+      "accuracy": 0.9951219512195122,
+      "fpr": 0.007272727272727273,
+      "threshold": 0.09505000000000052,
+      "recall_seen": 1.0,
+      "recall_unseen": 1.0
+    }
+  },
+  "per_type": {
+    "Bot": {
+      "n": 84,
+      "recall": 1.0,
+      "unseen": true
+    },
+    "DoS Hulk": {
+      "n": 11,
+      "recall": 1.0,
+      "unseen": false
+    },
+    "PortScan": {
+      "n": 40,
+      "recall": 1.0,
+      "unseen": false
+    }
+  },
+  "threshold_percentile": 99.5,
+  "n_test": 410,
+  "n_test_benign": 275,
+  "n_test_seen": 51,
+  "n_test_unseen": 84,
+  "method": "rf",
+  "seed": 0,
+  "args": {
+    "prep": "prepared_smoke",
+    "out": "results_smoke",
+    "seed": 0,
+    "trees": 20,
+    "max_train": 150000
+  },
+  "latency_ms": null,
+  "model_mb": null,
+  "train_seconds": 0.17765331268310547
+}

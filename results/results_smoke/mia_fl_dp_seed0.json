@@ -1,0 +1,7 @@
+{
+  "mia_auc": 0.5264,
+  "mia_accuracy": 0.44,
+  "n_members": 100,
+  "n_nonmembers": 100,
+  "weights": "results_smoke/fl_dp_seed0.pt"
+}

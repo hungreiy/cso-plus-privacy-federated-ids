@@ -1,0 +1,7 @@
+{
+  "mia_auc": 0.529,
+  "mia_accuracy": 0.49,
+  "n_members": 100,
+  "n_nonmembers": 100,
+  "weights": "results_smoke/central_seed0.pt"
+}

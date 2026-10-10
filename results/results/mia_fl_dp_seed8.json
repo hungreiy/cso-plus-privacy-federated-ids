@@ -1,0 +1,7 @@
+{
+  "mia_auc": 0.55241308,
+  "mia_accuracy": 0.5008,
+  "n_members": 5000,
+  "n_nonmembers": 5000,
+  "weights": "results/fl_dp_seed8.pt"
+}
